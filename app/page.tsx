@@ -1,10 +1,11 @@
+import { Layout } from "@/components/layouts";
 
-const HomeView: React.FunctionComponent = () => {
+const MainView: React.FunctionComponent = () => {
   return (
-    <div className="home-view">
-
-    </div>
+    <Layout>
+      
+    </Layout>
   )
 }
 
-export default HomeView;
+export default MainView;
