@@ -13,3 +13,7 @@ export async function copyToClipboard({ content }: { content: string }) {
     return document.execCommand('copy', true, content);
   }
 }
+
+export {
+  sanitizeHackathonDetails
+} from './sanitizeHackathonData'

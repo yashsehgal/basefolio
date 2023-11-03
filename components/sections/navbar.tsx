@@ -3,6 +3,7 @@ import { ViewContainer } from "../layouts"
 import { BasefolioLogo, Button } from "../ui"
 import Link from "next/link"
 import { BASEROUTE } from "@/common"
+import { fetchFeaturedHackathon } from "@/middleware"
 
 /**
  * Constructs the navbar for desktop & mobile views
