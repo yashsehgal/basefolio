@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/helpers"
 import { ViewContainer } from "../layouts"
 import { BasefolioLogo, Button } from "../ui"
@@ -9,10 +10,10 @@ import { fetchFeaturedHackathon } from "@/middleware"
  * Constructs the navbar for desktop & mobile views
  * @returns {React.ReactNode} Navigation bar
  */
-const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
+const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = async ({
   className,
   ...props
-}): React.ReactNode => {
+}) => {
   return (
     <nav className={cn("navbar py-6", className)} {...props}>
       <ViewContainer className="flex flex-row items-center justify-between">
