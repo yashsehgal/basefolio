@@ -11,20 +11,9 @@ const fetchAllHackathons = async () => {
 }
 
 const fetchFeaturedHackathon = async () => {
-  const featuredHackathon
-    = await fetch(`${STRAPI_BASE_API_URL}/hackathons?filters[isFeatured][$eq]=true`, RequestOptions)
-      .then((res) => res.json())
-      .then((res) => res)
-      .catch(err => {
-        return {
-          message: "Not able to fetch featured hackathon",
-          error: err,
-          data: [],
-          source: "fetchFeaturedHackathon"
-        }
-      });
-  
-  return featuredHackathon.data;
+  const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons?filters[isFeatured][$eq]=true`, RequestOptions);
+  const data = await response.json();
+  return data;
 }
 
 const fetchPastHackathons = async () => {
