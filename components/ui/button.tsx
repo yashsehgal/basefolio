@@ -19,7 +19,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         (variant === "primary" && "bg-zinc-800 text-zinc-100 border-transparent hover:bg-zinc-700"),
         (variant === "secondary" && "bg-white text-zinc-800 border-transparent"),
         (variant === "solid" && "bg-transparent text-zinc-600 border-zinc-600 hover:bg-zinc-50"),
-        (variant === "destructive" && "bg-red-400 text-red-50 border-transparent hover:bg-red-300"),
+        (variant === "destructive" && "bg-red-500 text-red-50 border-transparent hover:bg-red-400"),
         // classes for different button sizes
         (size === "small" && "font-normal px-3 py-1.5 rounded-xl text-sm shadow-sm hover:shadow"),
         (size === "medium" && "font-medium px-6 py-2.5 rounded-xl text-base shadow-md hover:shadow-lg"),
