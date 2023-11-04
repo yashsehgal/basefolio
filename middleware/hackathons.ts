@@ -16,7 +16,7 @@ const fetchFeaturedHackathon = async () => {
   return data;
 }
 
-const fetchHackathonList = async (base: number = 0, amount: number = 2) => {
+const fetchHackathonList = async (amount: number = 2) => {
   const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`, RequestOptions);
   const data = await response.json();
   const startingExploreHackathons: Array<HackathonInterface> = [];
