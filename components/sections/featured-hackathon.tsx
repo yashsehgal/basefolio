@@ -93,7 +93,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
             <div className="links-wrapper my-3 flex flex-row items-center justify-start gap-2">
               {featuredHackathonData.website &&
                 <Button
-                  variant="solid"
+                  variant="secondary"
                   className="p-3"
                   onClick={() => window.open(featuredHackathonData.website)}
                 >
@@ -101,17 +101,17 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
                 </Button>}
               {featuredHackathonData.twitter &&
                 <Button
-                  variant="solid"
+                  variant="secondary"
                   className="p-3"
                   onClick={() => window.open(featuredHackathonData.twitter)}
                 >
                   <Twitter />
                 </Button>}
             </div>
-            <div className="hackathon-details-wrapper my-6 pl-2 border-l-2 border-neutral-800 flex flex-col items-start gap-2">
+            <div className="hackathon-details-wrapper my-6 pl-2 border-l-2 border-neutral-800 flex flex-col items-start gap-3">
               <div className="hackathon-startDate-wrapper">
                 <p className="leading-snug tracking-tight text-base text-zinc-400">{"starts from"}</p>
-                <h4 className="leading-snug tracking-tight font-medium text-lg">
+                <h4 className="leading-snug tracking-tight font-medium text-base">
                   {parseStrapiDate(featuredHackathonData.startDate)}
                 </h4>
               </div>
@@ -119,7 +119,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
                 className="location-wrapper"
               >
                 <p className="leading-snug tracking-tight text-base text-zinc-400">{"happening"}</p>
-                <h4 className="leading-snug tracking-tight font-medium text-lg">
+                <h4 className="leading-snug tracking-tight font-medium text-base">
                   {featuredHackathonData.isRemote && "Remote"}
                 </h4>
               </div>
