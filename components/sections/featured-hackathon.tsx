@@ -93,7 +93,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
             <div className="links-wrapper my-3 flex flex-row items-center justify-start gap-2">
               {featuredHackathonData.website &&
                 <Button
-                  variant="secondary"
+                  variant="solid"
                   className="p-3"
                   onClick={() => window.open(featuredHackathonData.website)}
                 >
@@ -101,7 +101,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
                 </Button>}
               {featuredHackathonData.twitter &&
                 <Button
-                  variant="secondary"
+                  variant="solid"
                   className="p-3"
                   onClick={() => window.open(featuredHackathonData.twitter)}
                 >
