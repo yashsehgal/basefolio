@@ -45,11 +45,11 @@ const ExploreHackathonsSection: React.FunctionComponent = () => {
   return (
     <Section id="explore-hackathons-section">
       <header className="flex flex-row items-center justify-between">
-        <h1 className="leading-snug text-3xl font-medium tracking-tight">{"New hackathons"}</h1>
+        <h1 className="leading-snug text-3xl font-medium tracking-tight max-md:text-lg">{"New hackathons"}</h1>
         <Button variant="secondary">{"All new hackathons"}</Button>
       </header>
       <Section
-        className={cn("grid grid-cols-3 gap-6")}
+        className={cn("grid grid-cols-3 gap-6 max-xl:grid-cols-2 max-md:grid-cols-1")}
       >
         {exploreHackathonsList.map((hackathon, index) => {
           return (
