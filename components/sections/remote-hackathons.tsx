@@ -30,8 +30,8 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
           <h3 className="text-lg font-medium text-zinc-500 mt-6">
             Here are some remote hackathons for you
           </h3>
-          <div className="mt-12">
-            <Button>
+          <div className="mt-8">
+            <Button size="large" className="max-md:w-full">
               {"See more remote hackathons"}
             </Button>
           </div>
@@ -44,7 +44,7 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
           })}
         </div>
       </div>
-    </Section>
+    </Section >
   )
 }
 
