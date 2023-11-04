@@ -3,10 +3,10 @@ import { ExploreHackathonsSection, FeaturedHackathonSection } from "@/components
 
 const MainView: React.FunctionComponent = () => {
   return (
-    <Layout>
+    <>
       <FeaturedHackathonSection />
       <ExploreHackathonsSection />
-    </Layout>
+    </>
   )
 }
 

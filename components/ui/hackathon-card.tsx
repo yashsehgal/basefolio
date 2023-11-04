@@ -46,7 +46,7 @@ const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
               <Instagram />
             </Button>}
         </div>
-        <div className="hackathon-details-wrapper my-6 pl-2 border-l-2 border-neutral-800 grid grid-cols-2 items-start gap-6 lg:flex lg:flex-row">
+        <div className="hackathon-details-wrapper my-8 pl-2 border-l-2 border-neutral-800 grid grid-cols-2 items-start gap-6 lg:flex lg:flex-row">
           <div className="hackathon-startDate-wrapper">
             <p className="leading-snug tracking-tight text-base text-zinc-400">{"starting from"}</p>
             <h4 className="leading-snug tracking-tight font-medium text-base">

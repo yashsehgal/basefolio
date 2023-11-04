@@ -1,12 +1,12 @@
 
 declare interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * for hiding footer component from layout for views
+   * for hiding footer component from layout
    */
   hideFooter?: boolean;
 
   /**
-   * for hiding navigation component from layout for views
+   * for hiding navigation component from layout
    */
   hideNavigation?: boolean;
 
@@ -14,4 +14,9 @@ declare interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
    * to render layout from hackathon microsite
    */
   forMicrosite?: boolean;
+
+  /**
+   * for hiding sub-navigation from main site layout
+   */
+  hideSubNavigation?: boolean;
 }
