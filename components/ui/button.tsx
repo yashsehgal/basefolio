@@ -25,7 +25,8 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         (size === "medium" && "font-medium px-6 py-2.5 rounded-xl text-base shadow-md hover:shadow-lg"),
         (size === "large" && "font-medium px-8 py-3.5 rounded-2xl text-lg shadow-xl hover:shadow-2xl"),
         // conditional check for "stretch"
-        stretch && "w-full"
+        stretch && "w-full",
+        className
       )}
       {...props}
     >

@@ -14,7 +14,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = as
 }) => {
   return (
     <nav className={cn("navbar py-6", className)} {...props}>
-      <ViewContainer className="flex flex-row items-center justify-between">
+      <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
         <Link href={BASEROUTE}>
           <BasefolioLogo responsiveForMobileView />
         </Link>
@@ -44,7 +44,7 @@ const NavbarOptions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
   ...props
 }): React.ReactNode => {
   return (
-    <div className={cn("navigation-options-wrapper w-fit", className)} {...props}>
+    <div className={cn("navigation-options-wrapper w-fit max-md:hidden", className)} {...props}>
       <ul className={cn("navigation-options-list flex flex-row items-center justify-center gap-6")}>
         {NavbarOptionsData.map((option, index) => {
           return (
