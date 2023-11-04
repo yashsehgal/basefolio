@@ -8,7 +8,7 @@ html, body {
 
 .view-container {
   @apply box-border mx-auto;
-  @apply w-[1100px] max-2xl:w-[1200px] max-xl:w-[920px] max-lg:w-[680px] max-md:w-[540px] max-sm:w-[430px];
+  @apply w-[1100px] max-2xl:w-[1200px] max-xl:w-[920px] max-lg:w-[680px] max-md:w-[440px] max-sm:w-[370px];
 }
 
 .section {

@@ -1,10 +1,11 @@
 import { Layout } from "@/components/layouts";
-import { FeaturedHackathonSection } from "@/components/sections/featured-hackathon";
+import { ExploreHackathonsSection, FeaturedHackathonSection } from "@/components/sections";
 
 const MainView: React.FunctionComponent = () => {
   return (
     <Layout>
       <FeaturedHackathonSection />
+      <ExploreHackathonsSection />
     </Layout>
   )
 }

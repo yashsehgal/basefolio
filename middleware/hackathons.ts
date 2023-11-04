@@ -16,6 +16,16 @@ const fetchFeaturedHackathon = async () => {
   return data;
 }
 
+const fetchHackathonList = async (amount: number = 2) => {
+  const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`, RequestOptions);
+  const data = await response.json();
+  if (data.data.length <= amount) {
+    return data;
+  } else {
+    return data.data.slice(0, 3);
+  }
+}
+
 const fetchPastHackathons = async () => {
 
 }
@@ -28,5 +38,6 @@ export {
   fetchAllHackathons,
   fetchFeaturedHackathon,
   fetchPastHackathons,
-  fetchUpcomingHackathons
+  fetchUpcomingHackathons,
+  fetchHackathonList
 }

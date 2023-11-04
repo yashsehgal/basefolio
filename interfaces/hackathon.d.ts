@@ -18,4 +18,5 @@ declare interface HackathonInterface {
   instagram?:     string;
   slug:           string;
   isHackathon:    boolean;
+  location?:      string;
 }

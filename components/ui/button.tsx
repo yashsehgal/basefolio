@@ -14,7 +14,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     <button
       className={cn(
         // default button properties for all the variants and sizes
-        "flex flex-row items-center justify-center gap-2 border hover:scale-105 transition-all shadow-zinc-200",
+        "flex flex-row items-center justify-center gap-2 border transition-all shadow-zinc-200",
         // classes for different button variants
         (variant === "primary" && "bg-zinc-800 text-zinc-100 border-transparent hover:bg-zinc-700"),
         (variant === "secondary" && "bg-white text-zinc-800 border-transparent"),
@@ -23,7 +23,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         // classes for different button sizes
         (size === "small" && "font-normal px-3 py-1.5 rounded-xl text-sm shadow-sm hover:shadow"),
         (size === "medium" && "font-medium px-6 py-2.5 rounded-xl text-base shadow-md hover:shadow-lg"),
-        (size === "large" && "font-medium px-8 py-3.5 rounded-2xl text-lg shadow-xl hover:shadow-2xl"),
+        (size === "large" && "font-medium px-8 py-3.5 rounded-xl text-lg shadow-xl hover:shadow-2xl"),
         // conditional check for "stretch"
         stretch && "w-full",
         className
