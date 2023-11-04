@@ -4,43 +4,18 @@ import { useEffect, useState } from "react"
 import { Section } from "../layouts";
 import { Button, HackathonCard } from "../ui";
 import { cn } from "@/helpers";
+import { CONTROLLED_SIZE } from "@/common";
 
 const ExploreHackathonsSection: React.FunctionComponent = () => {
   const [exploreHackathonsList, setExploreHackathonsList] = useState<Array<HackathonInterface>>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetchHackathonList(3);
-      console.log("receiving", response);
-
-      await response.map((item: any, index: number) => {
-        const responseAttributes = item.attributes;
-
-        setExploreHackathonsList([
-          ...exploreHackathonsList,
-          {
-            title: responseAttributes.title,
-            subtitle: responseAttributes.subtitle,
-            description: responseAttributes.description,
-            startDate: responseAttributes.startDate,
-            endDate: responseAttributes.endDate,
-            desktopBanner: responseAttributes.desktopBanner,
-            mobileBanner: responseAttributes.mobileBanner,
-            isRemote: responseAttributes.isRemote ?? false,
-            twitter: responseAttributes.twitter ?? '',
-            website: responseAttributes.website ?? '',
-            linkedin: responseAttributes.linkedin ?? '',
-            instagram: responseAttributes.instagram ?? '',
-            slug: responseAttributes.slug,
-            isHackathon: responseAttributes.isHackathon,
-            isFeatured: false,
-            location: responseAttributes.location ?? 'Not listed'
-          }
-        ])
-      });
+      const data = await fetchHackathonList(CONTROLLED_SIZE);
+      setExploreHackathonsList(data);
     }
-    (exploreHackathonsList.length < 3) && fetchData();
-  });
+    fetchData();
+  }, []);
 
   return (
     <Section id="explore-hackathons-section">
@@ -49,9 +24,9 @@ const ExploreHackathonsSection: React.FunctionComponent = () => {
         <Button variant="secondary">{"All new hackathons"}</Button>
       </header>
       <Section
-        className={cn("grid grid-cols-3 gap-6 max-xl:grid-cols-2 max-md:grid-cols-1")}
+        className={cn("grid grid-cols-2 gap-6 max-md:grid-cols-1")}
       >
-        {exploreHackathonsList.map((hackathon, index) => {
+        {exploreHackathonsList.map((hackathon: HackathonInterface, index: number) => {
           return (
             <HackathonCard
               {...hackathon}
