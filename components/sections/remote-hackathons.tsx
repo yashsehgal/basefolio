@@ -12,16 +12,16 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchRemoteHackathonList(CONTROLLED_SIZE);
+      const data = await fetchRemoteHackathonList(4);
       setRemoteHackathonsList(data);
     }
     fetchData();
   }, [])
 
   return (
-    <Section>
+    <Section className="relative">
       <div className="grid grid-cols-2 gap-6 items-start justify-between max-md:grid-cols-1 max-md:gap-12">
-        <div className="remote-cta-content-container">
+        <div className="remote-cta-content-container lg:sticky top-12">
           <h1 className="leading-[105%] font-bold text-6xl tracking-tighter text-zinc-800">
             We understand<br />
             it's tough to travel <br />
