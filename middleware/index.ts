@@ -4,5 +4,6 @@ export {
   fetchFeaturedHackathon,
   fetchPastHackathons,
   fetchUpcomingHackathons,
-  fetchHackathonList
+  fetchHackathonList,
+  fetchRemoteHackathonList
 } from './hackathons'
