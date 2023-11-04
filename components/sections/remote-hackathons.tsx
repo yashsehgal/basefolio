@@ -21,7 +21,7 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
   return (
     <Section className="relative">
       <div className="grid grid-cols-2 gap-6 items-start justify-between max-md:grid-cols-1 max-md:gap-12">
-        <div className="remote-cta-content-container lg:sticky top-12">
+        <div className="remote-cta-content-container lg:sticky top-24">
           <h1 className="leading-[105%] font-bold text-6xl tracking-tighter text-zinc-800">
             We understand<br />
             it's tough to travel <br />
