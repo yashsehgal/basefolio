@@ -4,13 +4,14 @@ import { useEffect, useState } from "react"
 import { Section } from "../layouts";
 import { Button, HackathonCard } from "../ui";
 import { cn } from "@/helpers";
+import { CONTROLLED_SIZE } from "@/common";
 
 const ExploreHackathonsSection: React.FunctionComponent = () => {
   const [exploreHackathonsList, setExploreHackathonsList] = useState<Array<HackathonInterface>>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchHackathonList(0, 3);
+      const data = await fetchHackathonList(CONTROLLED_SIZE);
       setExploreHackathonsList(data);
     }
     fetchData();
@@ -25,7 +26,7 @@ const ExploreHackathonsSection: React.FunctionComponent = () => {
       <Section
         className={cn("grid grid-cols-2 gap-6 max-md:grid-cols-1")}
       >
-        {exploreHackathonsList.map((hackathon, index) => {
+        {exploreHackathonsList.map((hackathon: HackathonInterface, index: number) => {
           return (
             <HackathonCard
               {...hackathon}
