@@ -7,7 +7,32 @@ const RequestOptions = {
 }
 
 const fetchAllHackathons = async () => {
-
+  const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`);
+  const data = await response.json();
+  
+  const allHackathons: Array<HackathonInterface> = [];
+  for (let count = 0; count < data.data.length; count++) {
+    const responseAttributes = data.data[count].attributes;
+    allHackathons.push({
+      title: responseAttributes.title,
+      subtitle: responseAttributes.subtitle,
+      description: responseAttributes.description,
+      startDate: responseAttributes.startDate,
+      endDate: responseAttributes.endDate,
+      desktopBanner: responseAttributes.desktopBanner,
+      mobileBanner: responseAttributes.mobileBanner,
+      isRemote: responseAttributes.isRemote ?? false,
+      twitter: responseAttributes.twitter ?? '',
+      website: responseAttributes.website ?? '',
+      linkedin: responseAttributes.linkedin ?? '',
+      instagram: responseAttributes.instagram ?? '',
+      slug: responseAttributes.slug,
+      isHackathon: responseAttributes.isHackathon,
+      isFeatured: responseAttributes.isFeatured,
+      location: responseAttributes.location ?? 'Not listed'
+    })
+  }
+  return allHackathons;
 }
 
 const fetchFeaturedHackathon = async () => {

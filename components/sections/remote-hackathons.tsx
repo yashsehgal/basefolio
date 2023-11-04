@@ -12,7 +12,7 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchRemoteHackathonList(4);
+      const data = await fetchRemoteHackathonList(CONTROLLED_SIZE);
       setRemoteHackathonsList(data);
     }
     fetchData();
@@ -31,7 +31,7 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
             Here are some remote hackathons for you
           </h3>
           <div className="mt-8">
-            <Button size="large" className="max-md:w-full">
+            <Button size="large" className="max-md:hidden">
               {"See more remote hackathons"}
             </Button>
           </div>
@@ -42,6 +42,11 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
               <HackathonCard {...hackathon} key={index} />
             )
           })}
+        </div>
+        <div className="mt-8 md:hidden">
+          <Button size="large" className="w-full">
+            {"See more remote hackathons"}
+          </Button>
         </div>
       </div>
     </Section >

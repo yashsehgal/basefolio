@@ -1,5 +1,4 @@
 import { CardContainer } from "./card"
-import { format } from 'date-fns';
 import { parseStrapiDate } from "@/helpers/datetime";
 import { Button } from "../ui";
 import { Twitter, Instagram, Link } from "lucide-react";
