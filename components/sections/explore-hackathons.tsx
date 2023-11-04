@@ -49,7 +49,7 @@ const ExploreHackathonsSection: React.FunctionComponent = () => {
         <Button variant="secondary">{"All new hackathons"}</Button>
       </header>
       <Section
-        className={cn("grid grid-cols-2 gap-6")}
+        className={cn("grid grid-cols-3 gap-6")}
       >
         {exploreHackathonsList.map((hackathon, index) => {
           return (

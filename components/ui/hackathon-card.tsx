@@ -48,7 +48,7 @@ const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
       </div>
       <div className="hackathon-details-wrapper my-6 pl-2 border-l-2 border-neutral-800 flex flex-col items-start gap-3">
         <div className="hackathon-startDate-wrapper">
-          <p className="leading-snug tracking-tight text-base text-zinc-400">{"starts from"}</p>
+          <p className="leading-snug tracking-tight text-base text-zinc-400">{"starting from"}</p>
           <h4 className="leading-snug tracking-tight font-medium text-base">
             {parseStrapiDate(hackathonData.startDate)}
           </h4>
@@ -56,7 +56,7 @@ const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
         <div
           className="location-wrapper"
         >
-          <p className="leading-snug tracking-tight text-base text-zinc-400">{"happening"}</p>
+          <p className="leading-snug tracking-tight text-base text-zinc-400">{"location"}</p>
           <h4 className="leading-snug tracking-tight font-medium text-base">
             {hackathonData.isRemote && "Remote"}
             {!hackathonData.isRemote && hackathonData.location}
