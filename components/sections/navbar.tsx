@@ -13,7 +13,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = as
   ...props
 }) => {
   return (
-    <nav className={cn("navbar py-6", className)} {...props}>
+    <nav className={cn("navbar py-4 border-b", className)} {...props}>
       <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
         <Link href={BASEROUTE}>
           <BasefolioLogo responsiveForMobileView />
@@ -31,8 +31,8 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = as
 
 const NavbarOptionsData: Array<NavbarOptionInterface> = [
   { title: "about", path: "/about" },
-  { title: "hackathons", path: "/hackathons" },
-  { title: "hackers", path: "/explore-hackers" }
+  { title: "blogs", path: "/blogs" },
+  { title: "home", path: "/home" }
 ]
 
 /**
