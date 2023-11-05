@@ -1,4 +1,5 @@
 import { STRAPI_BASE_API_URL } from "@/common"
+import { parseDatestamp, sortScheduleTimelineCollection } from "@/helpers";
 
 const RequestOptions = {
   headers: {
@@ -183,8 +184,132 @@ const fetchHackathonData = async (slug: string) => {
       location: responseAttributes.location ?? 'Not listed'
     }
   }
-  
+
   return hackathonData;
+}
+
+const fetchHackathonEvents = async (hackathonSlug: string) => {
+  if (!hackathonSlug) return;
+
+  const response = await fetch(`${STRAPI_BASE_API_URL}/events?filters[hackathonSlug][$eq]=${hackathonSlug}`, RequestOptions);
+  const data = await response.json();
+
+  let events: Array<EventInterface> = [];
+
+  if (data.data.length) {
+    for (let count = 0; count < data.data.length; count++) {
+      let responseAttributes = data.data[count].attributes;
+      events.push({
+        title: responseAttributes.title,
+        description: responseAttributes.description ?? '',
+        startDate: responseAttributes.startDate,
+        endDate: responseAttributes.endDate,
+        speaker: responseAttributes.speaker ?? '',
+        speakerImage: responseAttributes.speakerImage ?? '',
+        speakerSocialURL: responseAttributes.speakerSocialURL ?? '',
+        hackathonSlug: responseAttributes.hackathonSlug
+      })
+    }
+  }
+
+  console.log("events data", events);
+
+  return events;
+}
+
+const fetchHackathonSchedule = async (hackathonSlug: string) => {
+  if (!hackathonSlug) return [];
+
+  const allHackathonEvents = await fetchHackathonEvents(hackathonSlug) ?? [];
+  let timeline: Array<EventInterface> = [];
+  const hackathonData: HackathonInterface = await fetchHackathonData(hackathonSlug);
+  const scheduleType = hackathonData.isHackathon ? "Hackathon" : "Event";
+  const { startDate: scheduleStartDate, endDate: scheduleEndDate } = hackathonData;
+
+  const schedule: Array<ScheduleInterface> = [];
+
+  // manually adding schedule start and end to the timeline
+  const scheduleMainOutline: Array<EventInterface> = [
+    {
+      title: `${scheduleType} starts`,
+      startDate: scheduleStartDate,
+      hackathonSlug: hackathonData.slug
+    },
+    {
+      title: `${scheduleType} ends`,
+      startDate: scheduleEndDate,
+      hackathonSlug: hackathonData.slug
+    }
+  ];
+
+  timeline.push(...scheduleMainOutline);
+
+  /**
+   * adding all the hackathon events to the timeline
+   * and sorting according to datetime
+   */
+  
+  timeline.push(...allHackathonEvents);
+
+  /**
+   * refining all the timeline items to schedule with respective datestamps and timestamps
+   */
+
+  let allDatestamps: Array<{ date: string; month: string; year: string; mainTimestamp: string; }> = [];
+
+  // adding when no timestamp is logged
+  if (!allDatestamps.length && !schedule.length && timeline.length) {
+    schedule.push({
+      datestamp: {
+        date: parseDatestamp(timeline[0].startDate).date,
+        month: parseDatestamp(timeline[0].startDate).month,
+        year: parseDatestamp(timeline[0].startDate).year,
+        mainTimestamp: timeline[0].startDate
+      },
+      events: [timeline[0]]
+    });
+    // adding date to date log
+    allDatestamps.push({
+      date: timeline[0].startDate,
+      month: timeline[0].startDate,
+      year: timeline[0].startDate,
+      mainTimestamp: timeline[0].startDate
+    })
+  }
+
+  // adding more timeline collections/items to schedule, if any
+  if (timeline.length > 1) {
+    for (let count = 1; count < timeline.length; count++) {
+      if (allDatestamps.includes({
+        date: parseDatestamp(timeline[count].startDate).date,
+        month: parseDatestamp(timeline[count].startDate).month,
+        year: parseDatestamp(timeline[count].startDate).year,
+        mainTimestamp: timeline[count].startDate,
+      })) {
+        // if collection is already dated, then adding new item to it's own events collection
+        schedule[count].events.push(timeline[count]);
+      } else {
+        schedule.push({
+          datestamp: {
+            date: parseDatestamp(timeline[count].startDate).date,
+            month: parseDatestamp(timeline[count].startDate).month,
+            year: parseDatestamp(timeline[count].startDate).year,
+            mainTimestamp: timeline[count].startDate
+          },
+          events: [timeline[count]]
+        });
+        // adding date to date log
+        allDatestamps.push({
+          date: timeline[count].startDate,
+          month: timeline[count].startDate,
+          year: timeline[count].startDate,
+          mainTimestamp: timeline[count].startDate
+        })
+      }
+    }
+  }
+
+  return sortScheduleTimelineCollection(schedule);
 }
 
 export {
@@ -194,5 +319,7 @@ export {
   fetchUpcomingHackathons,
   fetchHackathonList,
   fetchRemoteHackathonList,
-  fetchHackathonData
+  fetchHackathonData,
+  fetchHackathonEvents,
+  fetchHackathonSchedule
 }

@@ -1,6 +1,6 @@
 'use client';
 import { HackathonMicrositeLayout } from "@/components/layouts";
-import { Overview } from "@/components/sections/hackathon-microsite-tabs";
+import { Overview, Schedule } from "@/components/sections/hackathon-microsite-tabs";
 import { Button } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchHackathonData } from "@/middleware";
@@ -42,6 +42,7 @@ const HackathonMicrosite: React.FunctionComponent = () => {
         />
         <div className={"microsite-content-container mt-6"}>
           {micrositeTab === "overview" && <Overview {...hackathonData as any} />}
+          {micrositeTab === "schedule" && <Schedule {...hackathonData as any} />}
         </div>
       </HackathonMicrositeLayout>
     </>

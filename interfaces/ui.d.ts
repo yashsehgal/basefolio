@@ -15,3 +15,8 @@ declare interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   size?: "small" | "medium" | "large";
   stretch?: boolean;
 }
+
+declare interface SpeakerBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  speakerProfileImage?: string;
+  speakerURL?: string;
+}

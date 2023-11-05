@@ -11,6 +11,7 @@ const Overview = (hackathonData: HackathonInterface) => {
           width={"600"}
           height={"400"}
           className="w-full shadow-md rounded-2xl"
+          priority
         />}
       </div>
       <h1 className="leading-snug tracking-tight font-bold text-4xl">{"Overview"}</h1>

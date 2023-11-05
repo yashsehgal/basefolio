@@ -26,3 +26,24 @@ declare interface HackathonMicrositeLayoutProps extends React.HTMLAttributes<HTM
 }
 
 declare type HackathonMicrositeTabType = "overview" | "schedule" | "projects" | "builders";
+
+declare interface EventInterface {
+  title:          string;
+  description?:   string;
+  startDate: string;
+  endDate?: string;
+  speaker?: string;
+  speakerImage?: string;
+  speakerSocialURL?: string;
+  hackathonSlug: string;
+};
+
+declare interface ScheduleInterface {
+  datestamp: {
+    date: string;
+    month: string;
+    year: string;
+    mainTimestamp: string;
+  };
+  events: Array<EventInterface>;
+};

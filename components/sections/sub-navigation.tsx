@@ -41,7 +41,7 @@ const SubNavigation: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
   const router = useRouter();
   return (
     <div className={cn("sub-navigation py-4 border-b flex flex-row items-center justify-center", className)} {...props}>
-      <div className={cn("sub-navigation-actions-wrapper border flex flex-row items-center justify-center w-fit bg-white p-2 rounded-2xl max-sm:grid max-sm:grid-cols-2 max-sm:gap-2")}>
+      <div className={cn("sub-navigation-actions-wrapper border flex flex-row items-center justify-center w-fit bg-white p-2 rounded-2xl max-sm:grid max-sm:grid-cols-2 max-sm:gap-2 max-sm:w-auto")}>
         {SubNavigationOptions.map((option, index) => {
           return (
             <Button

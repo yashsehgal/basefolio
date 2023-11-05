@@ -1,9 +1,9 @@
 import { CardContainer } from "./card"
-import { parseStrapiDate } from "@/helpers/datetime";
+import { parseStrapiDate } from "@/helpers";
 import { Button } from "../ui";
 import { Twitter, Instagram, Link as LinkIcon } from "lucide-react";
 import { cn } from "@/helpers";
-import { APP_BASE_HOSTNAME, BASEROUTE } from "@/common";
+import { APP_BASE_HOSTNAME } from "@/common";
 import Link from "next/link";
 
 const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement> & HackathonInterface> = (hackathonData): React.ReactNode => {
