@@ -24,3 +24,5 @@ declare interface HackathonInterface {
 declare interface HackathonMicrositeLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   hackathonData?: HackathonInterface;
 }
+
+declare type HackathonMicrositeTabType = "overview" | "schedule" | "projects" | "builders";
