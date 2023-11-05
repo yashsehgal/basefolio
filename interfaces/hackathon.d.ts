@@ -20,3 +20,7 @@ declare interface HackathonInterface {
   isHackathon:    boolean;
   location?:      string;
 }
+
+declare interface HackathonMicrositeLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+  hackathonData?: HackathonInterface;
+}

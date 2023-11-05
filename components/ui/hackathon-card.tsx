@@ -1,8 +1,10 @@
 import { CardContainer } from "./card"
 import { parseStrapiDate } from "@/helpers/datetime";
 import { Button } from "../ui";
-import { Twitter, Instagram, Link } from "lucide-react";
+import { Twitter, Instagram, Link as LinkIcon } from "lucide-react";
 import { cn } from "@/helpers";
+import { APP_BASE_HOSTNAME, BASEROUTE } from "@/common";
+import Link from "next/link";
 
 const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement> & HackathonInterface> = (hackathonData): React.ReactNode => {
   return (
@@ -26,7 +28,7 @@ const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
               className="p-3"
               onClick={() => window.open(hackathonData.website)}
             >
-              <Link />
+              <LinkIcon />
             </Button>}
           {hackathonData.twitter &&
             <Button
@@ -69,12 +71,14 @@ const HackathonCard: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
           </div>
         </div>
       </div>
-      <Button
-        stretch
-        size="large"
-      >
-        {"Apply now"}
-      </Button>
+      <Link href={`${APP_BASE_HOSTNAME}/hackathons/${hackathonData.slug}`} className="w-full">
+        <Button
+          stretch
+          size="large"
+        >
+          {"Apply now"}
+        </Button>
+      </Link>
     </CardContainer>
   )
 }

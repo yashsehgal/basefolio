@@ -1,4 +1,3 @@
-import { Layout } from "@/components/layouts";
 import { ExploreHackathonsSection, FeaturedHackathonSection } from "@/components/sections";
 import { RemoteHackathonsSection } from "@/components/sections/remote-hackathons";
 

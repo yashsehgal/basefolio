@@ -14,3 +14,11 @@ html, body {
 .section {
   @apply py-12;
 }
+
+.markdown > h2 {
+  @apply font-medium text-2xl tracking-tight mb-2;
+}
+
+.markdown > p {
+  @apply mb-6;
+}

@@ -1,14 +1,10 @@
+'use client';
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Manrope } from 'next/font/google'
 import './globals.css'
 import { Layout } from '@/components/layouts'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Basefolio',
-  description: 'Platform to search hackathons and events. A base profile for all your learning experiences.',
-}
+const manrope = Manrope({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,
@@ -17,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={manrope.className}>
         <Layout>
           {children}
         </Layout>
