@@ -14,6 +14,12 @@ export async function copyToClipboard({ content }: { content: string }) {
   }
 }
 
+export function checkIfDateLogged(objA: any, objB: any) {
+  return objA.date === objB.date &&
+         objA.month === objB.month &&
+         objA.year === objB.year;
+}
+
 export {
   sanitizeHackathonDetails
 } from './sanitizeHackathonData';

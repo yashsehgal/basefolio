@@ -1,5 +1,5 @@
 import { STRAPI_BASE_API_URL } from "@/common"
-import { parseDatestamp, sortScheduleTimelineCollection } from "@/helpers";
+import { checkIfDateLogged, parseDatestamp, sortScheduleTimelineCollection } from "@/helpers";
 
 const RequestOptions = {
   headers: {
@@ -212,8 +212,6 @@ const fetchHackathonEvents = async (hackathonSlug: string) => {
     }
   }
 
-  console.log("events data", events);
-
   return events;
 }
 
@@ -255,7 +253,7 @@ const fetchHackathonSchedule = async (hackathonSlug: string) => {
    * refining all the timeline items to schedule with respective datestamps and timestamps
    */
 
-  let allDatestamps: Array<{ date: string; month: string; year: string; mainTimestamp: string; }> = [];
+  let allDatestamps: Array<{ date: string; month: string; year: string; }> = [];
 
   // adding when no timestamp is logged
   if (!allDatestamps.length && !schedule.length && timeline.length) {
@@ -273,22 +271,52 @@ const fetchHackathonSchedule = async (hackathonSlug: string) => {
       date: timeline[0].startDate,
       month: timeline[0].startDate,
       year: timeline[0].startDate,
-      mainTimestamp: timeline[0].startDate
     })
   }
 
   // adding more timeline collections/items to schedule, if any
   if (timeline.length > 1) {
     for (let count = 1; count < timeline.length; count++) {
-      if (allDatestamps.includes({
+
+      const eventDatestamp = {
         date: parseDatestamp(timeline[count].startDate).date,
         month: parseDatestamp(timeline[count].startDate).month,
         year: parseDatestamp(timeline[count].startDate).year,
-        mainTimestamp: timeline[count].startDate,
-      })) {
+      };
+
+      const existingDatestampIndex = schedule.findIndex(item => {
+        return (
+          item.datestamp.date === eventDatestamp.date &&
+          item.datestamp.month === eventDatestamp.month &&
+          item.datestamp.year === eventDatestamp.year
+        );
+      });
+
+      if (allDatestamps.some(datestamp => checkIfDateLogged(datestamp, {
+        date: parseDatestamp(timeline[count].startDate).date,
+        month: parseDatestamp(timeline[count].startDate).month,
+        year: parseDatestamp(timeline[count].startDate).year,
+      }))) {
         // if collection is already dated, then adding new item to it's own events collection
-        schedule[count].events.push(timeline[count]);
+
+        if (existingDatestampIndex !== -1) {
+          // Datestamp already exists in the schedule array
+          schedule[existingDatestampIndex].events.push(timeline[count]);
+        } else {
+          // Datestamp does not exist in the schedule array, create a new entry
+          schedule.push({
+            datestamp: {
+              date: eventDatestamp.date,
+              month: eventDatestamp.month,
+              year: eventDatestamp.year,
+              mainTimestamp: timeline[count].startDate,
+            },
+            events: [timeline[count]],
+          });
+        }
+        
       } else {
+        
         schedule.push({
           datestamp: {
             date: parseDatestamp(timeline[count].startDate).date,
@@ -300,10 +328,9 @@ const fetchHackathonSchedule = async (hackathonSlug: string) => {
         });
         // adding date to date log
         allDatestamps.push({
-          date: timeline[count].startDate,
-          month: timeline[count].startDate,
-          year: timeline[count].startDate,
-          mainTimestamp: timeline[count].startDate
+          date: parseDatestamp(timeline[count].startDate).date,
+          month: parseDatestamp(timeline[count].startDate).month,
+          year: parseDatestamp(timeline[count].startDate).year,
         })
       }
     }
