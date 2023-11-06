@@ -285,9 +285,9 @@ const fetchHackathonSchedule = async (hackathonSlug: string) => {
     });
     // adding date to date log
     allDatestamps.push({
-      date: timeline[0].startDate,
-      month: timeline[0].startDate,
-      year: timeline[0].startDate,
+      date: parseDatestamp(timeline[0].startDate).date,
+      month: parseDatestamp(timeline[0].startDate).month,
+      year: parseDatestamp(timeline[0].startDate).year,
     });
   }
 

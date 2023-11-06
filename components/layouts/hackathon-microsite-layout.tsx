@@ -7,7 +7,7 @@ const HackathonMicrositeLayout: React.FunctionComponent<
   return (
     <div
       className={cn(
-        "hackathon-microsite-layout relative flex flex-row items-start justify-between gap-6 w-full",
+        "hackathon-microsite-layout relative flex flex-row items-start justify-between gap-6 w-full max-xl:grid max-xl:mx-auto max-md:w-fit",
         className,
       )}
       {...props}
@@ -19,7 +19,7 @@ const HackathonMicrositeLayout: React.FunctionComponent<
       </div>
       <div
         className={cn(
-          "hackathon-microsite-apply-hackathon-card-container sticky top-12",
+          "hackathon-microsite-apply-hackathon-card-container sticky top-12 max-xl:hidden",
         )}
       >
         {hackathonData && <HackathonCard {...hackathonData} />}

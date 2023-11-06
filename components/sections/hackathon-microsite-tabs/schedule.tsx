@@ -18,12 +18,12 @@ const Schedule = (hackathonData: HackathonInterface) => {
   }, [hackathonData.slug]);
 
   return (
-    <Section className="schedule-content-container border rounded-2xl px-8">
+    <Section className="schedule-content-container border rounded-2xl px-8 max-md:p-0 max-md:border-none">
       {schedule.map((timelineItem, index) => {
         return (
           <div className="timeline-item" key={index}>
             <div className="timeline-item-datestamp-content-wrapper">
-              <h3 className="timeline-collection-datestamp font-semibold text-lg">
+              <h3 className="timeline-collection-datestamp font-semibold text-lg max-md:text-base">
                 {timelineItem.datestamp.date} {timelineItem.datestamp.month}
                 {timelineItem.datestamp.month && ", "}
                 {timelineItem.datestamp.year}
@@ -35,17 +35,19 @@ const Schedule = (hackathonData: HackathonInterface) => {
                   return (
                     <div
                       className={cn(
-                        "flex flex-row items-start justify-between"
+                        "flex flex-row items-start justify-between gap-6"
                       )}
                       key={timelineIndex}
                     >
                       <div className={cn(
                         "timeline-collection-event-item w-full flex flex-row items-start gap-2",
+                        "max-md:flex-col"
                       )}>
                         <div
                           className={cn(
                             "timeline-collection-event-item__time-content-wrapper",
                             "font-semibold text-lg w-[140px]",
+                            "max-md:text-sm max-md:text-zinc-500"
                           )}
                         >
                           {`${parseTimestampToHHMM(timelineEvent.startDate)}`}{" "}
@@ -59,7 +61,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
                             "timeline-collection-event-item__title-description-content-wrapper",
                           )}
                         >
-                          <h2 className="event-title w-full font-semibold text-lg">
+                          <h2 className="event-title w-full font-semibold text-base">
                             {timelineEvent.title}
                           </h2>
                           {timelineEvent.description && (
@@ -67,6 +69,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
                               className={cn(
                                 "event-description",
                                 "w-[40ch] text-zinc-500 text-sm mt-2",
+                                "max-md:text-xs"
                               )}
                             >
                               {timelineEvent.description}
@@ -84,7 +87,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
                           )}
                         </div>
                       </div>
-                      <div className="event-actions-container">
+                      <div className="event-actions-container max-md:hidden">
                         <Link
                           href={createHackathonEventOnGoogleCalendar(timelineEvent)}
                           target="_blank"

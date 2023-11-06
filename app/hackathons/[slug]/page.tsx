@@ -68,7 +68,7 @@ const HackathonMicrositeTabNavigation: React.FunctionComponent<
   return (
     <div
       className={cn(
-        "sub-navigation-actions-wrapper border flex flex-row items-center justify-center w-full bg-white p-2 rounded-2xl max-sm:grid max-sm:grid-cols-2 max-sm:gap-2",
+        "sub-navigation-actions-wrapper border flex flex-row items-center justify-center w-full bg-white p-2 rounded-2xl max-md:grid max-md:grid-cols-2 max-md:gap-2",
       )}
     >
       {HackathonMicrositeTabs.map((option, index) => {
