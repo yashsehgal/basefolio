@@ -1,4 +1,4 @@
-import { STRAPI_BASE_API_URL } from "@/common";
+import { INITIAL_HACKATHON_DATA, STRAPI_BASE_API_URL } from "@/common";
 import {
   checkIfDateLogged,
   parseDatestamp,
@@ -183,7 +183,7 @@ const fetchHackathonData = async (slug: string) => {
   );
   const data = await response.json();
 
-  let hackathonData: HackathonInterface = null as any;
+  let hackathonData: HackathonInterface = INITIAL_HACKATHON_DATA;
 
   if (data.data.length) {
     let responseAttributes = data.data[0].attributes;

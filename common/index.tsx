@@ -22,3 +22,23 @@ export const MONTH_NAMES = [
   "Nov",
   "Dec",
 ];
+
+export const INITIAL_HACKATHON_DATA = {
+  title: "",
+  subtitle: "",
+  description: "",
+  startDate: "",
+  endDate: "",
+  desktopBanner: "",
+  mobileBanner: "",
+  isFeatured: true,
+  isRemote: false,
+  twitter: "",
+  website: "",
+  linkedin: "",
+  instagram: "",
+  slug: "",
+  isHackathon: true,
+  registrationEndDate: "",
+  registrationStartDate: ""
+};

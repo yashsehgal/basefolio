@@ -13,6 +13,7 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
   showSocialLinks = false,
   showEndDate = false,
   variant = "apply",
+  showApplyButtonWithStatus = false,
   ...props
 }): React.ReactNode => {
 
@@ -153,24 +154,26 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
           </div>
         </div>
       </div>
-      {variant === "apply" && <Link
-        href={`${APP_BASE_HOSTNAME}/hackathons/${props.slug}`}
-        className="w-full"
-      >
-        <Button stretch size="large">
-          {"Apply now"}
-        </Button>
-      </Link>}
-      {variant === "status" && <div className={cn("status-content-wrapper",
-        "rounded-lg bg-zinc-100 py-3 px-4 w-full",
-        "font-bold uppercase text-zinc-500"
-      )}>
-        {statusContent.message}
-        {statusContent.time && <p className="days-remaining-content-wrapper text-zinc-400">
-          {statusContent.time}{" "}
-          {parseInt(statusContent.time) <= 1 ? "Day" : "Days"}{" remaining"}
-        </p>}
-      </div>}
+      <div className={cn("grid grid-cols-1 gap-2 w-full")}>
+        {(variant === "status" || showApplyButtonWithStatus) && <div className={cn("status-content-wrapper",
+          "rounded-lg bg-zinc-100 py-3 px-4 w-full",
+          "font-bold uppercase text-zinc-500"
+        )}>
+          {statusContent.message}
+          {statusContent.time && <p className="days-remaining-content-wrapper text-zinc-400">
+            {statusContent.time}{" "}
+            {parseInt(statusContent.time) <= 1 ? "Day" : "Days"}{" remaining"}
+          </p>}
+        </div>}
+        {(variant === "apply" || showApplyButtonWithStatus) && <Link
+          href={`${APP_BASE_HOSTNAME}/hackathons/${props.slug}`}
+          className="w-full"
+        >
+          <Button stretch size="large">
+            {"Apply now"}
+          </Button>
+        </Link>}
+      </div>
     </CardContainer>
   );
 };

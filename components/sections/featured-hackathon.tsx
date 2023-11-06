@@ -5,28 +5,11 @@ import { useEffect, useState } from "react";
 import { fetchFeaturedHackathon } from "@/middleware";
 import Image from "next/image";
 import { HackathonCard } from "../ui";
+import { INITIAL_HACKATHON_DATA } from "@/common";
 
 const FeaturedHackathonSection: React.FunctionComponent = () => {
   const [featuredHackathonData, setFeaturedHackathonData] =
-    useState<HackathonInterface>({
-      title: "",
-      subtitle: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-      desktopBanner: "",
-      mobileBanner: "",
-      isFeatured: true,
-      isRemote: false,
-      twitter: "",
-      website: "",
-      linkedin: "",
-      instagram: "",
-      slug: "",
-      isHackathon: true,
-      registrationEndDate: "",
-      registrationStartDate: ""
-    });
+    useState<HackathonInterface>(INITIAL_HACKATHON_DATA);
 
   useEffect(() => {
     async function fetchData() {
@@ -85,6 +68,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
               {...featuredHackathonData}
               className="w-[40%] max-lg:w-full"
               showSocialLinks
+              showApplyButtonWithStatus
             />
           </Section>
         )}
