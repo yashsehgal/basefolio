@@ -15,7 +15,8 @@ const SpeakerBadge: React.FunctionComponent<SpeakerBadgeProps> = ({
         <div
           className={cn(
             "speaker-badge w-fit h-auto flex flex-row items-center justify-center gap-2 rounded-full border",
-            "p-2 pr-3 text-sm",
+            "p-2 text-sm",
+            speakerProfileImage && "pr-3"
           )}
           {...props}
         >
