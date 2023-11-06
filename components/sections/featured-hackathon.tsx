@@ -24,6 +24,8 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
       instagram: "",
       slug: "",
       isHackathon: true,
+      registrationEndDate: "",
+      registrationStartDate: ""
     });
 
   useEffect(() => {
@@ -82,6 +84,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
             <HackathonCard
               {...featuredHackathonData}
               className="w-[40%] max-lg:w-full"
+              showSocialLinks
             />
           </Section>
         )}

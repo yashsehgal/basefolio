@@ -24,3 +24,9 @@ declare interface SpeakerBadgeProps
   speakerProfileImage?: string;
   speakerURL?: string;
 }
+
+declare interface HackathonCardProps extends HackathonInterface {
+  variant?: "apply" | "status";
+  showSocialLinks?: boolean;
+  showEndDate?: boolean;
+};

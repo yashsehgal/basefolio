@@ -22,7 +22,7 @@ const HackathonMicrositeLayout: React.FunctionComponent<
           "hackathon-microsite-apply-hackathon-card-container sticky top-12 max-xl:hidden",
         )}
       >
-        {hackathonData && <HackathonCard {...hackathonData} />}
+        {hackathonData && <HackathonCard {...hackathonData} variant="status" showSocialLinks />}
       </div>
     </div>
   );

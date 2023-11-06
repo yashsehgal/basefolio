@@ -33,7 +33,7 @@ const OpenHackathonsSection: React.FunctionComponent = () => {
       >
         {openHackathonsList.map(
           (hackathon: HackathonInterface, index: number) => {
-            return <HackathonCard {...hackathon} key={index} />;
+            return <HackathonCard {...hackathon} key={index} showSocialLinks />;
           },
         )}
       </Section>

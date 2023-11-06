@@ -29,6 +29,7 @@ export {
   sortScheduleTimelineCollection,
   parseTimestampToHHMM,
   convertToRFC5545Timestamp,
+  getHackathonCardStatus
 } from "./datetime";
 
 export { createHackathonEventOnGoogleCalendar } from "./calendar";

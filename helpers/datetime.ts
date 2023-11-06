@@ -52,10 +52,51 @@ function convertToRFC5545Timestamp(timestamp: string) {
   return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
 }
 
+function getHackathonCardStatus(
+  registrationStartDate: Date,
+  registrationEndDate: Date,
+  hackathonStartDate: Date,
+  hackathonEndDate: Date
+): {
+    daysRemaining: number;
+    status: HackathonCardStatusMessageType;
+} {
+  const currentDate: Date = new Date();
+  let daysRemaining: number;
+  let status: HackathonCardStatusMessageType;
+
+  if (currentDate < registrationStartDate) {
+    daysRemaining = Math.ceil((registrationStartDate.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
+    if (daysRemaining <= 7) {
+      status = "Registrations starting soon";
+    } else {
+      status = "Coming soon";
+    }
+  } else if (currentDate >= registrationStartDate && currentDate <= registrationEndDate) {
+    daysRemaining = Math.ceil((registrationEndDate.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
+    status = "Registrations started";
+  } else if (currentDate > registrationEndDate && currentDate < hackathonStartDate) {
+    daysRemaining = 0;
+    status = "Registrations ended";
+  } else if (currentDate >= hackathonStartDate && currentDate <= hackathonEndDate) {
+    daysRemaining = Math.ceil((hackathonEndDate.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
+    status = "Hackathon started";
+  } else {
+    daysRemaining = 0;
+    status = "Hackathon ended";
+  }
+
+  return {
+    status,
+    daysRemaining
+  }
+}
+
 export {
   parseStrapiDate,
   parseDatestamp,
   sortScheduleTimelineCollection,
   parseTimestampToHHMM,
   convertToRFC5545Timestamp,
+  getHackathonCardStatus
 };

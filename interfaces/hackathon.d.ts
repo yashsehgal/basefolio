@@ -7,6 +7,8 @@ declare interface HackathonInterface {
   description: string;
   startDate: string;
   endDate: string;
+  registrationStartDate: string;
+  registrationEndDate: string;
   desktopBanner: string;
   mobileBanner: string;
   isFeatured: boolean;
@@ -51,3 +53,10 @@ declare interface ScheduleInterface {
   };
   events: Array<EventInterface>;
 }
+
+declare type HackathonCardStatusMessageType = "Coming soon"
+  | "Registrations started"
+  | "Registrations ended"
+  | "Hackathon started"
+  | "Hackathon ended"
+  | "Registrations starting soon";
