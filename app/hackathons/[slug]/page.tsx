@@ -14,11 +14,11 @@ const HackathonMicrositeTabs: Array<{
   value: HackathonMicrositeTabType;
   title: string;
 }> = [
-    { value: "overview", title: "Overview" },
-    { value: "schedule", title: "Schedule" },
-    { value: "projects", title: "Projects" },
-    { value: "builders", title: "Builders" },
-  ];
+  { value: "overview", title: "Overview" },
+  { value: "schedule", title: "Schedule" },
+  { value: "projects", title: "Projects" },
+  { value: "builders", title: "Builders" },
+];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
   const pathname = usePathname();

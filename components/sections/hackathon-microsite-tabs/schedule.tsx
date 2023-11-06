@@ -1,9 +1,13 @@
 import { Section } from "@/components/layouts";
 import { CardContainer, SpeakerBadge } from "@/components/ui";
-import { cn, createHackathonEventOnGoogleCalendar, parseTimestampToHHMM } from "@/helpers";
+import {
+  cn,
+  createHackathonEventOnGoogleCalendar,
+  parseTimestampToHHMM,
+} from "@/helpers";
 import { fetchHackathonSchedule } from "@/middleware";
 import { useEffect, useState } from "react";
-import { CalendarPlus as AddToCalendarIcon } from 'lucide-react';
+import { CalendarPlus as AddToCalendarIcon } from "lucide-react";
 import Link from "next/link";
 
 const Schedule = (hackathonData: HackathonInterface) => {
@@ -29,32 +33,39 @@ const Schedule = (hackathonData: HackathonInterface) => {
                 {timelineItem.datestamp.year}
               </h3>
               <CardContainer
-                className={cn("timeline-collection-event-list-container my-4 grid w-full gap-8")}
+                className={cn(
+                  "timeline-collection-event-list-container my-4 grid w-full gap-8",
+                )}
               >
                 {timelineItem.events.map((timelineEvent, timelineIndex) => {
                   return (
                     <div
                       className={cn(
-                        "flex flex-row items-start justify-between gap-6"
+                        "flex flex-row items-start justify-between gap-6",
                       )}
                       key={timelineIndex}
                     >
-                      <div className={cn(
-                        "timeline-collection-event-item w-full flex flex-row items-start gap-2",
-                        "max-md:flex-col"
-                      )}>
+                      <div
+                        className={cn(
+                          "timeline-collection-event-item w-full flex flex-row items-start gap-2",
+                          "max-md:flex-col",
+                        )}
+                      >
                         <div
                           className={cn(
                             "timeline-collection-event-item__time-content-wrapper",
                             "font-semibold text-lg w-[140px]",
-                            "max-md:text-sm max-md:text-zinc-500"
+                            "max-md:text-sm max-md:text-zinc-500",
                           )}
                         >
                           {`${parseTimestampToHHMM(timelineEvent.startDate)}`}{" "}
-                          {`${timelineEvent.endDate?.length
-                            ? `- ${parseTimestampToHHMM(timelineEvent.endDate)}`
-                            : ""
-                            }`}
+                          {`${
+                            timelineEvent.endDate?.length
+                              ? `- ${parseTimestampToHHMM(
+                                  timelineEvent.endDate,
+                                )}`
+                              : ""
+                          }`}
                         </div>
                         <div
                           className={cn(
@@ -69,7 +80,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
                               className={cn(
                                 "event-description",
                                 "w-[40ch] text-zinc-500 text-sm mt-2",
-                                "max-md:text-xs"
+                                "max-md:text-xs",
                               )}
                             >
                               {timelineEvent.description}
@@ -89,7 +100,9 @@ const Schedule = (hackathonData: HackathonInterface) => {
                       </div>
                       <div className="event-actions-container max-md:hidden">
                         <Link
-                          href={createHackathonEventOnGoogleCalendar(timelineEvent)}
+                          href={createHackathonEventOnGoogleCalendar(
+                            timelineEvent,
+                          )}
                           target="_blank"
                         >
                           <AddToCalendarIcon className="w-5 h-5" />

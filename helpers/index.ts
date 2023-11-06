@@ -28,9 +28,7 @@ export {
   parseStrapiDate,
   sortScheduleTimelineCollection,
   parseTimestampToHHMM,
-  convertToRFC5545Timestamp
+  convertToRFC5545Timestamp,
 } from "./datetime";
 
-export {
-  createHackathonEventOnGoogleCalendar
-} from './calendar'
+export { createHackathonEventOnGoogleCalendar } from "./calendar";

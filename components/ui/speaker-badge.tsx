@@ -16,7 +16,7 @@ const SpeakerBadge: React.FunctionComponent<SpeakerBadgeProps> = ({
           className={cn(
             "speaker-badge w-fit h-auto flex flex-row items-center justify-center gap-2 rounded-full border",
             "p-2 text-sm max-md:text-xs max-md:p-1.5",
-            speakerProfileImage && "pr-3 max-md:pr-2"
+            speakerProfileImage && "pr-3 max-md:pr-2",
           )}
           {...props}
         >
@@ -27,7 +27,9 @@ const SpeakerBadge: React.FunctionComponent<SpeakerBadgeProps> = ({
               height={"24"}
               alt={children?.toString() ?? "speaker-image"}
               loading="lazy"
-              className={cn("w-[24px] h-[24px] rounded-full max-md:w-[20px] max-md:h-[20px]")}
+              className={cn(
+                "w-[24px] h-[24px] rounded-full max-md:w-[20px] max-md:h-[20px]",
+              )}
             />
           )}
           {children}
