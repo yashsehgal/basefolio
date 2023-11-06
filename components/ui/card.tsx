@@ -1,22 +1,19 @@
-import { cn } from "@/helpers"
+import { cn } from "@/helpers";
 
-const CardContainer: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
-  children,
-  ...props
-}) => {
+const CardContainer: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({ className, children, ...props }) => {
   return (
     <div
-      className={cn("card-container bg-white p-6 rounded-xl border border-zinc-200/90 shadow-xl shadow-zinc-200",
-        className
+      className={cn(
+        "card-container bg-white p-6 rounded-xl border border-zinc-200/90 shadow-xl shadow-zinc-200",
+        className,
       )}
       {...props}
     >
       {children}
     </div>
-  )
-}
+  );
+};
 
-export {
-  CardContainer
-}
+export { CardContainer };

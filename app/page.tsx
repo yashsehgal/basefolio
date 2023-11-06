@@ -1,4 +1,7 @@
-import { ExploreHackathonsSection, FeaturedHackathonSection } from "@/components/sections";
+import {
+  ExploreHackathonsSection,
+  FeaturedHackathonSection,
+} from "@/components/sections";
 import { RemoteHackathonsSection } from "@/components/sections/remote-hackathons";
 
 const MainView: React.FunctionComponent = () => {
@@ -8,7 +11,7 @@ const MainView: React.FunctionComponent = () => {
       <ExploreHackathonsSection />
       <RemoteHackathonsSection />
     </>
-  )
-}
+  );
+};
 
 export default MainView;

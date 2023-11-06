@@ -1,4 +1,3 @@
-
 /**
  * To define the action type: link / button
  */

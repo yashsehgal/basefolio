@@ -1,42 +1,46 @@
-
 /**
  * Data Interface for hackathon details
  */
 declare interface HackathonInterface {
-  title:          string;
-  subtitle?:      string;
-  description:    string;
-  startDate:      string;
-  endDate:        string;
-  desktopBanner:  string;
-  mobileBanner:   string;
-  isFeatured:     boolean;
-  isRemote:       boolean;
-  twitter?:       string;
-  website?:       string;
-  linkedin?:      string;
-  instagram?:     string;
-  slug:           string;
-  isHackathon:    boolean;
-  location?:      string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  desktopBanner: string;
+  mobileBanner: string;
+  isFeatured: boolean;
+  isRemote: boolean;
+  twitter?: string;
+  website?: string;
+  linkedin?: string;
+  instagram?: string;
+  slug: string;
+  isHackathon: boolean;
+  location?: string;
 }
 
-declare interface HackathonMicrositeLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+declare interface HackathonMicrositeLayoutProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   hackathonData?: HackathonInterface;
 }
 
-declare type HackathonMicrositeTabType = "overview" | "schedule" | "projects" | "builders";
+declare type HackathonMicrositeTabType =
+  | "overview"
+  | "schedule"
+  | "projects"
+  | "builders";
 
 declare interface EventInterface {
-  title:          string;
-  description?:   string;
+  title: string;
+  description?: string;
   startDate: string;
   endDate?: string;
   speaker?: string;
   speakerImage?: string;
   speakerSocialURL?: string;
   hackathonSlug: string;
-};
+}
 
 declare interface ScheduleInterface {
   datestamp: {
@@ -46,4 +50,4 @@ declare interface ScheduleInterface {
     mainTimestamp: string;
   };
   events: Array<EventInterface>;
-};
+}

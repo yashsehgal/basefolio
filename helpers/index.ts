@@ -1,32 +1,31 @@
-
-import { ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export async function copyToClipboard({ content }: { content: string }) {
-  if ('clipboard' in navigator) {
+  if ("clipboard" in navigator) {
     return await navigator.clipboard.writeText(content);
   } else {
-    return document.execCommand('copy', true, content);
+    return document.execCommand("copy", true, content);
   }
 }
 
 export function checkIfDateLogged(objA: any, objB: any) {
-  return objA.date === objB.date &&
-         objA.month === objB.month &&
-         objA.year === objB.year;
+  return (
+    objA.date === objB.date &&
+    objA.month === objB.month &&
+    objA.year === objB.year
+  );
 }
 
-export {
-  sanitizeHackathonDetails
-} from './sanitizeHackathonData';
+export { sanitizeHackathonDetails } from "./sanitizeHackathonData";
 
 export {
   parseDatestamp,
   parseStrapiDate,
   sortScheduleTimelineCollection,
-  parseTimestampToHHMM
-} from './datetime'
+  parseTimestampToHHMM,
+} from "./datetime";

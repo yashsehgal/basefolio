@@ -1,4 +1,3 @@
-
 declare interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * for hiding footer component from layout

@@ -1,3 +1,4 @@
-declare interface BasefolioLogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+declare interface BasefolioLogoProps
+  extends React.ImgHTMLAttributes<HTMLImageElement> {
   responsiveForMobileView?: boolean;
-};
+}

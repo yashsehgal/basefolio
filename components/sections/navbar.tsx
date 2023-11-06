@@ -1,8 +1,8 @@
-import { cn } from "@/helpers"
-import { ViewContainer } from "../layouts"
-import { BasefolioLogo, Button } from "../ui"
-import Link from "next/link"
-import { BASEROUTE } from "@/common"
+import { cn } from "@/helpers";
+import { ViewContainer } from "../layouts";
+import { BasefolioLogo, Button } from "../ui";
+import Link from "next/link";
+import { BASEROUTE } from "@/common";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -26,25 +26,34 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         </div>
       </ViewContainer>
     </nav>
-  )
-}
+  );
+};
 
 const NavbarOptionsData: Array<NavbarOptionInterface> = [
   { title: "home", path: "/home" },
   { title: "blogs", path: "/blogs" },
-]
+];
 
 /**
  * Constructs the navbar options for desktop & mobile views
  * @returns {React.ReactNode} Navigation Options
  */
-const NavbarOptions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
-  ...props
-}): React.ReactNode => {
+const NavbarOptions: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({ className, ...props }): React.ReactNode => {
   return (
-    <div className={cn("navigation-options-wrapper w-fit max-md:hidden", className)} {...props}>
-      <ul className={cn("navigation-options-list flex flex-row items-center justify-center gap-4")}>
+    <div
+      className={cn(
+        "navigation-options-wrapper w-fit max-md:hidden",
+        className,
+      )}
+      {...props}
+    >
+      <ul
+        className={cn(
+          "navigation-options-list flex flex-row items-center justify-center gap-4",
+        )}
+      >
         {NavbarOptionsData.map((option, index) => {
           return (
             <Link
@@ -54,29 +63,28 @@ const NavbarOptions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement
             >
               <li>{option.title}</li>
             </Link>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-const NavbarActions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
-  ...props
-}): React.ReactNode => {
+const NavbarActions: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({ className, ...props }): React.ReactNode => {
   return (
-    <div className={cn("navbar-actions-wrapper flex flex-row items-center justify-end gap-3", className)} {...props}>
-      <Button variant="secondary">
-        Login
-      </Button>
-      <Button>
-        Get started
-      </Button>
+    <div
+      className={cn(
+        "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
+        className,
+      )}
+      {...props}
+    >
+      <Button variant="secondary">Login</Button>
+      <Button>Get started</Button>
     </div>
-  )
-}
+  );
+};
 
-export {
-  Navbar
-}
+export { Navbar };

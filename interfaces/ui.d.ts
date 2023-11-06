@@ -1,14 +1,17 @@
-
-
 /**
  * Variants for button component: primary, secondary, solid and destructive
  */
-declare type ButtonVariantType = "primary" | "secondary" | "solid" | "destructive";
+declare type ButtonVariantType =
+  | "primary"
+  | "secondary"
+  | "solid"
+  | "destructive";
 
 /**
  * Props interface for button component
  */
-declare interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+declare interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariantType;
   icon?: React.ReactNode | string;
   iconPosition?: "start" | "end";
@@ -16,7 +19,8 @@ declare interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   stretch?: boolean;
 }
 
-declare interface SpeakerBadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+declare interface SpeakerBadgeProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   speakerProfileImage?: string;
   speakerURL?: string;
 }
