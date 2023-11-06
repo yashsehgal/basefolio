@@ -74,7 +74,12 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
         default: break;
       }
     }
-  }, []);
+  }, [getHackathonCardStatus(
+    new Date(props.registrationStartDate),
+    new Date(props.registrationEndDate),
+    new Date(props.startDate),
+    new Date(props.endDate)
+  ).status]);
 
   return (
     <CardContainer
