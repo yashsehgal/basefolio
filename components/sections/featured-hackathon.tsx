@@ -49,7 +49,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
       });
     }
     fetchData();
-  }, []);
+  });
 
   return (
     <>

@@ -26,7 +26,7 @@ const RemoteHackathonsSection: React.FunctionComponent = () => {
           <h1 className="leading-[105%] font-bold text-6xl tracking-tighter text-zinc-800">
             We understand
             <br />
-            it's tough to travel <br />
+            it&apos;s tough to travel <br />
             for offline hackathons. <br />
           </h1>
           <h3 className="text-lg font-medium text-zinc-500 mt-6">

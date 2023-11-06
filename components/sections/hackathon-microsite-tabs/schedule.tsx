@@ -13,7 +13,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
       setSchedule(data);
     }
     fetchData();
-  }, []);
+  }, [hackathonData.slug]);
 
   return (
     <Section className="schedule-content-container border rounded-2xl px-8">
@@ -44,11 +44,10 @@ const Schedule = (hackathonData: HackathonInterface) => {
                         )}
                       >
                         {`${parseTimestampToHHMM(timelineEvent.startDate)}`}{" "}
-                        {`${
-                          timelineEvent.endDate?.length
+                        {`${timelineEvent.endDate?.length
                             ? `- ${parseTimestampToHHMM(timelineEvent.endDate)}`
                             : ""
-                        }`}
+                          }`}
                       </div>
                       <div
                         className={cn(
