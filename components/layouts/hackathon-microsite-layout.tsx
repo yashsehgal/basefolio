@@ -7,7 +7,7 @@ const HackathonMicrositeLayout: React.FunctionComponent<
   return (
     <div
       className={cn(
-        "hackathon-microsite-layout relative flex flex-row items-start justify-between gap-6 w-full max-xl:grid max-xl:mx-auto max-md:w-fit",
+        "hackathon-microsite-layout relative flex flex-row items-start justify-between gap-6 w-full max-xl:grid max-xl:mx-auto max-xl:w-fit",
         className,
       )}
       {...props}

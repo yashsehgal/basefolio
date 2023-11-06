@@ -61,7 +61,7 @@ const Schedule = (hackathonData: HackathonInterface) => {
                             "timeline-collection-event-item__title-description-content-wrapper",
                           )}
                         >
-                          <h2 className="event-title w-full font-semibold text-base">
+                          <h2 className="event-title w-full font-semibold text-lg max-md:text-base">
                             {timelineEvent.title}
                           </h2>
                           {timelineEvent.description && (
