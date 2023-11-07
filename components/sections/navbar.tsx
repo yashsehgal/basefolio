@@ -1,8 +1,10 @@
+'use client';
 import { cn } from "@/helpers";
 import { ViewContainer } from "../layouts";
-import { BasefolioLogo, Button } from "../ui";
+import { AuthView, BasefolioLogo, Button, UI } from "../ui";
 import Link from "next/link";
 import { BASEROUTE } from "@/common";
+import { useState } from "react";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -74,16 +76,32 @@ const NavbarActions: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
 > = ({ className, ...props }): React.ReactNode => {
   return (
-    <div
-      className={cn(
-        "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
-        className,
-      )}
-      {...props}
-    >
-      <Button variant="secondary">Login</Button>
-      <Button>Get started</Button>
-    </div>
+    <>
+      <div
+        className={cn(
+          "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
+          className,
+        )}
+        {...props}
+      >
+        <UI.Dialog>
+          <UI.DialogTrigger asChild>
+            <Button variant="secondary">Login</Button>
+          </UI.DialogTrigger>
+          <UI.DialogOverlay>
+            <AuthView />
+          </UI.DialogOverlay>
+        </UI.Dialog>
+        <UI.Dialog>
+          <UI.DialogTrigger asChild>
+            <Button>Create account</Button>
+          </UI.DialogTrigger>
+          <UI.DialogOverlay>
+            <AuthView />
+          </UI.DialogOverlay>
+        </UI.Dialog>
+      </div>
+    </>
   );
 };
 

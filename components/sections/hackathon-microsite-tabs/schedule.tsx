@@ -1,3 +1,4 @@
+'use client';
 import { Section } from "@/components/layouts";
 import { CardContainer, SpeakerBadge } from "@/components/ui";
 import {
@@ -59,13 +60,12 @@ const Schedule = (hackathonData: HackathonInterface) => {
                           )}
                         >
                           {`${parseTimestampToHHMM(timelineEvent.startDate)}`}{" "}
-                          {`${
-                            timelineEvent.endDate?.length
+                          {`${timelineEvent.endDate?.length
                               ? `- ${parseTimestampToHHMM(
-                                  timelineEvent.endDate,
-                                )}`
+                                timelineEvent.endDate,
+                              )}`
                               : ""
-                          }`}
+                            }`}
                         </div>
                         <div
                           className={cn(

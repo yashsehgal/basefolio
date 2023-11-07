@@ -4,7 +4,7 @@ import { HackathonMicrositeLayout } from "@/components/layouts";
 import {
   Overview,
   Schedule,
-} from "@/components/sections/hackathon-microsite-tabs";
+} from "@/components/sections";
 import { Button } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchHackathonData } from "@/middleware";

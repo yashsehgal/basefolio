@@ -45,3 +45,15 @@ export const INITIAL_HACKATHON_DATA = {
   registrationEndDate: "",
   registrationStartDate: ""
 };
+
+export const INITIAL_USER_AUTHORIZATION = {
+  username: "",
+  email: "",
+  password: "",
+  profileAvatar: "",
+  fullName: {
+    firstName: "",
+    lastName: ""
+  },
+  isAuthenticated: false
+}

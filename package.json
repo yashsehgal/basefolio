@@ -25,6 +25,7 @@
     "tailwind-merge": "2.0.0"
   },
   "devDependencies": {
+    "@radix-ui/react-dialog": "1.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
