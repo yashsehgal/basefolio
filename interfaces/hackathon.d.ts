@@ -17,6 +17,8 @@ declare interface HackathonInterface {
   website?: string;
   linkedin?: string;
   instagram?: string;
+  github?: string;
+  email?: string;
   slug: string;
   isHackathon: boolean;
   location?: string;
@@ -31,7 +33,8 @@ declare type HackathonMicrositeTabType =
   | "overview"
   | "schedule"
   | "projects"
-  | "builders";
+  | "builders"
+  | "register";
 
 declare interface EventInterface {
   title: string;
@@ -60,3 +63,13 @@ declare type HackathonCardStatusMessageType = "Coming soon"
   | "Hackathon started"
   | "Hackathon ended"
   | "Registrations starting soon";
+
+declare type OverviewSocialLinksContainerProps = {
+  twitter?: string;
+  email?: string;
+  linkedin?: string;
+  instagram?: string;
+  github?: string;
+  website?: string;
+  discord?: string;
+}

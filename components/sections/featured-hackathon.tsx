@@ -29,6 +29,8 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
         website: responseAttributes.website ?? "",
         linkedin: responseAttributes.linkedin ?? "",
         instagram: responseAttributes.instagram ?? "",
+        email: responseAttributes.email ?? "",
+        github: responseAttributes.github ?? "",
         slug: responseAttributes.slug,
         isHackathon: responseAttributes.isHackathon,
       });

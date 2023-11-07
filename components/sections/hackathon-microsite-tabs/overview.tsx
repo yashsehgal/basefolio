@@ -1,3 +1,4 @@
+import { Section } from "@/components/layouts";
 import Image from "next/image";
 import Markdown from "react-markdown";
 
@@ -27,5 +28,15 @@ const Overview = (hackathonData: HackathonInterface) => {
     </div>
   );
 };
+
+
+
+const OverviewSocialLinksContainer = (socialLinks: OverviewSocialLinksContainerProps) => {
+  return (
+    <Section id="socials-overview">
+
+    </Section>
+  )
+}
 
 export { Overview };

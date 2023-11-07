@@ -17,6 +17,7 @@ const HackathonMicrositeTabs: Array<{
 }> = [
     { value: "overview", title: "Overview" },
     { value: "schedule", title: "Schedule" },
+    { value: "register", title: "Register" },
     { value: "projects", title: "Projects" },
     { value: "builders", title: "Builders" },
   ];

@@ -37,6 +37,8 @@ export const INITIAL_HACKATHON_DATA = {
   website: "",
   linkedin: "",
   instagram: "",
+  github: "",
+  email: "",
   slug: "",
   isHackathon: true,
   registrationEndDate: "",
