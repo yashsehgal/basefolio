@@ -1,10 +1,12 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { Input } from "@/components/ui";
 import { motion } from "framer-motion"
 import { cn } from "@/helpers";
 import { DialogFooter } from "../dialog";
 import { Button } from "../button";
 import { Github } from 'lucide-react';
+import { authorizeUser } from "@/middleware";
+import { UserAuthenticationContext } from "@/contexts";
 
 const LoginFlow: React.FunctionComponent = () => {
   // to switch between flows in login procedure
@@ -27,6 +29,7 @@ const LoginFlow: React.FunctionComponent = () => {
           setFlow={setFlow}
           setPasswordInput={setPasswordInput}
           passwordInput={passwordInput}
+          emailInput={emailInput}
         />}
       {flow === "email" && <> <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
         <div className="h-[2px] w-full bg-neutral-100"></div>
@@ -84,7 +87,8 @@ const LoginEmailInputView: React.FunctionComponent<LoginEmailInputViewProps> = (
 const LoginPasswordInputView: React.FunctionComponent<LoginPasswordInputViewProps> = ({
   setFlow,
   passwordInput,
-  setPasswordInput
+  setPasswordInput,
+  emailInput
 }) => {
   // auto-focus to login password input
   useEffect(() => {
@@ -95,6 +99,8 @@ const LoginPasswordInputView: React.FunctionComponent<LoginPasswordInputViewProp
   const managePasswordInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordInput(e.target?.value as string);
   }
+
+  const { userData, setUserData } = useContext(UserAuthenticationContext);
 
   return (
     <>
@@ -120,6 +126,16 @@ const LoginPasswordInputView: React.FunctionComponent<LoginPasswordInputViewProp
         {passwordInput && <Button
           stretch
           size="large"
+          onClick={async () => {
+            if (emailInput && passwordInput) {
+              const { status, data } = await authorizeUser(emailInput, passwordInput);
+              if (status === "success") {
+                setUserData({
+                  ...data
+                });
+              }
+            }
+          }}
         >
           {"Login"}
         </Button>}

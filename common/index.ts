@@ -57,3 +57,5 @@ export const INITIAL_USER_AUTHORIZATION = {
   },
   isAuthenticated: false
 }
+
+export const JWT_EXPIRATION_TIME = 2; // In days

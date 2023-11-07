@@ -41,6 +41,7 @@ declare interface LoginPasswordInputViewProps {
   setFlow: (value: LoginFlowType) => void;
   passwordInput: string;
   setPasswordInput: (value: string) => void;
+  emailInput: string;
 }
 
 /**

@@ -1,10 +1,12 @@
 'use client';
 import { cn } from "@/helpers";
 import { ViewContainer } from "../layouts";
-import { AuthView, BasefolioLogo, Button, UI } from "../ui";
+import { AuthView, Avatar, AvatarFallback, AvatarImage, BasefolioLogo, Button, UI } from "../ui";
 import Link from "next/link";
 import { BASEROUTE } from "@/common";
-import { useState } from "react";
+import React, { useContext } from "react";
+import { UserAuthenticationContext } from "@/contexts";
+import Image from "next/image";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -14,6 +16,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   ...props
 }) => {
+  const { userData } = useContext(UserAuthenticationContext);
   return (
     <nav className={cn("navbar py-4 border-b", className)} {...props}>
       <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
@@ -23,13 +26,34 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
           </Link>
           <NavbarOptions />
         </div>
-        <div className="navbar-cta-actions-container">
+        {!userData.isAuthenticated && <div className="navbar-cta-actions-container">
           <NavbarActions />
-        </div>
+        </div>}
+        {userData.isAuthenticated && <div className="navbar-user-actions-container">
+          <NavbarUserActions userData={userData} />
+        </div>}
       </ViewContainer>
     </nav>
   );
 };
+
+const NavbarUserActions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType }> = ({
+  userData,
+  className,
+  ...props
+}) => {
+  return (
+    <div className={cn("navbar-actions-wrapper flex flex-row items-center justify-end gap-3", className)} {...props}>
+      <Image
+        src={userData.profileAvatar}
+        width={"60"}
+        height={"60"}
+        className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
+        alt={"avatar"}
+      />
+    </div>
+  )
+}
 
 const NavbarOptionsData: Array<NavbarOptionInterface> = [
   { title: "home", path: "/home" },
@@ -76,32 +100,30 @@ const NavbarActions: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
 > = ({ className, ...props }): React.ReactNode => {
   return (
-    <>
-      <div
-        className={cn(
-          "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
-          className,
-        )}
-        {...props}
-      >
-        <UI.Dialog>
-          <UI.DialogTrigger asChild>
-            <Button variant="secondary">Login</Button>
-          </UI.DialogTrigger>
-          <UI.DialogOverlay>
-            <AuthView />
-          </UI.DialogOverlay>
-        </UI.Dialog>
-        <UI.Dialog>
-          <UI.DialogTrigger asChild>
-            <Button>Create account</Button>
-          </UI.DialogTrigger>
-          <UI.DialogOverlay>
-            <AuthView />
-          </UI.DialogOverlay>
-        </UI.Dialog>
-      </div>
-    </>
+    <div
+      className={cn(
+        "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
+        className,
+      )}
+      {...props}
+    >
+      <UI.Dialog>
+        <UI.DialogTrigger asChild>
+          <Button variant="secondary">Login</Button>
+        </UI.DialogTrigger>
+        <UI.DialogOverlay>
+          <AuthView />
+        </UI.DialogOverlay>
+      </UI.Dialog>
+      <UI.Dialog>
+        <UI.DialogTrigger asChild>
+          <Button>Create account</Button>
+        </UI.DialogTrigger>
+        <UI.DialogOverlay>
+          <AuthView />
+        </UI.DialogOverlay>
+      </UI.Dialog>
+    </div>
   );
 };
 

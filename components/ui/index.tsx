@@ -16,3 +16,9 @@ export {
 export {
   Input
 } from './input';
+
+export {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from './avatar';

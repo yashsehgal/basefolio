@@ -9,3 +9,7 @@ export {
   fetchHackathonEvents,
   fetchHackathonSchedule,
 } from "./hackathons";
+
+export {
+  authorizeUser
+} from './authentication'
