@@ -7,18 +7,10 @@ export { CardContainer } from "./card";
 
 export { SpeakerBadge } from "./speaker-badge";
 
-export * as UI from './dialog';
+export * as UI from "./dialog";
 
-export {
-  AuthView
-} from './auth'
+export { AuthView } from "./auth";
 
-export {
-  Input
-} from './input';
+export { Input } from "./input";
 
-export {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from './avatar';
+export { Avatar, AvatarFallback, AvatarImage } from "./avatar";

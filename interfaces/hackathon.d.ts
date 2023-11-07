@@ -58,7 +58,8 @@ declare interface ScheduleInterface {
   events: Array<EventInterface>;
 }
 
-declare type HackathonCardStatusMessageType = "Coming soon"
+declare type HackathonCardStatusMessageType =
+  | "Coming soon"
   | "Registrations started"
   | "Registrations ended"
   | "Hackathon started"
@@ -74,4 +75,4 @@ declare type OverviewSocialLinksContainerProps = {
   website?: string;
   discord?: string;
   hackathonTitle: string;
-}
+};

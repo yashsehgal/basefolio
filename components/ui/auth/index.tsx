@@ -1,2 +1,1 @@
-
-export { AuthView } from './auth';
+export { AuthView } from "./auth";

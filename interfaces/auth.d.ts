@@ -1,4 +1,3 @@
-
 declare type AuthorizedUserType = {
   username: string;
   email: string;
@@ -16,14 +15,14 @@ declare type AuthorizedUserType = {
  * ~ login
  * ~ create account
  */
-declare type AuthFlowViewType = 'login' | 'create-account';
+declare type AuthFlowViewType = "login" | "create-account";
 
 /**
  * type for login procedure in auth-flow:
  * ~ email input view
  * ~ password input view
  */
-declare type LoginFlowType = 'email' | 'password';
+declare type LoginFlowType = "email" | "password";
 
 /**
  * interface for LoginEmailInputView Props
@@ -50,7 +49,7 @@ declare interface LoginPasswordInputViewProps {
  * ~ email input view: email
  * ~ password and confirm password input vew: password
  */
-declare type CreateAccountFlowType = 'name' | 'email' | 'password';
+declare type CreateAccountFlowType = "name" | "email" | "password";
 
 /**
  * interface for CreateAccountNameInputView Props

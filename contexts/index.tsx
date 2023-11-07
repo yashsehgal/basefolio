@@ -1,1 +1,1 @@
-export { UserAuthenticationContext, UserAuthenticationProvider } from './user'
+export { UserAuthenticationContext, UserAuthenticationProvider } from "./user";

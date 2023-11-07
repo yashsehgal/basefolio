@@ -30,4 +30,4 @@ declare interface HackathonCardProps extends HackathonInterface {
   showSocialLinks?: boolean;
   showEndDate?: boolean;
   showApplyButtonWithStatus?: boolean;
-};
+}

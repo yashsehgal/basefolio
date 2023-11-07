@@ -1,10 +1,7 @@
 "use client";
 import { INITIAL_HACKATHON_DATA } from "@/common";
 import { HackathonMicrositeLayout } from "@/components/layouts";
-import {
-  Overview,
-  Schedule,
-} from "@/components/sections";
+import { Overview, Schedule } from "@/components/sections";
 import { Button } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchHackathonData } from "@/middleware";
@@ -15,18 +12,20 @@ const HackathonMicrositeTabs: Array<{
   value: HackathonMicrositeTabType;
   title: string;
 }> = [
-    { value: "overview", title: "Overview" },
-    { value: "schedule", title: "Schedule" },
-    { value: "register", title: "Register" },
-    { value: "projects", title: "Projects" },
-    { value: "builders", title: "Builders" },
-  ];
+  { value: "overview", title: "Overview" },
+  { value: "schedule", title: "Schedule" },
+  { value: "register", title: "Register" },
+  { value: "projects", title: "Projects" },
+  { value: "builders", title: "Builders" },
+];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
   const pathname = usePathname();
   const slug = pathname.replace("/hackathons/", "");
 
-  const [hackathonData, setHackathonData] = useState<HackathonInterface>(INITIAL_HACKATHON_DATA);
+  const [hackathonData, setHackathonData] = useState<HackathonInterface>(
+    INITIAL_HACKATHON_DATA,
+  );
 
   const [micrositeTab, setMicrositeTab] =
     useState<HackathonMicrositeTabType>("overview");

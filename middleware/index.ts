@@ -10,6 +10,4 @@ export {
   fetchHackathonSchedule,
 } from "./hackathons";
 
-export {
-  authorizeUser
-} from './authentication'
+export { authorizeUser } from "./authentication";

@@ -4,33 +4,36 @@ let HEADERS = new Headers();
 HEADERS.append("Content-Type", "application/json");
 
 const REQUEST_OPTIONS = {
-  method: 'POST',
+  method: "POST",
   headers: HEADERS,
-  redirect: 'follow'
+  redirect: "follow",
 };
 
-const authorizeUser = async (username: string, password: string): Promise<{
+const authorizeUser = async (
+  username: string,
+  password: string,
+): Promise<{
   status: "error" | "success";
   data: AuthorizedUserType;
 }> => {
-  if (!username || !password) return {
-    status: "error",
-    data: {} as any
-  };
+  if (!username || !password)
+    return {
+      status: "error",
+      data: {} as any,
+    };
 
   const BODY = JSON.stringify({
-    "identifier": username,
-    "password": password
+    identifier: username,
+    password: password,
   });
-  
+
   const response = await fetch(`${STRAPI_BASE_API_URL}/auth/local`, {
     ...REQUEST_OPTIONS,
-    body: BODY
+    body: BODY,
   } as any);
 
   const data = await response.json();
 
-  
   if (data.jwt) {
     document.cookie = `jwt=${data.jwt}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `username=${username}; expires=${JWT_EXPIRATION_TIME} path=/`;
@@ -47,20 +50,17 @@ const authorizeUser = async (username: string, password: string): Promise<{
         profileAvatar: data.user.profileAvatar,
         fullName: {
           firstName: data.user.firstName,
-          lastName: data.user.lastName
+          lastName: data.user.lastName,
         },
-        isAuthenticated: true
-      }
-    }
+        isAuthenticated: true,
+      },
+    };
   }
 
   return {
     status: "error",
     data: {} as any,
-  }
-}
+  };
+};
 
-
-export {
-  authorizeUser
-}
+export { authorizeUser };

@@ -11,57 +11,64 @@ const CreateAccountFlow: React.FunctionComponent = () => {
   const [flow, setFlow] = useState<CreateAccountFlowType>("name");
 
   // account creation input fields state
-  const [createAccountData, setCreateAccountData] = useState<CreateAccountDataType>({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    password: ""
-  });
+  const [createAccountData, setCreateAccountData] =
+    useState<CreateAccountDataType>({
+      firstName: "",
+      lastName: "",
+      username: "",
+      email: "",
+      password: "",
+    });
 
   return (
     <>
-      {flow === "name"
-        && <CreateAccountNameInputView
+      {flow === "name" && (
+        <CreateAccountNameInputView
           setCreateAccountData={setCreateAccountData}
           data={createAccountData}
           setFlow={setFlow}
-        />}
-      {flow === "email"
-        && <CreateAccountEmailInputView
+        />
+      )}
+      {flow === "email" && (
+        <CreateAccountEmailInputView
           setCreateAccountData={setCreateAccountData}
           data={createAccountData}
           setFlow={setFlow}
-        />}
-      {flow === "password"
-        && <CreateAccountPasswordInputView
+        />
+      )}
+      {flow === "password" && (
+        <CreateAccountPasswordInputView
           setCreateAccountData={setCreateAccountData}
           data={createAccountData}
           setFlow={setFlow}
-        />}
-      {flow === "name" && <> <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
-        <div className="h-[2px] w-full bg-neutral-100"></div>
-        <span>{"OR"}</span>
-        <div className="h-[2px] w-full bg-neutral-100"></div>
-      </div>
-        <DialogFooter>
-          <Button size="large" variant="secondary" stretch>
-            <Github className="w-5 h-5" />
-            {"Continue with GitHub"}
-          </Button>
-        </DialogFooter></>}
+        />
+      )}
+      {flow === "name" && (
+        <>
+          {" "}
+          <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
+            <div className="h-[2px] w-full bg-neutral-100"></div>
+            <span>{"OR"}</span>
+            <div className="h-[2px] w-full bg-neutral-100"></div>
+          </div>
+          <DialogFooter>
+            <Button size="large" variant="secondary" stretch>
+              <Github className="w-5 h-5" />
+              {"Continue with GitHub"}
+            </Button>
+          </DialogFooter>
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
-const CreateAccountNameInputView: React.FunctionComponent<CreateAccountNameInputViewProps> = ({
-  data,
-  setCreateAccountData,
-  setFlow
-}) => {
+const CreateAccountNameInputView: React.FunctionComponent<
+  CreateAccountNameInputViewProps
+> = ({ data, setCreateAccountData, setFlow }) => {
   // auto-focus to first name input
   useEffect(() => {
-    document.querySelector('input')?.focus();
+    document.querySelector("input")?.focus();
   }, []);
   return (
     <>
@@ -73,8 +80,8 @@ const CreateAccountNameInputView: React.FunctionComponent<CreateAccountNameInput
           onChange={(e: any) => {
             setCreateAccountData({
               ...data,
-              firstName: e.target.value as string
-            })
+              firstName: e.target.value as string,
+            });
           }}
           value={data.firstName}
         />
@@ -85,8 +92,8 @@ const CreateAccountNameInputView: React.FunctionComponent<CreateAccountNameInput
           onChange={(e: any) => {
             setCreateAccountData({
               ...data,
-              lastName: e.target.value as string
-            })
+              lastName: e.target.value as string,
+            });
           }}
           value={data.lastName}
         />
@@ -98,30 +105,26 @@ const CreateAccountNameInputView: React.FunctionComponent<CreateAccountNameInput
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
-            username: e.target.value as string
+            username: e.target.value as string,
           });
         }}
         value={data.username}
       />
-      {data.username && <Button
-        size="large"
-        stretch
-        onClick={() => setFlow("email")}
-      >
-        {"Next"}
-      </Button>}
+      {data.username && (
+        <Button size="large" stretch onClick={() => setFlow("email")}>
+          {"Next"}
+        </Button>
+      )}
     </>
-  )
-}
+  );
+};
 
-const CreateAccountEmailInputView: React.FunctionComponent<CreateAccountEmailInputViewProps> = ({
-  data,
-  setCreateAccountData,
-  setFlow
-}) => {
+const CreateAccountEmailInputView: React.FunctionComponent<
+  CreateAccountEmailInputViewProps
+> = ({ data, setCreateAccountData, setFlow }) => {
   // auto-focus to login email input
   useEffect(() => {
-    document.querySelector('input')?.focus();
+    document.querySelector("input")?.focus();
   }, []);
   return (
     <>
@@ -132,8 +135,8 @@ const CreateAccountEmailInputView: React.FunctionComponent<CreateAccountEmailInp
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
-            email: e.target.value as string
-          })
+            email: e.target.value as string,
+          });
         }}
         value={data.email}
       />
@@ -146,26 +149,22 @@ const CreateAccountEmailInputView: React.FunctionComponent<CreateAccountEmailInp
         >
           {"Go back"}
         </Button>
-        {data.email && <Button
-          size="large"
-          stretch
-          onClick={() => setFlow("password")}
-        >
-          {"Next"}
-        </Button>}
+        {data.email && (
+          <Button size="large" stretch onClick={() => setFlow("password")}>
+            {"Next"}
+          </Button>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-const CreateAccountPasswordInputView: React.FunctionComponent<CreateAccountPasswordInputViewProps> = ({
-  setFlow,
-  setCreateAccountData,
-  data
-}) => {
+const CreateAccountPasswordInputView: React.FunctionComponent<
+  CreateAccountPasswordInputViewProps
+> = ({ setFlow, setCreateAccountData, data }) => {
   // auto-focus to login password input
   useEffect(() => {
-    document.querySelector('input')?.focus();
+    document.querySelector("input")?.focus();
   }, []);
   return (
     <>
@@ -176,8 +175,8 @@ const CreateAccountPasswordInputView: React.FunctionComponent<CreateAccountPassw
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
-            password: e.target.value as string
-          })
+            password: e.target.value as string,
+          });
         }}
       />
       <Input
@@ -194,15 +193,12 @@ const CreateAccountPasswordInputView: React.FunctionComponent<CreateAccountPassw
         >
           {"Go back"}
         </Button>
-        <Button
-          size="large"
-          stretch
-        >
+        <Button size="large" stretch>
           {"Create account"}
         </Button>
       </div>
     </>
-  )
-}
+  );
+};
 
 export { CreateAccountFlow };

@@ -43,7 +43,7 @@ export const INITIAL_HACKATHON_DATA = {
   slug: "",
   isHackathon: true,
   registrationEndDate: "",
-  registrationStartDate: ""
+  registrationStartDate: "",
 };
 
 export const INITIAL_USER_AUTHORIZATION = {
@@ -53,9 +53,9 @@ export const INITIAL_USER_AUTHORIZATION = {
   profileAvatar: "",
   fullName: {
     firstName: "",
-    lastName: ""
+    lastName: "",
   },
-  isAuthenticated: false
-}
+  isAuthenticated: false,
+};
 
 export const JWT_EXPIRATION_TIME = 2; // In days

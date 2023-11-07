@@ -1,7 +1,15 @@
-'use client';
+"use client";
 import { cn } from "@/helpers";
 import { ViewContainer } from "../layouts";
-import { AuthView, Avatar, AvatarFallback, AvatarImage, BasefolioLogo, Button, UI } from "../ui";
+import {
+  AuthView,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  BasefolioLogo,
+  Button,
+  UI,
+} from "../ui";
 import Link from "next/link";
 import { BASEROUTE } from "@/common";
 import React, { useContext } from "react";
@@ -26,24 +34,32 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
           </Link>
           <NavbarOptions />
         </div>
-        {!userData.isAuthenticated && <div className="navbar-cta-actions-container">
-          <NavbarActions />
-        </div>}
-        {userData.isAuthenticated && <div className="navbar-user-actions-container">
-          <NavbarUserActions userData={userData} />
-        </div>}
+        {!userData.isAuthenticated && (
+          <div className="navbar-cta-actions-container">
+            <NavbarActions />
+          </div>
+        )}
+        {userData.isAuthenticated && (
+          <div className="navbar-user-actions-container">
+            <NavbarUserActions userData={userData} />
+          </div>
+        )}
       </ViewContainer>
     </nav>
   );
 };
 
-const NavbarUserActions: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType }> = ({
-  userData,
-  className,
-  ...props
-}) => {
+const NavbarUserActions: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType }
+> = ({ userData, className, ...props }) => {
   return (
-    <div className={cn("navbar-actions-wrapper flex flex-row items-center justify-end gap-3", className)} {...props}>
+    <div
+      className={cn(
+        "navbar-actions-wrapper flex flex-row items-center justify-end gap-3",
+        className,
+      )}
+      {...props}
+    >
       <Image
         src={userData.profileAvatar}
         width={"60"}
@@ -52,8 +68,8 @@ const NavbarUserActions: React.FunctionComponent<React.HTMLAttributes<HTMLDivEle
         alt={"avatar"}
       />
     </div>
-  )
-}
+  );
+};
 
 const NavbarOptionsData: Array<NavbarOptionInterface> = [
   { title: "home", path: "/home" },

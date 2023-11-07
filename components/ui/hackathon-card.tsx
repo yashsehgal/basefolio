@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { CardContainer } from "./card";
 import { getHackathonCardStatus, parseStrapiDate } from "@/helpers";
 import { Button } from "../ui";
@@ -8,7 +8,9 @@ import { APP_BASE_HOSTNAME } from "@/common";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttributes<HTMLDivElement>> = ({
+const HackathonCard: React.FunctionComponent<
+  HackathonCardProps & React.HTMLAttributes<HTMLDivElement>
+> = ({
   className,
   showSocialLinks = false,
   showEndDate = false,
@@ -16,14 +18,13 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
   showApplyButtonWithStatus = false,
   ...props
 }): React.ReactNode => {
-
   // to store and generate the status according to datetime-stamps
   const [statusContent, setStatusContent] = useState<{
     time?: string;
     message: HackathonCardStatusMessageType | string;
   }>({
     time: "",
-    message: "Coming soon"
+    message: "Coming soon",
   });
 
   useEffect(() => {
@@ -32,54 +33,57 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
         new Date(props.registrationStartDate),
         new Date(props.registrationEndDate),
         new Date(props.startDate),
-        new Date(props.endDate)
-      )
+        new Date(props.endDate),
+      );
       switch (_statusData.status) {
         case "Coming soon":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: "Coming soon"
+            message: "Coming soon",
           });
           break;
         case "Registrations starting soon":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: "Registrations starting soon"
+            message: "Registrations starting soon",
           });
           break;
         case "Registrations started":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: "Registrations started"
+            message: "Registrations started",
           });
           break;
         case "Registrations ended":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: "Registrations ended"
+            message: "Registrations ended",
           });
           break;
         case "Hackathon started":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: `${props.isHackathon ? "Hackathon" : "Event"} started`
+            message: `${props.isHackathon ? "Hackathon" : "Event"} started`,
           });
           break;
         case "Hackathon ended":
           setStatusContent({
             time: _statusData.daysRemaining.toString(),
-            message: `${props.isHackathon ? "Hackathon" : "Event"} ended`
+            message: `${props.isHackathon ? "Hackathon" : "Event"} ended`,
           });
           break;
-        default: break;
+        default:
+          break;
       }
     }
-  }, [getHackathonCardStatus(
-    new Date(props.registrationStartDate),
-    new Date(props.registrationEndDate),
-    new Date(props.startDate),
-    new Date(props.endDate)
-  ).status]);
+  }, [
+    getHackathonCardStatus(
+      new Date(props.registrationStartDate),
+      new Date(props.registrationEndDate),
+      new Date(props.startDate),
+      new Date(props.endDate),
+    ).status,
+  ]);
 
   return (
     <CardContainer
@@ -100,35 +104,37 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
         <h3 className="font-normal text-base tracking-tight mt-2 text-zinc-400 w-[32ch]">
           {props.subtitle}
         </h3>
-        {showSocialLinks && <div className="links-wrapper my-3 flex flex-row items-center justify-start gap-2">
-          {props.website && (
-            <Button
-              variant="secondary"
-              className="p-3"
-              onClick={() => window.open(props.website)}
-            >
-              <LinkIcon />
-            </Button>
-          )}
-          {props.twitter && (
-            <Button
-              variant="secondary"
-              className="p-3"
-              onClick={() => window.open(props.twitter)}
-            >
-              <Twitter />
-            </Button>
-          )}
-          {props.instagram && (
-            <Button
-              variant="secondary"
-              className="p-3"
-              onClick={() => window.open(props.instagram)}
-            >
-              <Instagram />
-            </Button>
-          )}
-        </div>}
+        {showSocialLinks && (
+          <div className="links-wrapper my-3 flex flex-row items-center justify-start gap-2">
+            {props.website && (
+              <Button
+                variant="secondary"
+                className="p-3"
+                onClick={() => window.open(props.website)}
+              >
+                <LinkIcon />
+              </Button>
+            )}
+            {props.twitter && (
+              <Button
+                variant="secondary"
+                className="p-3"
+                onClick={() => window.open(props.twitter)}
+              >
+                <Twitter />
+              </Button>
+            )}
+            {props.instagram && (
+              <Button
+                variant="secondary"
+                className="p-3"
+                onClick={() => window.open(props.instagram)}
+              >
+                <Instagram />
+              </Button>
+            )}
+          </div>
+        )}
         <div className="hackathon-details-wrapper my-8 pl-2 border-l-2 border-zinc-800 grid grid-cols-2 items-start gap-6 lg:flex lg:flex-row">
           <div className="hackathon-startDate-wrapper">
             <p className="leading-snug tracking-tight text-base text-zinc-400">
@@ -160,24 +166,34 @@ const HackathonCard: React.FunctionComponent<HackathonCardProps & React.HTMLAttr
         </div>
       </div>
       <div className={cn("grid grid-cols-1 gap-2 w-full")}>
-        {(variant === "status" || showApplyButtonWithStatus) && <div className={cn("status-content-wrapper",
-          "rounded-lg bg-zinc-100 py-3 px-4 w-full",
-          "font-bold uppercase text-zinc-500"
-        )}>
-          {statusContent.message}
-          {statusContent.time && <p className="days-remaining-content-wrapper text-zinc-400">
-            {statusContent.time}{" "}
-            {parseInt(statusContent.time) <= 1 ? "Day" : "Days"}{" remaining"}
-          </p>}
-        </div>}
-        {(variant === "apply" || showApplyButtonWithStatus) && <Link
-          href={`${APP_BASE_HOSTNAME}/hackathons/${props.slug}`}
-          className="w-full"
-        >
-          <Button stretch size="large">
-            {"Apply now"}
-          </Button>
-        </Link>}
+        {(variant === "status" || showApplyButtonWithStatus) && (
+          <div
+            className={cn(
+              "status-content-wrapper",
+              "rounded-lg bg-zinc-100 py-3 px-4 w-full",
+              "font-bold uppercase text-zinc-500",
+            )}
+          >
+            {statusContent.message}
+            {statusContent.time && (
+              <p className="days-remaining-content-wrapper text-zinc-400">
+                {statusContent.time}{" "}
+                {parseInt(statusContent.time) <= 1 ? "Day" : "Days"}
+                {" remaining"}
+              </p>
+            )}
+          </div>
+        )}
+        {(variant === "apply" || showApplyButtonWithStatus) && (
+          <Link
+            href={`${APP_BASE_HOSTNAME}/hackathons/${props.slug}`}
+            className="w-full"
+          >
+            <Button stretch size="large">
+              {"Apply now"}
+            </Button>
+          </Link>
+        )}
       </div>
     </CardContainer>
   );

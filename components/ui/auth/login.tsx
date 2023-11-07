@@ -1,10 +1,10 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Input } from "@/components/ui";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import { cn } from "@/helpers";
 import { DialogFooter } from "../dialog";
 import { Button } from "../button";
-import { Github } from 'lucide-react';
+import { Github } from "lucide-react";
 import { authorizeUser } from "@/middleware";
 import { UserAuthenticationContext } from "@/contexts";
 
@@ -18,48 +18,53 @@ const LoginFlow: React.FunctionComponent = () => {
 
   return (
     <>
-      {flow === "email"
-        && <LoginEmailInputView
+      {flow === "email" && (
+        <LoginEmailInputView
           emailInput={emailInput}
           setEmailInput={setEmailInput}
           setFlow={setFlow}
-        />}
-      {flow === "password"
-        && <LoginPasswordInputView
+        />
+      )}
+      {flow === "password" && (
+        <LoginPasswordInputView
           setFlow={setFlow}
           setPasswordInput={setPasswordInput}
           passwordInput={passwordInput}
           emailInput={emailInput}
-        />}
-      {flow === "email" && <> <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
-        <div className="h-[2px] w-full bg-neutral-100"></div>
-        <span>{"OR"}</span>
-        <div className="h-[2px] w-full bg-neutral-100"></div>
-      </div>
-        <DialogFooter>
-          <Button size="large" variant="secondary" stretch>
-            <Github className="w-5 h-5" />
-            {"Continue with GitHub"}
-          </Button>
-        </DialogFooter></>}
+        />
+      )}
+      {flow === "email" && (
+        <>
+          {" "}
+          <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
+            <div className="h-[2px] w-full bg-neutral-100"></div>
+            <span>{"OR"}</span>
+            <div className="h-[2px] w-full bg-neutral-100"></div>
+          </div>
+          <DialogFooter>
+            <Button size="large" variant="secondary" stretch>
+              <Github className="w-5 h-5" />
+              {"Continue with GitHub"}
+            </Button>
+          </DialogFooter>
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
-const LoginEmailInputView: React.FunctionComponent<LoginEmailInputViewProps> = ({
-  emailInput,
-  setEmailInput,
-  setFlow
-}) => {
+const LoginEmailInputView: React.FunctionComponent<
+  LoginEmailInputViewProps
+> = ({ emailInput, setEmailInput, setFlow }) => {
   // auto-focus to login email input
   useEffect(() => {
-    document.querySelector('input')?.focus();
+    document.querySelector("input")?.focus();
   }, []);
 
   // method to make changes in email string storage
   const manageEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailInput(e.target?.value as string);
-  }
+  };
 
   return (
     <>
@@ -73,32 +78,27 @@ const LoginEmailInputView: React.FunctionComponent<LoginEmailInputViewProps> = (
         }}
         value={emailInput}
       />
-      {emailInput && <Button
-        stretch
-        size="large"
-        onClick={() => setFlow("password")}
-      >
-        {"Continue"}
-      </Button>}
+      {emailInput && (
+        <Button stretch size="large" onClick={() => setFlow("password")}>
+          {"Continue"}
+        </Button>
+      )}
     </>
-  )
-}
+  );
+};
 
-const LoginPasswordInputView: React.FunctionComponent<LoginPasswordInputViewProps> = ({
-  setFlow,
-  passwordInput,
-  setPasswordInput,
-  emailInput
-}) => {
+const LoginPasswordInputView: React.FunctionComponent<
+  LoginPasswordInputViewProps
+> = ({ setFlow, passwordInput, setPasswordInput, emailInput }) => {
   // auto-focus to login password input
   useEffect(() => {
-    document.querySelector('input')?.focus();
+    document.querySelector("input")?.focus();
   }, []);
 
   // method to make changes in password string storage
   const managePasswordInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordInput(e.target?.value as string);
-  }
+  };
 
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
@@ -123,25 +123,30 @@ const LoginPasswordInputView: React.FunctionComponent<LoginPasswordInputViewProp
         >
           {"Go back"}
         </Button>
-        {passwordInput && <Button
-          stretch
-          size="large"
-          onClick={async () => {
-            if (emailInput && passwordInput) {
-              const { status, data } = await authorizeUser(emailInput, passwordInput);
-              if (status === "success") {
-                setUserData({
-                  ...data
-                });
+        {passwordInput && (
+          <Button
+            stretch
+            size="large"
+            onClick={async () => {
+              if (emailInput && passwordInput) {
+                const { status, data } = await authorizeUser(
+                  emailInput,
+                  passwordInput,
+                );
+                if (status === "success") {
+                  setUserData({
+                    ...data,
+                  });
+                }
               }
-            }
-          }}
-        >
-          {"Login"}
-        </Button>}
+            }}
+          >
+            {"Login"}
+          </Button>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
 export default LoginFlow;
