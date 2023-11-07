@@ -38,6 +38,10 @@ const authorizeUser = async (
     document.cookie = `jwt=${data.jwt}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `username=${username}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `password=${password}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `profileAvatar=${data.user.profileAvatar}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `email=${data.user.email}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `firstName=${data.user.firstName}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `lastName=${data.user.lastName}l expires=${JWT_EXPIRATION_TIME} path=/`;
 
     console.log("data from user local", data);
 

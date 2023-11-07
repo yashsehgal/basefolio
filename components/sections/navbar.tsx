@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/helpers";
+import { cn, getCookie } from "@/helpers";
 import { ViewContainer } from "../layouts";
 import {
   AuthView,
@@ -12,7 +12,7 @@ import {
 } from "../ui";
 import Link from "next/link";
 import { BASEROUTE } from "@/common";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
 
@@ -24,7 +24,28 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   ...props
 }) => {
-  const { userData } = useContext(UserAuthenticationContext);
+  const { userData, setUserData } = useContext(UserAuthenticationContext);
+  const [isJWTAvailable, setIsJWTAvailable] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (getCookie('jwt').status === "success") {
+      setIsJWTAvailable(true);
+      // storing the cookie(ed) data in global context
+      setUserData({
+        ...userData,
+        profileAvatar: getCookie('profileAvatar').data,
+        fullName: {
+          firstName: getCookie('firstName').data,
+          lastName: getCookie('lastName').data
+        },
+        isAuthenticated: true,
+        email: getCookie('email').data,
+        username: getCookie('username').data,
+        password: getCookie('password').data
+      })
+    }
+  }, []);
+
   return (
     <nav className={cn("navbar py-4 border-b", className)} {...props}>
       <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
@@ -34,12 +55,12 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
           </Link>
           <NavbarOptions />
         </div>
-        {!userData.isAuthenticated && (
+        {(!userData.isAuthenticated && !isJWTAvailable) && (
           <div className="navbar-cta-actions-container">
             <NavbarActions />
           </div>
         )}
-        {userData.isAuthenticated && (
+        {(userData.isAuthenticated || isJWTAvailable) && (
           <div className="navbar-user-actions-container">
             <NavbarUserActions userData={userData} />
           </div>
@@ -60,13 +81,13 @@ const NavbarUserActions: React.FunctionComponent<
       )}
       {...props}
     >
-      <Image
+      {userData.profileAvatar && <Image
         src={userData.profileAvatar}
         width={"60"}
         height={"60"}
         className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
         alt={"avatar"}
-      />
+      />}
     </div>
   );
 };
@@ -128,7 +149,7 @@ const NavbarActions: React.FunctionComponent<
           <Button variant="secondary">Login</Button>
         </UI.DialogTrigger>
         <UI.DialogOverlay>
-          <AuthView />
+          <AuthView initialView="login" />
         </UI.DialogOverlay>
       </UI.Dialog>
       <UI.Dialog>
@@ -136,7 +157,7 @@ const NavbarActions: React.FunctionComponent<
           <Button>Create account</Button>
         </UI.DialogTrigger>
         <UI.DialogOverlay>
-          <AuthView />
+          <AuthView initialView="create-account" />
         </UI.DialogOverlay>
       </UI.Dialog>
     </div>

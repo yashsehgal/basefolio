@@ -5,8 +5,8 @@ import { cn } from "@/helpers";
 import LoginFlow from "./login";
 import { CreateAccountFlow } from "./create-account";
 
-const AuthView: React.FunctionComponent = () => {
-  const [view, setView] = useState<"login" | "create-account">("login");
+const AuthView: React.FunctionComponent<{ initialView: AuthFlowViewType }> = ({ initialView = "login" }) => {
+  const [view, setView] = useState<AuthFlowViewType>(initialView);
   return (
     <UI.DialogContent>
       <UI.DialogHeader className="mb-3">

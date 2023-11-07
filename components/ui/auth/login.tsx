@@ -100,7 +100,7 @@ const LoginPasswordInputView: React.FunctionComponent<
     setPasswordInput(e.target?.value as string);
   };
 
-  const { userData, setUserData } = useContext(UserAuthenticationContext);
+  const { setUserData } = useContext(UserAuthenticationContext);
 
   return (
     <>
