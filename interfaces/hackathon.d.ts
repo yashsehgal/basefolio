@@ -19,6 +19,7 @@ declare interface HackathonInterface {
   instagram?: string;
   github?: string;
   email?: string;
+  discord?: string;
   slug: string;
   isHackathon: boolean;
   location?: string;
@@ -72,4 +73,5 @@ declare type OverviewSocialLinksContainerProps = {
   github?: string;
   website?: string;
   discord?: string;
+  hackathonTitle: string;
 }
