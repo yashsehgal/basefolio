@@ -6,7 +6,7 @@ const CardContainer: React.FunctionComponent<
   return (
     <div
       className={cn(
-        "card-container bg-white p-6 rounded-xl border border-zinc-200/90 shadow-xl shadow-zinc-200",
+        "card-container bg-white p-6 rounded-xl border border-zinc-200/90 shadow-md shadow-zinc-200/80",
         className,
       )}
       {...props}

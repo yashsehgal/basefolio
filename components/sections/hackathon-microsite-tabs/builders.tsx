@@ -1,30 +1,69 @@
 'use client';
 import { Section } from "@/components/layouts";
-import { Button, CardContainer } from "@/components/ui";
+import { Button, CardContainer, Input } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchBuildersForHackathon } from "@/middleware";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { UserCircle, BadgeCheck } from 'lucide-react';
+import { KeyboardEvent, useEffect, useState } from "react";
+import { UserCircle, BadgeCheck, MapPin } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 
 const Builders = (hackathonData: HackathonInterface) => {
   const [builders, setBuilders] =
     useState<Array<BuilderInterface & { participationType?: "solo" | "team" }>>([]);
 
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  const [filteredBuilders, setFilteredBuilders] =
+    useState<Array<BuilderInterface & { participationType?: "solo" | "team" }>>([]);
+
   useEffect(() => {
     async function fetchData() {
       let data = await fetchBuildersForHackathon(hackathonData.slug);
       setBuilders(data);
+      setFilteredBuilders(data);
     }
     fetchData();
   }, []);
 
+  const filterBuildersOnSearch = () => {
+    const searchTermLowerCase = searchInput.toLowerCase().trim();
+
+    const filteredResults = builders.filter(item => {
+      const username = item.username.toLowerCase();
+      const firstName = item.fullName.firstName.toLowerCase();
+      const location = item.location.toLowerCase();
+
+      return (
+        username.includes(searchTermLowerCase) ||
+        firstName.includes(searchTermLowerCase) ||
+        location.includes(searchTermLowerCase)
+      );
+    });
+
+    setFilteredBuilders(filteredResults);
+  };
+
+  useEffect(() => {
+    filterBuildersOnSearch();
+  }, [searchInput]);
+
   return (
     <div id="builders-content-container">
-      <Section className="border rounded-2xl px-8 max-md:p-0 max-md:border-none">
+      <Section className="border rounded-2xl px-8 max-md:p-0 max-md:border-none grid gap-6">
+        <div className="builders-list-filter-actions-wrapper">
+          <Input
+            className={cn("p-4 rounded-xl placeholder:text-zinc-400")}
+            placeholder="Search by username, full name, location, etc"
+            onChange={(e) => {
+              e.preventDefault();
+              setSearchInput(e.target.value as string);
+            }}
+            value={searchInput}
+          />
+        </div>
         <div className="builders-list-container grid grid-cols-1 gap-4">
-          {builders.map((builder, index) => {
+          {filteredBuilders.map((builder, index) => {
             return (
               <BuilderRowCard {...builder} key={index} />
             )
@@ -38,7 +77,7 @@ const Builders = (hackathonData: HackathonInterface) => {
 const BuilderRowCard = (builderData: BuilderInterface & { participationType?: "solo" | "team" }) => {
   return (
     <CardContainer className="shadow flex flex-row items-center justify-between max-lg:flex-col max-lg:gap-4">
-      <div className="builder-avatar-and-details-wrapper flex flex-row items-start gap-4 max-lg:w-full">
+      <div className="builder-avatar-and-details-wrapper flex flex-row items-center gap-4 max-lg:w-full">
         <div className={cn("builder-avatar-wrapper flex flex-row items-center justify-center",
           "overflow-hidden w-16 h-16 rounded-xl",
           !builderData.profileImageURL && "border border-dashed border-zinc-400 text-zinc-400"
@@ -70,6 +109,10 @@ const BuilderRowCard = (builderData: BuilderInterface & { participationType?: "s
         <Badge variant="outline" className="capitalize">
           {builderData.participationType === "team" ? "Participating in a team" : "Participating solo"}
         </Badge>
+        <div className="text-zinc-400 text-xs flex flex-row items-center w-fit h-auto gap-1 font-medium">
+          <MapPin className="h-3 w-3" />{" "}
+          <span>{builderData.location}</span>
+        </div>
         <Button variant="solid">View profile</Button>
       </div>
     </CardContainer>

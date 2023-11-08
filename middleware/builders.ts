@@ -17,6 +17,7 @@ const fetchAllBuilders = async () => {
           firstName: responseAttributes.firstName,
           lastName: responseAttributes.lastName ?? ""
         },
+        location: responseAttributes.location,
         bio: responseAttributes.bio ?? "",
         isVerified: responseAttributes.isVerified ?? false,
         profileImageURL: responseAttributes.profileImageURL ?? "",
@@ -43,9 +44,9 @@ const fetchBuildersForHackathon = async (hackathonSlug: string) => {
     participationType?: "solo" | "team";
   }> = [];
 
-  allBuilders.map((builder, builderIndex) => {
+  allBuilders.map((builder) => {
     console.log("builders data", builder);
-    builder.hackathonParticipations?.map((hackathon, index) => {
+    builder.hackathonParticipations?.map((hackathon) => {
       if (hackathon.hackathonSlug === hackathonSlug) {
         console.log("hackathon data", hackathon);
         

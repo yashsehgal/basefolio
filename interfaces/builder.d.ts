@@ -5,6 +5,7 @@ declare interface BuilderInterface {
     firstName: string;
     lastName: string;
   };
+  location: string;
   bio?: string;
   isVerified: boolean;
   profileImageURL?: string;

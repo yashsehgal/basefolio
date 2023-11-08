@@ -164,7 +164,7 @@ const SocialBlock = ({
         }}
         stretch
         className="mt-4"
-        variant="secondary"
+        variant="solid"
       >
         {url}
       </Button>
