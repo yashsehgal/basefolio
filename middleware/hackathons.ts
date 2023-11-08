@@ -1,15 +1,9 @@
-import { INITIAL_HACKATHON_DATA, STRAPI_BASE_API_URL } from "@/common";
+import { INITIAL_HACKATHON_DATA, STRAPI_BASE_API_URL, STRAPI_REQUEST_OPTIONS } from "@/common";
 import {
   checkIfDateLogged,
   parseDatestamp,
   sortScheduleTimelineCollection,
 } from "@/helpers";
-
-const RequestOptions = {
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_SHOW_HACKATHONS_APIKEY}`,
-  },
-};
 
 const fetchAllHackathons = async () => {
   const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`);
@@ -48,7 +42,7 @@ const fetchAllHackathons = async () => {
 const fetchFeaturedHackathon = async () => {
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/hackathons?filters[isFeatured][$eq]=true`,
-    RequestOptions,
+    STRAPI_REQUEST_OPTIONS,
   );
   const data = await response.json();
   return data;
@@ -57,7 +51,7 @@ const fetchFeaturedHackathon = async () => {
 const fetchHackathonList = async (amount: number = 2) => {
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/hackathons`,
-    RequestOptions,
+    STRAPI_REQUEST_OPTIONS,
   );
   const data = await response.json();
   let startingExploreHackathons: Array<HackathonInterface> = [];
@@ -123,7 +117,7 @@ const fetchHackathonList = async (amount: number = 2) => {
 const fetchRemoteHackathonList = async (amount: number = 3) => {
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/hackathons?filters[isRemote][$eq]=true`,
-    RequestOptions,
+    STRAPI_REQUEST_OPTIONS,
   );
   const data = await response.json();
   let startingRemoteHackathons: Array<HackathonInterface> = [];
@@ -194,7 +188,7 @@ const fetchUpcomingHackathons = async () => {};
 const fetchHackathonData = async (slug: string) => {
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/hackathons?filters[slug][$eq]=${slug}`,
-    RequestOptions,
+    STRAPI_REQUEST_OPTIONS,
   );
   const data = await response.json();
 
@@ -235,7 +229,7 @@ const fetchHackathonEvents = async (hackathonSlug: string) => {
 
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/events?filters[hackathonSlug][$eq]=${hackathonSlug}`,
-    RequestOptions,
+    STRAPI_REQUEST_OPTIONS,
   );
   const data = await response.json();
 

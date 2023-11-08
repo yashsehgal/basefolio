@@ -3,9 +3,6 @@ import { cn, getCookie } from "@/helpers";
 import { ViewContainer } from "../layouts";
 import {
   AuthView,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
   BasefolioLogo,
   Button,
   UI,

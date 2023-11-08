@@ -1,7 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Input } from "@/components/ui";
-import { motion } from "framer-motion";
-import { cn } from "@/helpers";
 import { DialogFooter } from "../dialog";
 import { Button } from "../button";
 import { Github } from "lucide-react";

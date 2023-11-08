@@ -1,8 +1,7 @@
 "use client";
 import { INITIAL_HACKATHON_DATA } from "@/common";
 import { HackathonMicrositeLayout } from "@/components/layouts";
-import { Overview, Schedule } from "@/components/sections";
-import { Register } from "@/components/sections/hackathon-microsite-tabs";
+import { Overview, Schedule, Register, Builders } from "@/components/sections";
 import { Button } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchHackathonData } from "@/middleware";
@@ -16,8 +15,8 @@ const HackathonMicrositeTabs: Array<{
     { value: "overview", title: "Overview" },
     { value: "schedule", title: "Schedule" },
     { value: "register", title: "Register" },
-    { value: "projects", title: "Projects" },
     { value: "builders", title: "Builders" },
+    { value: "projects", title: "Projects" },
   ];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
@@ -55,6 +54,9 @@ const HackathonMicrosite: React.FunctionComponent = () => {
           )}
           {micrositeTab === 'register' && (
             <Register {...(hackathonData as any)} />
+          )}
+          {micrositeTab === 'builders' && (
+            <Builders {...(hackathonData as any)} />
           )}
         </div>
       </HackathonMicrositeLayout>

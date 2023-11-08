@@ -13,7 +13,16 @@ const Register = (hackathonData: HackathonInterface) => {
       {!userData.isAuthenticated && <div className="register-notLoggedIn-reminder-container">
         <NotLoggedInWhileRegister />
       </div>}
+      {userData.isAuthenticated && <div className="registration-flow-container">
+        <RegistrationFlow />
+      </div>}
     </div>
+  )
+}
+
+const RegistrationFlow = () => {
+  return (
+    <></>
   )
 }
 
