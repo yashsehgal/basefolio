@@ -31,3 +31,9 @@ declare interface HackathonCardProps extends HackathonInterface {
   showEndDate?: boolean;
   showApplyButtonWithStatus?: boolean;
 }
+
+declare interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  withSeparator?: boolean;
+  title?: string;
+  subtitle?: string;
+}

@@ -11,7 +11,7 @@ export * as UI from "./dialog";
 
 export { AuthView } from "./auth";
 
-export { Input } from "./input";
+export { Input, FormItemWrapper } from "./input";
 
 export { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
@@ -32,3 +32,5 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 } from './dropdown';
+
+export { Label } from './label'

@@ -6,3 +6,6 @@ export { OpenHackathonsSection } from "./open-hackathons";
 
 export { Overview, Schedule, Register, Builders } from "./hackathon-microsite-tabs";
 
+export { ProfileNavigation } from './profile-navigation'
+
+export { AboutTab } from './profile-tabs';

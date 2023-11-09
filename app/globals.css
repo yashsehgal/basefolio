@@ -12,6 +12,11 @@ body {
   @apply w-[1100px] max-2xl:w-[1200px] max-xl:w-[920px] max-lg:w-[680px] max-md:w-[440px] max-sm:w-[370px];
 }
 
+.profile-view-container {
+  @apply box-border mx-auto;
+  @apply w-[860px] max-2xl:w-[920px] max-xl:w-[740px] max-lg:w-[680px] max-md:w-[440px] max-sm:w-[370px];
+}
+
 .section {
   @apply py-12;
 }

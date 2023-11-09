@@ -22,4 +22,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-export { Input };
+const FormItemWrapper: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  className,
+  ...props
+}) => {
+  return (
+    <div className="flex flex-col items-start gap-2">
+      {children}
+    </div>
+  )
+}
+
+export { Input, FormItemWrapper };

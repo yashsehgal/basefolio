@@ -25,18 +25,6 @@ declare interface HackathonInterface {
   location?: string;
 }
 
-declare interface HackathonMicrositeLayoutProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  hackathonData?: HackathonInterface;
-}
-
-declare type HackathonMicrositeTabType =
-  | "overview"
-  | "schedule"
-  | "projects"
-  | "builders"
-  | "register";
-
 declare interface EventInterface {
   title: string;
   description?: string;

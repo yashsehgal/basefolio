@@ -1,0 +1,2 @@
+
+export { AboutTab } from './about'
