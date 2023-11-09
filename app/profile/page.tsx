@@ -9,7 +9,7 @@ const ProfileView: React.FunctionComponent = () => {
   return (
     <>
       <ProfileViewLayout selectedTab={selectedTab} setSelectedTab={setSelectedTab}>
-        {selectedTab && <AboutTab />}
+        {selectedTab === "about" && <AboutTab />}
       </ProfileViewLayout>
     </>
   )

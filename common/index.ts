@@ -55,6 +55,7 @@ export const INITIAL_USER_AUTHORIZATION = {
     firstName: "",
     lastName: "",
   },
+  bio: "",
   isAuthenticated: false,
 };
 

@@ -32,6 +32,8 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         "bg-transparent text-zinc-600 border-zinc-200/80 hover:bg-zinc-50 shadow-none hover:shadow-none",
         variant === "destructive" &&
         "bg-red-500 text-red-50 border-transparent hover:bg-red-400",
+        // for disabled state
+        props.disabled && "bg-zinc-100 text-zinc-300 cursor-not-allowed shadow-none hover:shadow-none hover:bg-zinc-100 hover:text-zinc-300",
         className,
       )}
       {...props}

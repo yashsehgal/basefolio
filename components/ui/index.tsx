@@ -33,4 +33,6 @@ export {
   DropdownMenuRadioGroup,
 } from './dropdown';
 
-export { Label } from './label'
+export { Label } from './label';
+
+export { MarkdownEditor } from './markdown-editor';

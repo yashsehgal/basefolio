@@ -46,10 +46,10 @@ const CreateAccountFlow: React.FunctionComponent = () => {
       {flow === "name" && (
         <>
           {" "}
-          <div className="content-seperator flex flex-row items-center justify-between gap-3 text-neutral-200 select-none">
-            <div className="h-[2px] w-full bg-neutral-100"></div>
+          <div className="content-seperator flex flex-row items-center justify-between gap-3 text-zinc-200 select-none">
+            <div className="h-[2px] w-full bg-zinc-100"></div>
             <span>{"OR"}</span>
-            <div className="h-[2px] w-full bg-neutral-100"></div>
+            <div className="h-[2px] w-full bg-zinc-100"></div>
           </div>
           <DialogFooter>
             <Button size="large" variant="secondary" stretch>
@@ -76,7 +76,7 @@ const CreateAccountNameInputView: React.FunctionComponent<
         <Input
           type="text"
           placeholder="First name"
-          className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+          className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
           onChange={(e: any) => {
             setCreateAccountData({
               ...data,
@@ -88,7 +88,7 @@ const CreateAccountNameInputView: React.FunctionComponent<
         <Input
           type="text"
           placeholder="Last name"
-          className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+          className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
           onChange={(e: any) => {
             setCreateAccountData({
               ...data,
@@ -101,7 +101,7 @@ const CreateAccountNameInputView: React.FunctionComponent<
       <Input
         type="text"
         placeholder="Create a username"
-        className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+        className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
@@ -131,7 +131,7 @@ const CreateAccountEmailInputView: React.FunctionComponent<
       <Input
         type="text"
         placeholder="Enter your email"
-        className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+        className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
@@ -171,7 +171,7 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
       <Input
         type="password"
         placeholder="Create a password"
-        className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+        className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
         onChange={(e: any) => {
           setCreateAccountData({
             ...data,
@@ -182,7 +182,7 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
       <Input
         type="password"
         placeholder="Confirm your password"
-        className="px-6 py-4 text-lg placeholder:text-neutral-400 bg-neutral-100 focus:bg-neutral-50"
+        className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
       />
       <div className=" grid grid-cols-2 gap-3 items-center">
         <Button

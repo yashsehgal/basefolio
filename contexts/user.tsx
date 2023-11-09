@@ -6,12 +6,12 @@ export const UserAuthenticationContext = createContext<{
   setUserData: (value: AuthorizedUserType) => void;
 }>({
   userData: INITIAL_USER_AUTHORIZATION,
-  setUserData: () => {},
+  setUserData: () => { },
 });
 
 const UserAuthenticationProvider: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
-> = ({ children, ...props }) => {
+> = ({ children }) => {
   const [userData, setUserData] = useState<AuthorizedUserType>(
     INITIAL_USER_AUTHORIZATION,
   );

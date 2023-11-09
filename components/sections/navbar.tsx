@@ -16,13 +16,12 @@ import {
   UI,
 } from "../ui";
 import Link from "next/link";
-import { BASEROUTE, INITIAL_USER_AUTHORIZATION } from "@/common";
+import { BASEROUTE } from "@/common";
 import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
 
 import { User, LogOut, Settings, Github, Users, Keyboard } from 'lucide-react';
-import { useRouter } from "next/navigation";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -50,6 +49,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         email: getCookie('email').data,
         username: getCookie('username').data,
         password: getCookie('password').data,
+        bio: getCookie('bio').data
       })
     }
   }, []);
@@ -82,13 +82,11 @@ const NavbarUserActions: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType; setUserData: (data: AuthorizedUserType) => void }
 > = ({ userData, setUserData, className, ...props }) => {
 
-  const router = useRouter();
-
   const handleLogOut = () => {
     // removing JWT and user detail cookies
     ['jwt', 'firstName', 'lastName',
       'username', 'profileAvatar', 'email',
-      'password'].map((key: string) => {
+      'password', 'bio'].map((key: string) => {
         deleteCookie(key);
       });
 

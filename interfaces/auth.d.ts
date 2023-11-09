@@ -7,6 +7,7 @@ declare type AuthorizedUserType = {
     firstName: string;
     lastName: string;
   };
+  bio: string;
   isAuthenticated: boolean;
 };
 

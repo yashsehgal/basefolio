@@ -13,14 +13,14 @@ const AuthView: React.FunctionComponent<{ initialView: AuthFlowViewType }> = ({ 
         <UI.DialogTitle className="text-4xl font-semibold">
           {view === "login" ? "Login" : "Create Account"}
         </UI.DialogTitle>
-        <UI.DialogDescription className="text-neutral-400 text-base">
+        <UI.DialogDescription className="text-zinc-400 text-base">
           {view === "login" ? (
             <>Don&apos;t have an account?</>
           ) : (
             <>Already have an account?</>
           )}{" "}
           <button
-            className="text-neutral-800"
+            className="text-zinc-800"
             onClick={() => {
               if (view === "login") setView("create-account");
               else setView("login");

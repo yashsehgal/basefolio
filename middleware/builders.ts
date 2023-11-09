@@ -6,8 +6,6 @@ const fetchAllBuilders = async () => {
   
   let allBuilders: Array<BuilderInterface> = [];
 
-  console.log("data from strapi", data);
-
   if (data.data.length) {
     for (let count = 0; count < data.data.length; count++) {
       let responseAttributes = data.data[count].attributes;
@@ -45,10 +43,8 @@ const fetchBuildersForHackathon = async (hackathonSlug: string) => {
   }> = [];
 
   allBuilders.map((builder) => {
-    console.log("builders data", builder);
     builder.hackathonParticipations?.map((hackathon) => {
       if (hackathon.hackathonSlug === hackathonSlug) {
-        console.log("hackathon data", hackathon);
         
         buildersForHackathon.push({
           ...builder,
