@@ -21,7 +21,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
 
-import { User, LogOut, Settings, Github, Users, Keyboard } from 'lucide-react';
+import { User, LogOut, Settings, Github, Users, Keyboard } from "lucide-react";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -35,22 +35,22 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
   const [isJWTAvailable, setIsJWTAvailable] = useState<boolean>(false);
 
   useEffect(() => {
-    if (getCookie('jwt').status === "success") {
+    if (getCookie("jwt").status === "success") {
       setIsJWTAvailable(true);
       // storing the cookie(ed) data in global context
       setUserData({
         ...userData,
-        profileAvatar: getCookie('profileAvatar').data,
+        profileAvatar: getCookie("profileAvatar").data,
         fullName: {
-          firstName: getCookie('firstName').data,
-          lastName: getCookie('lastName').data
+          firstName: getCookie("firstName").data,
+          lastName: getCookie("lastName").data,
         },
         isAuthenticated: true,
-        email: getCookie('email').data,
-        username: getCookie('username').data,
-        password: getCookie('password').data,
-        bio: getCookie('bio').data
-      })
+        email: getCookie("email").data,
+        username: getCookie("username").data,
+        password: getCookie("password").data,
+        bio: getCookie("bio").data,
+      });
     }
   }, []);
 
@@ -63,7 +63,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
           </Link>
           <NavbarOptions />
         </div>
-        {(!userData.isAuthenticated && !isJWTAvailable) && (
+        {!userData.isAuthenticated && !isJWTAvailable && (
           <div className="navbar-cta-actions-container">
             <NavbarActions />
           </div>
@@ -79,20 +79,29 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
 };
 
 const NavbarUserActions: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType; setUserData: (data: AuthorizedUserType) => void }
+  React.HTMLAttributes<HTMLDivElement> & {
+    userData: AuthorizedUserType;
+    setUserData: (data: AuthorizedUserType) => void;
+  }
 > = ({ userData, setUserData, className, ...props }) => {
-
   const handleLogOut = () => {
     // removing JWT and user detail cookies
-    ['jwt', 'firstName', 'lastName',
-      'username', 'profileAvatar', 'email',
-      'password', 'bio'].map((key: string) => {
-        deleteCookie(key);
-      });
+    [
+      "jwt",
+      "firstName",
+      "lastName",
+      "username",
+      "profileAvatar",
+      "email",
+      "password",
+      "bio",
+    ].map((key: string) => {
+      deleteCookie(key);
+    });
 
     // routing to base route
     window.location.href = "/";
-  }
+  };
 
   return (
     <div
@@ -104,19 +113,25 @@ const NavbarUserActions: React.FunctionComponent<
     >
       <DropdownMenu>
         <DropdownMenuTrigger>
-          {userData.profileAvatar && <Image
-            src={userData.profileAvatar}
-            width={"60"}
-            height={"60"}
-            className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
-            alt={"avatar"}
-          />}
+          {userData.profileAvatar && (
+            <Image
+              src={userData.profileAvatar}
+              width={"60"}
+              height={"60"}
+              className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
+              alt={"avatar"}
+            />
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>{userData.fullName.firstName}{" "}{userData.fullName.lastName}</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            {userData.fullName.firstName} {userData.fullName.lastName}
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => window.location.href = "/profile"}>
+            <DropdownMenuItem
+              onClick={() => (window.location.href = "/profile")}
+            >
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
@@ -151,7 +166,6 @@ const NavbarUserActions: React.FunctionComponent<
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
-
       </DropdownMenu>
     </div>
   );

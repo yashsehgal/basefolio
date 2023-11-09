@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/helpers";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> { }
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -22,16 +22,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-const FormItemWrapper: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  className,
-  ...props
-}) => {
-  return (
-    <div className="flex flex-col items-start gap-2">
-      {children}
-    </div>
-  )
-}
+const FormItemWrapper: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({ children, className, ...props }) => {
+  return <div className="flex flex-col items-start gap-2">{children}</div>;
+};
 
 export { Input, FormItemWrapper };

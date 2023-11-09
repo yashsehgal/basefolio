@@ -1,7 +1,14 @@
-'use client';
-import { Button, CardContainer, FormItemWrapper, Input, Label, MarkdownEditor } from "@/components/ui"
-import { UserAuthenticationContext } from "@/contexts"
-import { useContext, useEffect, useState } from "react"
+"use client";
+import {
+  Button,
+  CardContainer,
+  FormItemWrapper,
+  Input,
+  Label,
+  MarkdownEditor,
+} from "@/components/ui";
+import { UserAuthenticationContext } from "@/contexts";
+import { useContext, useEffect, useState } from "react";
 
 const AboutTab: React.FunctionComponent = () => {
   const { userData, setUserData } = useContext(UserAuthenticationContext);
@@ -9,9 +16,9 @@ const AboutTab: React.FunctionComponent = () => {
   const [userDataInput, setUserDataInput] = useState({
     fullName: {
       firstName: "",
-      lastName: ""
+      lastName: "",
     },
-    bio: ""
+    bio: "",
   });
 
   const [hasChanges, setHasChanges] = useState<boolean>(false);
@@ -20,18 +27,18 @@ const AboutTab: React.FunctionComponent = () => {
     setUserDataInput({
       fullName: {
         firstName: userData.fullName.firstName,
-        lastName: userData.fullName.lastName
+        lastName: userData.fullName.lastName,
       },
-      bio: userData.bio
-    })
+      bio: userData.bio,
+    });
   }, [userData]);
 
   useEffect(() => {
     // adding relative condition, if the data changes -- the changed button state will be updated
     setHasChanges(
-      (userData.fullName.firstName === userDataInput.fullName.firstName) &&
-      (userData.fullName.lastName === userDataInput.fullName.lastName)
-    )
+      userData.fullName.firstName === userDataInput.fullName.firstName &&
+        userData.fullName.lastName === userDataInput.fullName.lastName,
+    );
   }, [userData, userDataInput]);
 
   return (
@@ -47,13 +54,15 @@ const AboutTab: React.FunctionComponent = () => {
             <Input
               type="text"
               value={userDataInput.fullName.firstName}
-              onChange={(e) => setUserDataInput({
-                ...userDataInput,
-                fullName: {
-                  ...userDataInput.fullName,
-                  firstName: e.target.value as string
-                }
-              })}
+              onChange={(e) =>
+                setUserDataInput({
+                  ...userDataInput,
+                  fullName: {
+                    ...userDataInput.fullName,
+                    firstName: e.target.value as string,
+                  },
+                })
+              }
             />
           </FormItemWrapper>
           <FormItemWrapper className="lastName-wrapper">
@@ -61,22 +70,20 @@ const AboutTab: React.FunctionComponent = () => {
             <Input
               type="text"
               value={userDataInput.fullName.lastName}
-              onChange={(e) => setUserDataInput({
-                ...userDataInput,
-                fullName: {
-                  ...userDataInput.fullName,
-                  lastName: e.target.value as string
-                }
-              })}
+              onChange={(e) =>
+                setUserDataInput({
+                  ...userDataInput,
+                  fullName: {
+                    ...userDataInput.fullName,
+                    lastName: e.target.value as string,
+                  },
+                })
+              }
             />
           </FormItemWrapper>
         </div>
         <div className="mt-8 flex flex-row items-center justify-end">
-          <Button
-            disabled={hasChanges}
-          >
-            Save changes
-          </Button>
+          <Button disabled={hasChanges}>Save changes</Button>
         </div>
       </CardContainer>
       <CardContainer
@@ -86,16 +93,16 @@ const AboutTab: React.FunctionComponent = () => {
       >
         <MarkdownEditor
           value={userDataInput.bio}
-          onChange={(changes) => setUserDataInput({
-            ...userDataInput,
-            bio: changes as string
-          })}
+          onChange={(changes) =>
+            setUserDataInput({
+              ...userDataInput,
+              bio: changes as string,
+            })
+          }
         />
       </CardContainer>
     </div>
-  )
-}
+  );
+};
 
-export {
-  AboutTab
-}
+export { AboutTab };

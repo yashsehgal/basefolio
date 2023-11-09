@@ -1,4 +1,3 @@
-
 declare interface BuilderInterface {
   username: string;
   fullName: {
@@ -24,5 +23,5 @@ declare interface BuilderInterface {
     position?: string;
     hackathonSlug: string;
   }>;
-  projects?: any;   // Optional, interface and system for this is yet to be built
-};
+  projects?: any; // Optional, interface and system for this is yet to be built
+}

@@ -22,25 +22,28 @@ export function checkIfDateLogged(objA: any, objB: any) {
   );
 }
 
-export function getCookie(cookieName: string): { status: "error" | "success"; data: string } {
+export function getCookie(cookieName: string): {
+  status: "error" | "success";
+  data: string;
+} {
   var name = cookieName + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
-  var cookieArray = decodedCookie.split(';');
+  var cookieArray = decodedCookie.split(";");
 
   for (var i = 0; i < cookieArray.length; i++) {
     var cookie = cookieArray[i].trim();
     if (cookie.indexOf(name) === 0) {
       return {
         status: "success",
-        data: cookie.substring(name.length, cookie.length)
-      }
+        data: cookie.substring(name.length, cookie.length),
+      };
     }
   }
 
   // If the cookie with the specified name is not found, return null
   return {
     status: "error",
-    data: ""
+    data: "",
   };
 }
 

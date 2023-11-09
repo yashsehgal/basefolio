@@ -12,12 +12,12 @@ const HackathonMicrositeTabs: Array<{
   value: HackathonMicrositeTabType;
   title: string;
 }> = [
-    { value: "overview", title: "Overview" },
-    { value: "schedule", title: "Schedule" },
-    { value: "register", title: "Register" },
-    { value: "builders", title: "Builders" },
-    { value: "projects", title: "Projects" },
-  ];
+  { value: "overview", title: "Overview" },
+  { value: "schedule", title: "Schedule" },
+  { value: "register", title: "Register" },
+  { value: "builders", title: "Builders" },
+  { value: "projects", title: "Projects" },
+];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
   const pathname = usePathname();
@@ -52,10 +52,10 @@ const HackathonMicrosite: React.FunctionComponent = () => {
           {micrositeTab === "schedule" && (
             <Schedule {...(hackathonData as any)} />
           )}
-          {micrositeTab === 'register' && (
+          {micrositeTab === "register" && (
             <Register {...(hackathonData as any)} />
           )}
-          {micrositeTab === 'builders' && (
+          {micrositeTab === "builders" && (
             <Builders {...(hackathonData as any)} />
           )}
         </div>

@@ -1,6 +1,6 @@
-import { cn } from "@/helpers"
-import { ProfileNavigation } from "../sections"
-import { ViewContainer } from "."
+import { cn } from "@/helpers";
+import { ProfileNavigation } from "../sections";
+import { ViewContainer } from ".";
 
 const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
   className,
@@ -9,11 +9,12 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
   setSelectedTab,
   ...props
 }) => {
-
   return (
-    <div className={cn(
-      "profile-view-layout flex flex-row items-start max-lg:flex-col",
-      className)}
+    <div
+      className={cn(
+        "profile-view-layout flex flex-row items-start max-lg:flex-col",
+        className,
+      )}
       {...props}
     >
       <ProfileNavigation
@@ -24,9 +25,7 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
         {children}
       </ViewContainer>
     </div>
-  )
-}
+  );
+};
 
-export {
-  ProfileViewLayout
-}
+export { ProfileViewLayout };

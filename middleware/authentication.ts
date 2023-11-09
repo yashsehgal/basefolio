@@ -42,7 +42,9 @@ const authorizeUser = async (
     document.cookie = `email=${data.user.email}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `firstName=${data.user.firstName}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `lastName=${data.user.lastName}; expires=${JWT_EXPIRATION_TIME} path=/`;
-    document.cookie = `bio=${encodeURIComponent(data.user.bio)}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `bio=${encodeURIComponent(
+      data.user.bio,
+    )}; expires=${JWT_EXPIRATION_TIME} path=/`;
 
     return {
       status: "success",

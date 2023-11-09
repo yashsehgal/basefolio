@@ -12,9 +12,7 @@ const ROUTES_WITH_SUB_NAVIGATION = [
   "/builders",
 ];
 
-const ROUTES_WITH_NO_VIEW_CONTAINER_CONROL = [
-  '/profile'
-]
+const ROUTES_WITH_NO_VIEW_CONTAINER_CONROL = ["/profile"];
 
 const Layout: React.FunctionComponent<LayoutProps> = ({
   className,
@@ -32,12 +30,13 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
       {!hideSubNavigation && ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && (
         <SubNavigation />
       )}
-      {ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname)
-        ? <>{children}</>
-        : <Section>
+      {ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) ? (
+        <>{children}</>
+      ) : (
+        <Section>
           <ViewContainer>{children}</ViewContainer>
         </Section>
-      }
+      )}
     </div>
   );
 };

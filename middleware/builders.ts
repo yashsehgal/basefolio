@@ -1,9 +1,12 @@
-import { STRAPI_BASE_API_URL, STRAPI_REQUEST_OPTIONS } from "@/common"
+import { STRAPI_BASE_API_URL, STRAPI_REQUEST_OPTIONS } from "@/common";
 
 const fetchAllBuilders = async () => {
-  const response = await fetch(`${STRAPI_BASE_API_URL}/builders`, STRAPI_REQUEST_OPTIONS);
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/builders`,
+    STRAPI_REQUEST_OPTIONS,
+  );
   const data = await response.json();
-  
+
   let allBuilders: Array<BuilderInterface> = [];
 
   if (data.data.length) {
@@ -13,7 +16,7 @@ const fetchAllBuilders = async () => {
         username: responseAttributes.username,
         fullName: {
           firstName: responseAttributes.firstName,
-          lastName: responseAttributes.lastName ?? ""
+          lastName: responseAttributes.lastName ?? "",
         },
         location: responseAttributes.location,
         bio: responseAttributes.bio ?? "",
@@ -26,38 +29,37 @@ const fetchAllBuilders = async () => {
         hashnode: responseAttributes.hashnode ?? "",
         instagram: responseAttributes.instagram ?? "",
         hackathonWon: responseAttributes.hackathonWon ?? [],
-        hackathonParticipations: responseAttributes.hackathonParticipations ?? [],
+        hackathonParticipations:
+          responseAttributes.hackathonParticipations ?? [],
         projects: responseAttributes.projects ?? [],
-      })
+      });
     }
   }
 
   return allBuilders;
-}
+};
 
 const fetchBuildersForHackathon = async (hackathonSlug: string) => {
   const allBuilders = await fetchAllBuilders();
 
-  let buildersForHackathon: Array<BuilderInterface & {
-    participationType?: "solo" | "team";
-  }> = [];
+  let buildersForHackathon: Array<
+    BuilderInterface & {
+      participationType?: "solo" | "team";
+    }
+  > = [];
 
   allBuilders.map((builder) => {
     builder.hackathonParticipations?.map((hackathon) => {
       if (hackathon.hackathonSlug === hackathonSlug) {
-        
         buildersForHackathon.push({
           ...builder,
-          participationType: hackathon.participationType || "solo"
+          participationType: hackathon.participationType || "solo",
         });
       }
-    })
+    });
   });
-  
-  return buildersForHackathon;
-}
 
-export {
-  fetchAllBuilders,
-  fetchBuildersForHackathon
-}
+  return buildersForHackathon;
+};
+
+export { fetchAllBuilders, fetchBuildersForHackathon };

@@ -61,7 +61,8 @@ export const INITIAL_USER_AUTHORIZATION = {
 
 export const JWT_EXPIRATION_TIME = 2; // In days
 
-export const DUMMY_BUILDER_PROFILE_BG = 'https://ik.imagekit.io/eawrckp8wfi/basefolio-assets/builders-media/dummy-builder-bg_TGXlkha9M.png?updatedAt=1699398291727';
+export const DUMMY_BUILDER_PROFILE_BG =
+  "https://ik.imagekit.io/eawrckp8wfi/basefolio-assets/builders-media/dummy-builder-bg_TGXlkha9M.png?updatedAt=1699398291727";
 
 export const STRAPI_REQUEST_OPTIONS = {
   headers: {

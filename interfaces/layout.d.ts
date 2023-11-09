@@ -35,15 +35,20 @@ declare type HackathonMicrositeTabType =
   | "builders"
   | "register";
 
-
-declare interface ProfileViewLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+declare interface ProfileViewLayoutProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   selectedTab: ProfileViewTabsType;
   setSelectedTab: (tab: ProfileViewTabsType) => void;
 }
 
-declare type ProfileViewTabsType = "about" | "education" | "experience" | "links";
+declare type ProfileViewTabsType =
+  | "about"
+  | "education"
+  | "experience"
+  | "links";
 
-declare interface ProfileNavigationProps extends React.HTMLAttributes<HTMLDivElement> {
+declare interface ProfileNavigationProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * for tracking and changing the current selected tab in profile view
    */

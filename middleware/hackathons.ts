@@ -1,4 +1,8 @@
-import { INITIAL_HACKATHON_DATA, STRAPI_BASE_API_URL, STRAPI_REQUEST_OPTIONS } from "@/common";
+import {
+  INITIAL_HACKATHON_DATA,
+  STRAPI_BASE_API_URL,
+  STRAPI_REQUEST_OPTIONS,
+} from "@/common";
 import {
   checkIfDateLogged,
   parseDatestamp,
