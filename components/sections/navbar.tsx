@@ -1,5 +1,5 @@
 "use client";
-import { cn, getCookie } from "@/helpers";
+import { cn, deleteCookie, getCookie } from "@/helpers";
 import { ViewContainer } from "../layouts";
 import {
   AuthView,
@@ -16,12 +16,13 @@ import {
   UI,
 } from "../ui";
 import Link from "next/link";
-import { BASEROUTE } from "@/common";
+import { BASEROUTE, INITIAL_USER_AUTHORIZATION } from "@/common";
 import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
 
 import { User, LogOut, Settings, Github, Users, Keyboard } from 'lucide-react';
+import { useRouter } from "next/navigation";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -48,7 +49,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         isAuthenticated: true,
         email: getCookie('email').data,
         username: getCookie('username').data,
-        password: getCookie('password').data
+        password: getCookie('password').data,
       })
     }
   }, []);
@@ -69,7 +70,7 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         )}
         {(userData.isAuthenticated || isJWTAvailable) && (
           <div className="navbar-user-actions-container">
-            <NavbarUserActions userData={userData} />
+            <NavbarUserActions userData={userData} setUserData={setUserData} />
           </div>
         )}
       </ViewContainer>
@@ -78,8 +79,26 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
 };
 
 const NavbarUserActions: React.FunctionComponent<
-  React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType }
-> = ({ userData, className, ...props }) => {
+  React.HTMLAttributes<HTMLDivElement> & { userData: AuthorizedUserType; setUserData: (data: AuthorizedUserType) => void }
+> = ({ userData, setUserData, className, ...props }) => {
+
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    // removing JWT and user detail cookies
+    ['jwt', 'firstName', 'lastName',
+      'username', 'profileAvatar', 'email',
+      'password'].map((key: string) => {
+        deleteCookie(key);
+      });
+
+    // restoring global context
+    // setUserData(INITIAL_USER_AUTHORIZATION);
+
+    //   // routing to base route
+    window.location.href = "/";
+  }
+
   return (
     <div
       className={cn(
@@ -131,7 +150,7 @@ const NavbarUserActions: React.FunctionComponent<
             <span>GitHub</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handleLogOut}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

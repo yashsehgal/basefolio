@@ -67,3 +67,5 @@ export const STRAPI_REQUEST_OPTIONS = {
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_SHOW_HACKATHONS_APIKEY}`,
   },
 };
+
+export const COOKIE_EXPIRATION_ON_DELETE = "Thu, 01 Jan 1970 00:00:00 UTC";

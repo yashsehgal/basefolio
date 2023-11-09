@@ -1,3 +1,4 @@
+import { COOKIE_EXPIRATION_ON_DELETE } from "@/common";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -41,6 +42,10 @@ export function getCookie(cookieName: string): { status: "error" | "success"; da
     status: "error",
     data: ""
   };
+}
+
+export function deleteCookie(name: string) {
+  document.cookie = name + `=; expires=${COOKIE_EXPIRATION_ON_DELETE}; path=/;`;
 }
 
 export {
