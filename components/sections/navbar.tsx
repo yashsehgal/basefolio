@@ -5,6 +5,14 @@ import {
   AuthView,
   BasefolioLogo,
   Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
   UI,
 } from "../ui";
 import Link from "next/link";
@@ -12,6 +20,8 @@ import { BASEROUTE } from "@/common";
 import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
+
+import { User, LogOut, Settings, Github, Users, Keyboard } from 'lucide-react';
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -78,19 +88,63 @@ const NavbarUserActions: React.FunctionComponent<
       )}
       {...props}
     >
-      {userData.profileAvatar && <Image
-        src={userData.profileAvatar}
-        width={"60"}
-        height={"60"}
-        className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
-        alt={"avatar"}
-      />}
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {userData.profileAvatar && <Image
+            src={userData.profileAvatar}
+            width={"60"}
+            height={"60"}
+            className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
+            alt={"avatar"}
+          />}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>{userData.fullName.firstName}{" "}{userData.fullName.lastName}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              <User className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Keyboard className="mr-2 h-4 w-4" />
+              <span>Keyboard shortcuts</span>
+              <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              <Users className="mr-2 h-4 w-4" />
+              <span>Your Hackathons</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Github className="mr-2 h-4 w-4" />
+            <span>GitHub</span>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Log out</span>
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+
+      </DropdownMenu>
     </div>
   );
 };
 
 const NavbarOptionsData: Array<NavbarOptionInterface> = [
-  { title: "home", path: "/home" },
+  { title: "timeline", path: "/" },
   { title: "blogs", path: "/blogs" },
 ];
 

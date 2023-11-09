@@ -4,7 +4,8 @@ import { Section } from "@/components/layouts";
 import { AuthView, Button, UI } from "@/components/ui";
 import { UserAuthenticationContext } from "@/contexts"
 import { cn } from "@/helpers";
-import { useContext } from "react"
+import { useContext, useState } from "react"
+import { QuestionsView } from "./questions-view";
 
 const Register = (hackathonData: HackathonInterface) => {
   const { userData } = useContext(UserAuthenticationContext);
@@ -14,15 +15,18 @@ const Register = (hackathonData: HackathonInterface) => {
         <NotLoggedInWhileRegister />
       </div>}
       {userData.isAuthenticated && <div className="registration-flow-container">
-        <RegistrationFlow />
+        <RegistrationFlow {...hackathonData} />
       </div>}
     </div>
   )
 }
 
-const RegistrationFlow = () => {
+const RegistrationFlow = (hackathonData: HackathonInterface) => {
+  const [view, setView] = useState<"details" | "questions">("questions");
   return (
-    <></>
+    <Section className="border rounded-2xl px-8 max-md:p-0 max-md:border-none grid gap-6">
+      {view === "questions" && <QuestionsView hackathonSlug={hackathonData.slug} />}
+    </Section>
   )
 }
 
