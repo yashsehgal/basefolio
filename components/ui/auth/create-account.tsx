@@ -3,8 +3,6 @@ import { DialogFooter } from "../dialog";
 import { Button } from "../button";
 import { Github } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
-import { cn } from "@/helpers";
 
 const CreateAccountFlow: React.FunctionComponent = () => {
   // to switch between flows in account creation procedure

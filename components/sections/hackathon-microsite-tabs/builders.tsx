@@ -4,7 +4,7 @@ import { Button, CardContainer, Input } from "@/components/ui";
 import { cn } from "@/helpers";
 import { fetchBuildersForHackathon } from "@/middleware";
 import Image from "next/image";
-import { KeyboardEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserCircle, BadgeCheck, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
@@ -103,7 +103,7 @@ const BuilderRowCard = (
               "builder-avatar-wrapper flex flex-row items-center justify-center",
               "overflow-hidden w-16 h-16 rounded-xl",
               !builderData.profileImageURL &&
-                "border border-dashed border-zinc-400 text-zinc-400",
+              "border border-dashed border-zinc-400 text-zinc-400",
             )}
           >
             {builderData.profileImageURL && (

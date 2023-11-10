@@ -5,7 +5,6 @@ import Markdown from "react-markdown";
 import {
   Twitter,
   Linkedin,
-  Instagram,
   Mail,
   Github,
   Globe,
