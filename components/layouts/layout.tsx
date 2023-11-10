@@ -29,9 +29,9 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
   const { handleKeyDown } = useKeyboardAccessibility();
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
 

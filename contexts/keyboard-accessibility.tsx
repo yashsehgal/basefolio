@@ -1,15 +1,19 @@
-import React, { createContext, useContext, useCallback } from 'react';
+import React, { createContext, useContext, useCallback } from "react";
 
 interface KeyboardAccessibilityContextType {
   handleKeyDown: (event: KeyboardEvent) => void;
 }
 
-const KeyboardAccessibilityContext = createContext<KeyboardAccessibilityContextType | undefined>(undefined);
+const KeyboardAccessibilityContext = createContext<
+  KeyboardAccessibilityContextType | undefined
+>(undefined);
 
 export function useKeyboardAccessibility(): KeyboardAccessibilityContextType {
   const context = useContext(KeyboardAccessibilityContext);
   if (!context) {
-    throw new Error('useKeyboardAccessibility must be used within a KeyboardAccessibilityProvider');
+    throw new Error(
+      "useKeyboardAccessibility must be used within a KeyboardAccessibilityProvider",
+    );
   }
   return context;
 }
@@ -18,12 +22,14 @@ interface KeyboardAccessibilityProviderProps {
   children: React.ReactNode;
 }
 
-function KeyboardAccessibilityProvider({ children }: KeyboardAccessibilityProviderProps): JSX.Element {
+function KeyboardAccessibilityProvider({
+  children,
+}: KeyboardAccessibilityProviderProps): JSX.Element {
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
     const SHIFT_KEY = event.shiftKey;
-    if ((event.ctrlKey) && SHIFT_KEY && event.key === 'P') {
+    if (event.ctrlKey && SHIFT_KEY && event.key === "P") {
       // goto /profile page
-      window.location.href = '/profile';
+      window.location.href = "/profile";
     }
   }, []);
 
@@ -34,6 +40,4 @@ function KeyboardAccessibilityProvider({ children }: KeyboardAccessibilityProvid
   );
 }
 
-export {
-  KeyboardAccessibilityProvider
-}
+export { KeyboardAccessibilityProvider };
