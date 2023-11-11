@@ -118,7 +118,7 @@ const OverviewSocialLinksContainer = (
               />
             );
           } else {
-            return <></>;
+            return <React.Fragment key={index}></React.Fragment>;
           }
         })}
       </div>
