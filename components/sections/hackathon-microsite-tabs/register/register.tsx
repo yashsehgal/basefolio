@@ -1,11 +1,12 @@
 "use client";
 import { NOT_AUTHORIZED_CONTENT } from "@/common/copy";
 import { Section } from "@/components/layouts";
-import { AuthView, Button, UI } from "@/components/ui";
+import { AuthView, Button, Progress, UI } from "@/components/ui";
 import { UserAuthenticationContext } from "@/contexts";
 import { cn } from "@/helpers";
 import { useContext, useState } from "react";
 import { QuestionsView } from "./questions-view";
+import { DetailsView } from "./details-view";
 
 const Register = (hackathonData: HackathonInterface) => {
   const { userData } = useContext(UserAuthenticationContext);
@@ -26,12 +27,41 @@ const Register = (hackathonData: HackathonInterface) => {
 };
 
 const RegistrationFlow = (hackathonData: HackathonInterface) => {
-  const [view, setView] = useState<"details" | "questions">("questions");
+  const [view, setView] = useState<"details" | "questions">("details");
   return (
     <Section className="border rounded-2xl px-8 max-md:p-0 max-md:border-none grid gap-6">
+      <div className="mb-4 flex flex-row items-center justify-between">
+        <h3 className="text-2xl font-semibold">
+          {view === "details" ? "Basic Details" : "Questions from organizers"}
+        </h3>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            view === "details" ? setView("questions") : setView("details");
+          }}
+        >
+          {view === "details" ? "Next step" : "Previous step"}
+        </Button>
+      </div>
+      <Progress value={view === "details" ? 0 : 50} className="mb-4" />
+      {view === "details" && <DetailsView />}
       {view === "questions" && (
         <QuestionsView hackathonSlug={hackathonData.slug} />
       )}
+      <div className={cn("", view === "details" ? "flex flex-row justify-end" : "grid grid-cols-2 items-center gap-4")}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            view === "details" ? setView("questions") : setView("details");
+          }}
+          stretch={view === "questions"}
+        >
+          {view === "details" ? "Next step" : "Previous step"}
+        </Button>
+        {view === "questions" && <Button stretch>
+          Submit application
+        </Button>}
+      </div>
     </Section>
   );
 };

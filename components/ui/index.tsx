@@ -36,3 +36,5 @@ export {
 export { Label } from "./label";
 
 export { MarkdownEditor } from "./markdown-editor";
+
+export { Progress } from './progress'
