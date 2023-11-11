@@ -3,7 +3,7 @@ import { INITIAL_HACKATHON_DATA } from "@/common";
 import { HackathonMicrositeLayout } from "@/components/layouts";
 import { Overview, Schedule, Register, Builders } from "@/components/sections";
 import { Button } from "@/components/ui";
-import { cn } from "@/helpers";
+import { Logger, cn } from "@/helpers";
 import { fetchHackathonData } from "@/middleware";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,12 +12,12 @@ const HackathonMicrositeTabs: Array<{
   value: HackathonMicrositeTabType;
   title: string;
 }> = [
-  { value: "overview", title: "Overview" },
-  { value: "schedule", title: "Schedule" },
-  { value: "register", title: "Register" },
-  { value: "builders", title: "Builders" },
-  { value: "projects", title: "Projects" },
-];
+    { value: "overview", title: "Overview" },
+    { value: "schedule", title: "Schedule" },
+    { value: "register", title: "Register" },
+    { value: "builders", title: "Builders" },
+    { value: "projects", title: "Projects" },
+  ];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
   const pathname = usePathname();
@@ -87,7 +87,14 @@ const HackathonMicrositeTabNavigation: React.FunctionComponent<
               micrositeTab !== option.value && "shadow-none hover:shadow-none",
               "uppercase text-sm",
             )}
-            onClick={() => setMicrositeTab(option.value)}
+            onClick={() => {
+              setMicrositeTab(option.value);
+              // Adding sentry event log on every tab change
+              Logger({
+                level: 'log',
+                message: `Switching to ${option.value} inside hackathon microsite`
+              });
+            }}
           >
             {option.title}
           </Button>

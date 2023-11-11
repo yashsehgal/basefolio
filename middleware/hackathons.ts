@@ -10,7 +10,7 @@ import {
 } from "@/helpers";
 
 const fetchAllHackathons = async () => {
-  const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`);
+  const response = await fetch(`${STRAPI_BASE_API_URL}/hackathons`, STRAPI_REQUEST_OPTIONS);
   const data = await response.json();
   let allHackathons: Array<HackathonInterface> = [];
 

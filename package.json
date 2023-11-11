@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/mdx": "14.0.1",
+    "@sentry/nextjs": "7.80.0",
     "@uiw/react-md-editor": "3.6.0",
     "axios": "1.6.0",
     "clsx": "2.0.0",
