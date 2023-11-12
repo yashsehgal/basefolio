@@ -155,7 +155,7 @@ const NavbarUserActions: React.FunctionComponent<
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => window.open('https://github.com/yashsehgal/basefolio')}>
             <Github className="mr-2 h-4 w-4" />
             <span>GitHub</span>
           </DropdownMenuItem>
