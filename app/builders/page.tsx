@@ -1,8 +1,9 @@
+import { FeaturedBuildersSection } from "@/components/sections";
 
 const BuildersView: React.FunctionComponent = () => {
   return (
     <>
-      
+      <FeaturedBuildersSection />
     </>
   )
 }

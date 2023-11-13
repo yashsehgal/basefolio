@@ -32,6 +32,7 @@ const fetchAllBuilders = async () => {
         hackathonParticipations:
           responseAttributes.hackathonParticipations ?? [],
         projects: responseAttributes.projects ?? [],
+        isFeatured: responseAttributes.isFeatured ?? false
       });
     }
   }
@@ -62,4 +63,72 @@ const fetchBuildersForHackathon = async (hackathonSlug: string) => {
   return buildersForHackathon;
 };
 
-export { fetchAllBuilders, fetchBuildersForHackathon };
+const fetchFeaturedBuilders = async (amount: number = 3) => {
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/builders?filters[isFeatured][$eq]=true`,
+    STRAPI_REQUEST_OPTIONS,
+  );
+  const data = await response.json();
+
+  let featuredBuilders: Array<BuilderInterface> = [];
+
+  if (data.data.length >= amount) {
+    // Map only till "amount"
+    for (let count = 0; count < amount; count++) {
+      const responseAttributes = data.data[count].attributes;
+      featuredBuilders.push({
+        username: responseAttributes.username,
+        fullName: {
+          firstName: responseAttributes.firstName,
+          lastName: responseAttributes.lastName ?? "",
+        },
+        location: responseAttributes.location,
+        bio: responseAttributes.bio ?? "",
+        isVerified: responseAttributes.isVerified ?? false,
+        profileImageURL: responseAttributes.profileImageURL ?? "",
+        twitter: responseAttributes.twitter ?? "",
+        linkedin: responseAttributes.linkedin ?? "",
+        website: responseAttributes.website ?? "",
+        github: responseAttributes.github ?? "",
+        hashnode: responseAttributes.hashnode ?? "",
+        instagram: responseAttributes.instagram ?? "",
+        hackathonWon: responseAttributes.hackathonWon ?? [],
+        hackathonParticipations:
+          responseAttributes.hackathonParticipations ?? [],
+        projects: responseAttributes.projects ?? [],
+        isFeatured: responseAttributes.isFeatured ?? false
+      })
+    }
+  } else {
+    // Map all of the builders
+    data.data.map((item: any) => {
+      const responseAttributes = item.attributes;
+      featuredBuilders.push({
+        username: responseAttributes.username,
+        fullName: {
+          firstName: responseAttributes.firstName,
+          lastName: responseAttributes.lastName ?? "",
+        },
+        location: responseAttributes.location,
+        bio: responseAttributes.bio ?? "",
+        isVerified: responseAttributes.isVerified ?? false,
+        profileImageURL: responseAttributes.profileImageURL ?? "",
+        twitter: responseAttributes.twitter ?? "",
+        linkedin: responseAttributes.linkedin ?? "",
+        website: responseAttributes.website ?? "",
+        github: responseAttributes.github ?? "",
+        hashnode: responseAttributes.hashnode ?? "",
+        instagram: responseAttributes.instagram ?? "",
+        hackathonWon: responseAttributes.hackathonWon ?? [],
+        hackathonParticipations:
+          responseAttributes.hackathonParticipations ?? [],
+        projects: responseAttributes.projects ?? [],
+        isFeatured: responseAttributes.isFeatured ?? false
+      })
+    })
+  }
+
+  return featuredBuilders;
+}
+
+export { fetchAllBuilders, fetchBuildersForHackathon, fetchFeaturedBuilders };

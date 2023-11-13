@@ -37,3 +37,11 @@ declare interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   subtitle?: string;
 }
+
+declare interface FeaturedBuilderCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  profileImage: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  isVerified?: boolean;
+}

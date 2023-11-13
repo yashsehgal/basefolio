@@ -24,4 +24,5 @@ declare interface BuilderInterface {
     hackathonSlug: string;
   }>;
   projects?: any; // Optional, interface and system for this is yet to be built
+  isFeatured?: boolean;
 }

@@ -14,3 +14,5 @@ export {
 export { ProfileNavigation } from "./profile-navigation";
 
 export { AboutTab } from "./profile-tabs";
+
+export { FeaturedBuildersSection } from './featured-builders';

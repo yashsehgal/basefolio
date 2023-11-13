@@ -71,3 +71,7 @@ export const STRAPI_REQUEST_OPTIONS = {
 };
 
 export const COOKIE_EXPIRATION_ON_DELETE = "Thu, 01 Jan 1970 00:00:00 UTC";
+
+export const DEFAULT_PROFILE_BG_FOR_BUILDERS = "/workspace.jpeg";
+
+export const DEFAULT_NOMINATION_BG = '/nominate-bg.avif';
