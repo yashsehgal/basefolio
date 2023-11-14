@@ -4,7 +4,7 @@ import Image from "next/image"
 
 const FeaturedBuilderCard: React.FunctionComponent<FeaturedBuilderCardProps> = ({
   className,
-  profileImage,
+  profileImage = "",
   username,
   firstName,
   lastName,

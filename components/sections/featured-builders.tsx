@@ -2,7 +2,7 @@
 import { cn } from "@/helpers"
 import { Section } from "../layouts"
 import { useEffect, useState } from "react";
-import { fetchFeaturedBuilders } from "@/middleware/builders";
+import { fetchFeaturedBuilders } from "@/middleware";
 import { CONTROLLED_SIZE, DEFAULT_NOMINATION_BG, DEFAULT_PROFILE_BG_FOR_BUILDERS } from "@/common";
 import { FeaturedBuilderCard } from "../ui";
 import Image from "next/image";

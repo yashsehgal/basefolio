@@ -1,4 +1,4 @@
-declare interface BuilderInterface {
+declare interface BuilderInterface extends React.HTMLAttributes<HTMLDivElement> {
   username: string;
   fullName: {
     firstName: string;
@@ -14,15 +14,23 @@ declare interface BuilderInterface {
   github?: string;
   hashnode?: string;
   instagram?: string;
-  hackathonWon?: Array<{
+  hackathonWon: Array<{
     position: string;
     hackathonSlug: string;
   }>;
-  hackathonParticipations?: Array<{
+  hackathonParticipations: Array<{
     participationType?: "solo" | "team";
     position?: string;
     hackathonSlug: string;
   }>;
   projects?: any; // Optional, interface and system for this is yet to be built
   isFeatured?: boolean;
+}
+
+declare interface BuilderRowCardProps extends BuilderInterface {
+  participationType?: "solo" | "team";
+  id: number;
+  hideViewProfileButton?: boolean;
+  hideTeamType?: boolean;
+  withDetails?: boolean;
 }

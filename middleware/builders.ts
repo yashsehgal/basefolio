@@ -131,4 +131,22 @@ const fetchFeaturedBuilders = async (amount: number = 3) => {
   return featuredBuilders;
 }
 
-export { fetchAllBuilders, fetchBuildersForHackathon, fetchFeaturedBuilders };
+/**
+ * 
+ * @param order 
+ * from-most (ascending)
+ * from-least (descending)
+ */
+const fetchWinningBuilders = async (order: "from-most" | "from-least" = "from-most") => {
+  const data = await fetchAllBuilders();
+  const leaderboard: Array<BuilderInterface>
+    = data.sort((a: BuilderInterface, b: BuilderInterface) => a.hackathonWon.length - b.hackathonWon.length);
+  
+  if (order === "from-most") {
+    return leaderboard.reverse();
+  } else {
+    return leaderboard;
+  }
+}
+
+export { fetchAllBuilders, fetchBuildersForHackathon, fetchFeaturedBuilders, fetchWinningBuilders };
