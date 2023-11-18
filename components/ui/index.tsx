@@ -37,6 +37,6 @@ export { Label } from "./label";
 
 export { MarkdownEditor } from "./markdown-editor";
 
-export { Progress } from './progress';
+export { Progress } from "./progress";
 
-export { FeaturedBuilderCard } from './featured-builders-card';
+export { FeaturedBuilderCard } from "./featured-builders-card";

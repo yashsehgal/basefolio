@@ -1,6 +1,6 @@
-'use client';
-import { useEffect, useState } from "react"
-import { CardContainer } from "../ui"
+"use client";
+import { useEffect, useState } from "react";
+import { CardContainer } from "../ui";
 import { fetchWinningBuilders } from "@/middleware";
 import { BuilderRowCard } from "../ui/builder-row-card";
 
@@ -15,13 +15,11 @@ const WinnerBuildersLeaderboard: React.FunctionComponent = () => {
     fetchData();
   }, []);
 
-  console.log("receiving data", leaderboard);
-
   return (
     <CardContainer
       className="winner-builders-leaderboard"
       style={{
-        backgroundImage: `url('/workspace.jpeg')`
+        backgroundImage: `url('/workspace.jpeg')`,
       }}
     >
       <h2 className="text-white font-semibold text-2xl">
@@ -40,13 +38,11 @@ const WinnerBuildersLeaderboard: React.FunctionComponent = () => {
               withDetails
               role="button"
             />
-          )
+          );
         })}
       </div>
     </CardContainer>
-  )
-}
+  );
+};
 
-export {
-  WinnerBuildersLeaderboard
-}
+export { WinnerBuildersLeaderboard };

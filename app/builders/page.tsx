@@ -1,5 +1,8 @@
 import { Section } from "@/components/layouts";
-import { FeaturedBuildersSection, WinnerBuildersLeaderboard } from "@/components/sections";
+import {
+  FeaturedBuildersSection,
+  WinnerBuildersLeaderboard,
+} from "@/components/sections";
 
 const BuildersView: React.FunctionComponent = () => {
   return (
@@ -16,7 +19,7 @@ const BuildersView: React.FunctionComponent = () => {
         </div>
       </Section>
     </>
-  )
-}
+  );
+};
 
 export default BuildersView;

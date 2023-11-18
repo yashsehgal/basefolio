@@ -21,7 +21,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
 
-import { User, LogOut, Settings, Github, Users, Keyboard } from "lucide-react";
+import {
+  User,
+  LogOut,
+  Settings,
+  Github,
+  Users,
+  Keyboard,
+  UserCircle,
+} from "lucide-react";
 
 /**
  * Constructs the navbar for desktop & mobile views
@@ -47,9 +55,13 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         },
         isAuthenticated: true,
         email: getCookie("email").data,
+        id: parseInt(getCookie("id").data),
         username: getCookie("username").data,
         password: getCookie("password").data,
         bio: getCookie("bio").data,
+        education: JSON.parse(getCookie("education").data),
+        socialLinks: JSON.parse(getCookie("socialLinks").data),
+        experience: JSON.parse(getCookie("experience").data),
       });
     }
   }, []);
@@ -95,6 +107,9 @@ const NavbarUserActions: React.FunctionComponent<
       "email",
       "password",
       "bio",
+      "education",
+      "socialLinks",
+      "experience",
     ].map((key: string) => {
       deleteCookie(key);
     });
@@ -113,15 +128,23 @@ const NavbarUserActions: React.FunctionComponent<
     >
       <DropdownMenu>
         <DropdownMenuTrigger>
-          {userData.profileAvatar && (
-            <Image
-              src={userData.profileAvatar}
-              width={"60"}
-              height={"60"}
-              className={cn("w-8 h-8 rounded-full cursor-pointer select-none")}
-              alt={"avatar"}
-            />
-          )}
+          <span className="flex flex-row items-center gap-2 font-medium text-sm text-zinc-500">
+            {userData.profileAvatar.length &&
+            userData.profileAvatar !== "null" ? (
+              <Image
+                src={userData.profileAvatar}
+                width={"60"}
+                height={"60"}
+                className={cn(
+                  "w-8 h-8 rounded-full cursor-pointer select-none",
+                )}
+                alt={"avatar"}
+              />
+            ) : (
+              <UserCircle className="text-zinc-400" />
+            )}
+            {userData.username}
+          </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>
@@ -155,7 +178,11 @@ const NavbarUserActions: React.FunctionComponent<
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => window.open('https://github.com/yashsehgal/basefolio')}>
+          <DropdownMenuItem
+            onClick={() =>
+              window.open("https://github.com/yashsehgal/basefolio")
+            }
+          >
             <Github className="mr-2 h-4 w-4" />
             <span>GitHub</span>
           </DropdownMenuItem>

@@ -6,15 +6,7 @@ const SkeletonContent: React.FunctionComponent<SkeletonProps> = ({
   className,
   ...props
 }) => {
-  return (
-    <Skeleton
-      count={count}
-      className={cn("", className)}
-      {...props}
-    />
-  )
+  return <Skeleton count={count} className={cn("", className)} {...props} />;
 };
 
-export {
-  SkeletonContent
-}
+export { SkeletonContent };

@@ -36,6 +36,7 @@ const authorizeUser = async (
 
   if (data.jwt) {
     document.cookie = `jwt=${data.jwt}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `id=${data.user.id}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `username=${username}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `password=${password}; expires=${JWT_EXPIRATION_TIME} path=/`;
     document.cookie = `profileAvatar=${data.user.profileAvatar}; expires=${JWT_EXPIRATION_TIME} path=/`;
@@ -45,10 +46,20 @@ const authorizeUser = async (
     document.cookie = `bio=${encodeURIComponent(
       data.user.bio,
     )}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `education=${JSON.stringify(
+      data.user.education,
+    )}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `experience=${JSON.stringify(
+      data.user.experience,
+    )}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    document.cookie = `socialLinks=${JSON.stringify(
+      data.user.socialLinks,
+    )}; expires=${JWT_EXPIRATION_TIME} path=/`;
 
     return {
       status: "success",
       data: {
+        id: data.user.id,
         username: data.user.username,
         password: password,
         email: data.user.email,
@@ -59,6 +70,9 @@ const authorizeUser = async (
         },
         bio: data.user.bio,
         isAuthenticated: true,
+        socialLinks: data.user.socialLinks,
+        education: data.user.education,
+        experience: data.user.experience,
       },
     };
   }

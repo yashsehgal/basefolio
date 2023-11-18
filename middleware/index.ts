@@ -12,6 +12,13 @@ export {
 
 export { authorizeUser } from "./authentication";
 
-export { fetchAllBuilders, fetchBuildersForHackathon, fetchWinningBuilders, fetchFeaturedBuilders } from "./builders";
+export {
+  fetchAllBuilders,
+  fetchBuildersForHackathon,
+  fetchWinningBuilders,
+  fetchFeaturedBuilders,
+} from "./builders";
 
 export { fetchHackathonApplicationQuestions } from "./questions";
+
+export { AuthorizedUserSocialLinksOperations } from "./account";

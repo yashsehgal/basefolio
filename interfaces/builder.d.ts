@@ -1,4 +1,5 @@
-declare interface BuilderInterface extends React.HTMLAttributes<HTMLDivElement> {
+declare interface BuilderInterface
+  extends React.HTMLAttributes<HTMLDivElement> {
   username: string;
   fullName: {
     firstName: string;

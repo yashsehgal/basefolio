@@ -48,7 +48,14 @@ const RegistrationFlow = (hackathonData: HackathonInterface) => {
       {view === "questions" && (
         <QuestionsView hackathonSlug={hackathonData.slug} />
       )}
-      <div className={cn("", view === "details" ? "flex flex-row justify-end" : "grid grid-cols-2 items-center gap-4")}>
+      <div
+        className={cn(
+          "",
+          view === "details"
+            ? "flex flex-row justify-end"
+            : "grid grid-cols-2 items-center gap-4",
+        )}
+      >
         <Button
           variant="secondary"
           onClick={() => {
@@ -58,9 +65,7 @@ const RegistrationFlow = (hackathonData: HackathonInterface) => {
         >
           {view === "details" ? "Next step" : "Previous step"}
         </Button>
-        {view === "questions" && <Button stretch>
-          Submit application
-        </Button>}
+        {view === "questions" && <Button stretch>Submit application</Button>}
       </div>
     </Section>
   );

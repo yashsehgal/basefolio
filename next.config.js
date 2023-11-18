@@ -11,7 +11,6 @@ module.exports = removeImports({});
 
 module.exports = nextConfig;
 
-
 // Injected content via Sentry wizard below
 
 // const { withSentryConfig } = require("@sentry/nextjs");

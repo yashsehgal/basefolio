@@ -2,13 +2,7 @@ import { Section } from "@/components/layouts";
 import { cn } from "@/helpers";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import {
-  Twitter,
-  Linkedin,
-  Mail,
-  Github,
-  Globe,
-} from "lucide-react";
+import { Twitter, Linkedin, Mail, Github, Globe } from "lucide-react";
 import React from "react";
 import { Button, CardContainer } from "@/components/ui";
 

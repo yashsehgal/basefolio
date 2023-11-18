@@ -38,10 +38,18 @@ declare interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   subtitle?: string;
 }
 
-declare interface FeaturedBuilderCardProps extends React.HTMLAttributes<HTMLDivElement> {
+declare interface FeaturedBuilderCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   profileImage: string;
   username: string;
   firstName: string;
   lastName: string;
   isVerified?: boolean;
+}
+
+declare interface LinkRowContainerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  allSocialLinks: Array<AuthorizedUserSocialLinksType>;
+  setAllSocialLinks: (data: Array<AuthorizedUserSocialLinksType>) => void;
+  data: AuthorizedUserSocialLinksType;
 }

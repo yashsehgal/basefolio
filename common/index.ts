@@ -1,4 +1,4 @@
-export const BASEFOLIO_LOGO = "/basefolio-logo.svg";
+export const BASEFOLIO_LOGO: string = "/basefolio-logo.svg";
 export const BASEROUTE = process.env.NEXT_PUBLIC_BASE_ROUTE ?? "/";
 export const STRAPI_HOSTNAME = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
 export const STRAPI_BASE_API_URL =
@@ -6,9 +6,9 @@ export const STRAPI_BASE_API_URL =
 export const APP_BASE_HOSTNAME =
   process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "https://localhost:3000";
 
-export const CONTROLLED_SIZE = 3;
+export const CONTROLLED_SIZE: number = 3;
 
-export const MONTH_NAMES = [
+export const MONTH_NAMES: Array<string> = [
   "Jan",
   "Feb",
   "Mar",
@@ -23,7 +23,7 @@ export const MONTH_NAMES = [
   "Dec",
 ];
 
-export const INITIAL_HACKATHON_DATA = {
+export const INITIAL_HACKATHON_DATA: HackathonInterface = {
   title: "",
   subtitle: "",
   description: "",
@@ -46,7 +46,7 @@ export const INITIAL_HACKATHON_DATA = {
   registrationStartDate: "",
 };
 
-export const INITIAL_USER_AUTHORIZATION = {
+export const INITIAL_USER_AUTHORIZATION: AuthorizedUserType = {
   username: "",
   email: "",
   password: "",
@@ -57,11 +57,14 @@ export const INITIAL_USER_AUTHORIZATION = {
   },
   bio: "",
   isAuthenticated: false,
+  socialLinks: [],
+  education: [],
+  experience: [],
 };
 
-export const JWT_EXPIRATION_TIME = 2; // In days
+export const JWT_EXPIRATION_TIME: number = 2; // In days
 
-export const DUMMY_BUILDER_PROFILE_BG =
+export const DUMMY_BUILDER_PROFILE_BG: string =
   "https://ik.imagekit.io/eawrckp8wfi/basefolio-assets/builders-media/dummy-builder-bg_TGXlkha9M.png?updatedAt=1699398291727";
 
 export const STRAPI_REQUEST_OPTIONS = {
@@ -70,8 +73,9 @@ export const STRAPI_REQUEST_OPTIONS = {
   },
 };
 
-export const COOKIE_EXPIRATION_ON_DELETE = "Thu, 01 Jan 1970 00:00:00 UTC";
+export const COOKIE_EXPIRATION_ON_DELETE: string =
+  "Thu, 01 Jan 1970 00:00:00 UTC";
 
-export const DEFAULT_PROFILE_BG_FOR_BUILDERS = "/workspace.jpeg";
+export const DEFAULT_PROFILE_BG_FOR_BUILDERS: string = "/workspace.jpeg";
 
-export const DEFAULT_NOMINATION_BG = '/nominate-bg.avif';
+export const DEFAULT_NOMINATION_BG: string = "/nominate-bg.avif";

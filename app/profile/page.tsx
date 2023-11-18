@@ -1,6 +1,6 @@
 "use client";
 import { ProfileViewLayout } from "@/components/layouts";
-import { AboutTab } from "@/components/sections";
+import { AboutTab, SocialLinksTab } from "@/components/sections";
 import { useState } from "react";
 
 const ProfileView: React.FunctionComponent = () => {
@@ -13,6 +13,7 @@ const ProfileView: React.FunctionComponent = () => {
         setSelectedTab={setSelectedTab}
       >
         {selectedTab === "about" && <AboutTab />}
+        {selectedTab === "links" && <SocialLinksTab />}
       </ProfileViewLayout>
     </>
   );

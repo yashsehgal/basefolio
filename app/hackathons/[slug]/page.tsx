@@ -12,12 +12,12 @@ const HackathonMicrositeTabs: Array<{
   value: HackathonMicrositeTabType;
   title: string;
 }> = [
-    { value: "overview", title: "Overview" },
-    { value: "schedule", title: "Schedule" },
-    { value: "register", title: "Register" },
-    { value: "builders", title: "Builders" },
-    { value: "projects", title: "Projects" },
-  ];
+  { value: "overview", title: "Overview" },
+  { value: "schedule", title: "Schedule" },
+  { value: "register", title: "Register" },
+  { value: "builders", title: "Builders" },
+  { value: "projects", title: "Projects" },
+];
 
 const HackathonMicrosite: React.FunctionComponent = () => {
   const pathname = usePathname();
@@ -91,8 +91,8 @@ const HackathonMicrositeTabNavigation: React.FunctionComponent<
               setMicrositeTab(option.value);
               // Adding sentry event log on every tab change
               Logger({
-                level: 'log',
-                message: `Switching to ${option.value} inside hackathon microsite`
+                level: "log",
+                message: `Switching to ${option.value} inside hackathon microsite`,
               });
             }}
           >

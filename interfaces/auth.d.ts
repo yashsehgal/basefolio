@@ -1,4 +1,25 @@
+declare type AuthorizedUserSocialLinksType = {
+  title: string;
+  link: string;
+};
+
+declare type AuthorizedUserEducationType = {
+  title: string;
+  institutionName: string;
+  description: string;
+};
+
+declare type AuthorizedUserExperienceType = {
+  title: string;
+  company: {
+    name: string;
+    website: string;
+  };
+  description: string;
+};
+
 declare type AuthorizedUserType = {
+  id: number;
   username: string;
   email: string;
   password: string;
@@ -9,6 +30,9 @@ declare type AuthorizedUserType = {
   };
   bio: string;
   isAuthenticated: boolean;
+  socialLinks: Array<AuthorizedUserSocialLinksType>;
+  education: Array<AuthorizedUserEducationType>;
+  experience: Array<AuthorizedUserExperienceType>;
 };
 
 /**

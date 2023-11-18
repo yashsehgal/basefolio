@@ -62,6 +62,6 @@ export {
 
 export { createHackathonEventOnGoogleCalendar } from "./calendar";
 
-export { getAuthorizedUsername } from './user';
+export { getAuthorizedUsername } from "./user";
 
-export { Logger } from './sentry-logging-service';
+export { Logger } from "./sentry-logging-service";
