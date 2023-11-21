@@ -10,7 +10,7 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
           id: number,
         ): Promise<{
           status: "success" | "error";
-          data: any;
+          data: AuthorizedUserType;
         }> => {
           try {
             const response = await fetch(`${STRAPI_BASE_API_URL}/users/${id}`, {
@@ -23,16 +23,25 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
               }),
             });
 
-            const updatedDataResponse: AuthorizedUserType =
-              await response.json();
+            let updatedDataResponse = await response.json();
+
+            // converting firstName, lastName to fullName { firstName, lastName } to match the general user type
+            updatedDataResponse = {
+              ...updatedDataResponse,
+              fullName: {
+                firstName: updatedDataResponse.firstName,
+                lastName: updatedDataResponse.lastName
+              }
+            }
+
             return {
               status: "success",
-              data: updatedDataResponse.socialLinks,
+              data: updatedDataResponse,
             };
           } catch (error) {
             return {
               status: "error",
-              data: {},
+              data: {} as any,
             };
           }
         },
@@ -42,11 +51,11 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
         status: "error",
         method: async (): Promise<{
           status: "success" | "error";
-          data: any;
+          data: AuthorizedUserType;
         }> => {
           return {
             status: "error",
-            data: {},
+            data: {} as any,
           };
         },
       };

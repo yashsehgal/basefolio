@@ -47,6 +47,7 @@ export const INITIAL_HACKATHON_DATA: HackathonInterface = {
 };
 
 export const INITIAL_USER_AUTHORIZATION: AuthorizedUserType = {
+  id: -10000,
   username: "",
   email: "",
   password: "",

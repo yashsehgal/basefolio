@@ -4,6 +4,8 @@ import { UserAuthenticationContext } from "@/contexts";
 import { useContext, useEffect, useState } from "react";
 import { Check, Trash } from "lucide-react";
 import { AuthorizedUserSocialLinksOperations } from "@/middleware";
+import { JWT_EXPIRATION_TIME } from "@/common";
+import { deleteCookie } from "@/helpers";
 
 const SocialLinksTab: React.FunctionComponent = () => {
   const { userData, setUserData } = useContext(UserAuthenticationContext);
@@ -14,7 +16,7 @@ const SocialLinksTab: React.FunctionComponent = () => {
 
   // adding the current social links to the client social links list
   useEffect(() => {
-    if (userData.socialLinks.length) {
+    if (userData.socialLinks && userData.socialLinks.length) {
       setSocialLinks([...socialLinks, ...userData.socialLinks]);
     }
   }, [userData]);
@@ -36,10 +38,8 @@ const SocialLinksTab: React.FunctionComponent = () => {
           link: newSocialLinkInput.link,
         },
       ];
-      const response: Promise<{
-        status: "error" | "success";
-        data: any;
-      }> = (await AuthorizedUserSocialLinksOperations("update")).method(
+
+      const response = (await AuthorizedUserSocialLinksOperations("update")).method(
         updatedSocialLinks,
         userData.id,
       );
@@ -47,12 +47,26 @@ const SocialLinksTab: React.FunctionComponent = () => {
       // updating global context for user data on updating social links
       if ((await response).status === "success") {
         setUserData({
-          ...userData,
-          socialLinks: (await response).data,
+          ...(await response).data,
+          isAuthenticated: true
         });
       }
     }
+
+    // reseting the new social link inputs
+    setNewSocialLinkInput({
+      title: "",
+      link: ""
+    }); 
   };
+
+  // checking context update globally
+  useEffect(() => {
+    console.log("UPDATED USER DATA GLOBALLY", userData);
+    // updating cookie data for socialLinks and removing the old socialLinks cookie
+    deleteCookie('socialLinks');
+    document.cookie = `socialLinks=${JSON.stringify(userData.socialLinks)}; expires=${JWT_EXPIRATION_TIME} path=/`;
+  }, [userData]);
 
   return (
     <div className="social-links-tab-content-container">
@@ -140,7 +154,7 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     });
   }, []);
 
-  const handleSocialLinkDeletion = () => {};
+  const handleSocialLinkDeletion = () => { };
 
   const handleSocialLinkUpdate = async () => {
     let updatedSocialLinks = allSocialLinks;

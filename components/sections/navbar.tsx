@@ -16,7 +16,7 @@ import {
   UI,
 } from "../ui";
 import Link from "next/link";
-import { BASEROUTE } from "@/common";
+import { BASEROUTE, INITIAL_USER_AUTHORIZATION } from "@/common";
 import React, { useContext, useEffect, useState } from "react";
 import { UserAuthenticationContext } from "@/contexts";
 import Image from "next/image";
@@ -58,7 +58,6 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
         id: parseInt(getCookie("id").data),
         username: getCookie("username").data,
         password: getCookie("password").data,
-        bio: getCookie("bio").data,
         education: JSON.parse(getCookie("education").data),
         socialLinks: JSON.parse(getCookie("socialLinks").data),
         experience: JSON.parse(getCookie("experience").data),
@@ -99,6 +98,7 @@ const NavbarUserActions: React.FunctionComponent<
   const handleLogOut = () => {
     // removing JWT and user detail cookies
     [
+      "id",
       "jwt",
       "firstName",
       "lastName",
@@ -116,6 +116,8 @@ const NavbarUserActions: React.FunctionComponent<
 
     // routing to base route
     window.location.href = "/";
+    // reseting the global user context after logging 
+    // out and clearing user cookies
   };
 
   return (
@@ -130,7 +132,7 @@ const NavbarUserActions: React.FunctionComponent<
         <DropdownMenuTrigger>
           <span className="flex flex-row items-center gap-2 font-medium text-sm text-zinc-500">
             {userData.profileAvatar.length &&
-            userData.profileAvatar !== "null" ? (
+              userData.profileAvatar !== "null" ? (
               <Image
                 src={userData.profileAvatar}
                 width={"60"}
