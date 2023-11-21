@@ -70,7 +70,7 @@ const authorizeUser = async (
         },
         bio: data.user.bio,
         isAuthenticated: true,
-        socialLinks: data.user.socialLinks ?? [], 
+        socialLinks: data.user.socialLinks ?? [],
         education: data.user.education ?? [],
         experience: data.user.experience ?? [],
       },

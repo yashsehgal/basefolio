@@ -30,9 +30,9 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
               ...updatedDataResponse,
               fullName: {
                 firstName: updatedDataResponse.firstName,
-                lastName: updatedDataResponse.lastName
-              }
-            }
+                lastName: updatedDataResponse.lastName,
+              },
+            };
 
             return {
               status: "success",

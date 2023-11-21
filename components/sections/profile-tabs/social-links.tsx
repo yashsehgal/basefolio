@@ -39,16 +39,15 @@ const SocialLinksTab: React.FunctionComponent = () => {
         },
       ];
 
-      const response = (await AuthorizedUserSocialLinksOperations("update")).method(
-        updatedSocialLinks,
-        userData.id,
-      );
+      const response = (
+        await AuthorizedUserSocialLinksOperations("update")
+      ).method(updatedSocialLinks, userData.id);
 
       // updating global context for user data on updating social links
       if ((await response).status === "success") {
         setUserData({
           ...(await response).data,
-          isAuthenticated: true
+          isAuthenticated: true,
         });
       }
     }
@@ -56,16 +55,18 @@ const SocialLinksTab: React.FunctionComponent = () => {
     // reseting the new social link inputs
     setNewSocialLinkInput({
       title: "",
-      link: ""
-    }); 
+      link: "",
+    });
   };
 
   // checking context update globally
   useEffect(() => {
     console.log("UPDATED USER DATA GLOBALLY", userData);
     // updating cookie data for socialLinks and removing the old socialLinks cookie
-    deleteCookie('socialLinks');
-    document.cookie = `socialLinks=${JSON.stringify(userData.socialLinks)}; expires=${JWT_EXPIRATION_TIME} path=/`;
+    deleteCookie("socialLinks");
+    document.cookie = `socialLinks=${JSON.stringify(
+      userData.socialLinks,
+    )}; expires=${JWT_EXPIRATION_TIME} path=/`;
   }, [userData]);
 
   return (
@@ -154,7 +155,7 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     });
   }, []);
 
-  const handleSocialLinkDeletion = () => { };
+  const handleSocialLinkDeletion = () => {};
 
   const handleSocialLinkUpdate = async () => {
     let updatedSocialLinks = allSocialLinks;
