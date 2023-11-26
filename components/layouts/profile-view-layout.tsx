@@ -12,7 +12,7 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
   return (
     <div
       className={cn(
-        "profile-view-layout flex flex-row items-start max-lg:flex-col relative",
+        "profile-view-layout flex flex-row items-start max-lg:flex-col",
         className,
       )}
       {...props}

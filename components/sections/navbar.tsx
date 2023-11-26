@@ -132,7 +132,7 @@ const NavbarUserActions: React.FunctionComponent<
       <DropdownMenu>
         <DropdownMenuTrigger>
           <span className="flex flex-row items-center gap-2 font-medium text-sm text-zinc-500">
-            {userData.profileAvatar.length &&
+            {userData.profileAvatar &&
               userData.profileAvatar !== "null" ? (
               <Image
                 src={userData.profileAvatar}

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { DialogFooter } from "../dialog";
 import { Button } from "../button";
-import { Github } from "lucide-react";
+import { CheckCircle2, Github, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/helpers";
+import { motion } from "framer-motion";
+import { registerUser } from "@/middleware";
 
-const CreateAccountFlow: React.FunctionComponent = () => {
+const CreateAccountFlow: React.FunctionComponent<{ setView: (view: AuthFlowViewType) => void; }> = ({
+  setView
+}) => {
   // to switch between flows in account creation procedure
   const [flow, setFlow] = useState<CreateAccountFlowType>("name");
 
@@ -39,6 +44,7 @@ const CreateAccountFlow: React.FunctionComponent = () => {
           setCreateAccountData={setCreateAccountData}
           data={createAccountData}
           setFlow={setFlow}
+          setView={setView}
         />
       )}
       {flow === "name" && (
@@ -159,11 +165,36 @@ const CreateAccountEmailInputView: React.FunctionComponent<
 
 const CreateAccountPasswordInputView: React.FunctionComponent<
   CreateAccountPasswordInputViewProps
-> = ({ setFlow, setCreateAccountData, data }) => {
+> = ({ setFlow, setCreateAccountData, data, setView }) => {
+
+  const [passwordConfirmationInput, setPasswordConfirmationInput] = useState<string>("");
+  const [isPasswordMatching, setIsPasswordMatching] = useState<boolean>(false);
+
   // auto-focus to login password input
   useEffect(() => {
     document.querySelector("input")?.focus();
   }, []);
+
+  useEffect(() => {
+    if (data.password && passwordConfirmationInput) {
+      setIsPasswordMatching(data.password === passwordConfirmationInput);
+    }
+  }, [data.password, passwordConfirmationInput]);
+
+  const handleCreateAccount = async () => {
+    const response = await registerUser({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName
+    });
+
+    if (response.status === "success") {
+      setView("login");
+    }
+  }
+
   return (
     <>
       <Input
@@ -181,17 +212,39 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
         type="password"
         placeholder="Confirm your password"
         className="px-6 py-4 text-lg placeholder:text-zinc-400 bg-zinc-100 focus:bg-zinc-50"
+        onChange={(e) => setPasswordConfirmationInput(e.target.value as string)}
       />
+      {/* show the supportive text only when there are SOME input in both data.password & passwordConfirmationInput */}
+      {(data.password && passwordConfirmationInput) && <motion.div
+        className={cn("text-sm font-medium flex flex-row items-center gap-2",
+          isPasswordMatching ? "text-green-500" : "text-red-500"
+        )}
+        initial={{
+          y: 4,
+          opacity: 0
+        }}
+        animate={{
+          y: 0,
+          opacity: 1
+        }}
+      >
+        {isPasswordMatching ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
+        {isPasswordMatching ? 'Matched' : 'Not matching'}
+      </motion.div>}
       <div className=" grid grid-cols-2 gap-3 items-center">
         <Button
           size="large"
           stretch
           variant="secondary"
-          onClick={() => setFlow("email")}
+          onClick={() => {
+            setFlow("email");
+            // reseting the confirm password input
+            setPasswordConfirmationInput("");
+          }}
         >
           {"Go back"}
         </Button>
-        <Button size="large" stretch>
+        <Button size="large" stretch disabled={!isPasswordMatching} onClick={handleCreateAccount}>
           {"Create account"}
         </Button>
       </div>
