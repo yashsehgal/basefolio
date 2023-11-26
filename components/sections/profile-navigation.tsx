@@ -1,33 +1,38 @@
 import { cn } from "@/helpers";
 import { Button } from "../ui";
-import { UserCircle2, GraduationCap, Briefcase, Link } from "lucide-react";
+import { UserCircle2, GraduationCap, Briefcase, Link, User } from "lucide-react";
 
 const ProfileNavigationOptionsData: Array<{
   title: string;
   value: ProfileViewTabsType;
   icon: React.ReactNode;
 }> = [
-  {
-    title: "About",
-    value: "about",
-    icon: <UserCircle2 className="w-4 h-4" />,
-  },
-  {
-    title: "Education",
-    value: "education",
-    icon: <GraduationCap className="w-4 h-4" />,
-  },
-  {
-    title: "Experience",
-    value: "experience",
-    icon: <Briefcase className="w-4 h-4" />,
-  },
-  {
-    title: "Links",
-    value: "links",
-    icon: <Link className="w-4 h-4" />,
-  },
-];
+    {
+      title: "About",
+      value: "about",
+      icon: <UserCircle2 className="w-4 h-4" />,
+    },
+    {
+      title: "Education",
+      value: "education",
+      icon: <GraduationCap className="w-4 h-4" />,
+    },
+    {
+      title: "Experience",
+      value: "experience",
+      icon: <Briefcase className="w-4 h-4" />,
+    },
+    {
+      title: "Links",
+      value: "links",
+      icon: <Link className="w-4 h-4" />,
+    },
+    {
+      title: "Account Settings",
+      value: "account-settings",
+      icon: <User className="w-4 h-4" />
+    }
+  ];
 
 const ProfileNavigation: React.FunctionComponent<ProfileNavigationProps> = ({
   className,

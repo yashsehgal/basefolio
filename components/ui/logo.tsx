@@ -19,6 +19,7 @@ const BasefolioLogo: React.FunctionComponent<BasefolioLogoProps> = ({
         width={"24"}
         height={"24"}
         alt={"basefolio"}
+        priority
       />
       <p
         className={cn(

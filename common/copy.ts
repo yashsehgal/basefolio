@@ -7,3 +7,5 @@ export const NOT_AUTHORIZED_CONTENT = {
     applying: "You must be logged in before registering.",
   },
 };
+
+export const DELETE_ACCOUNT_DESCRIPTION = `This method is irriversable and will delete your account with all the details sycned. Be sure before moving ahead`;

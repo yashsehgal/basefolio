@@ -1,5 +1,10 @@
 import { STRAPI_BASE_API_URL } from "@/common";
 
+const ACCOUNT_DELETION_REQUEST_OPTIONS = {
+  method: 'DELETE',
+  redirect: 'follow'
+};
+
 const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
   switch (method) {
     case "update":
@@ -62,4 +67,32 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
   }
 };
 
-export { AuthorizedUserSocialLinksOperations };
+const deleteUserAccount = async (id: number):
+  Promise<{ status: "error" | "success"; data: any }> => {
+  
+  if (id === null || id === undefined) return {
+    status: "error",
+    data: {}
+  }
+  
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/users/${id}`,
+    ACCOUNT_DELETION_REQUEST_OPTIONS as any
+  );
+
+  const data = await response.json();
+
+  if (data.username) {
+    return {
+      status: "success",
+      data: data
+    }
+  }
+
+  return {
+    status: "error",
+    data: {}
+  }
+}
+
+export { AuthorizedUserSocialLinksOperations, deleteUserAccount };

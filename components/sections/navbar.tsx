@@ -24,7 +24,6 @@ import Image from "next/image";
 import {
   User,
   LogOut,
-  Settings,
   Github,
   Users,
   Keyboard,
@@ -66,7 +65,9 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
   }, []);
 
   return (
-    <nav className={cn("navbar py-4 border-b", className)} {...props}>
+    <nav className={cn("navbar py-4 border-b",
+      "bg-zinc-100",
+      className)} {...props}>
       <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
         <div className="flex flex-row items-center justify-start gap-8">
           <Link href={BASEROUTE}>
@@ -132,7 +133,7 @@ const NavbarUserActions: React.FunctionComponent<
         <DropdownMenuTrigger>
           <span className="flex flex-row items-center gap-2 font-medium text-sm text-zinc-500">
             {userData.profileAvatar.length &&
-            userData.profileAvatar !== "null" ? (
+              userData.profileAvatar !== "null" ? (
               <Image
                 src={userData.profileAvatar}
                 width={"60"}
@@ -141,6 +142,7 @@ const NavbarUserActions: React.FunctionComponent<
                   "w-8 h-8 rounded-full cursor-pointer select-none",
                 )}
                 alt={"avatar"}
+                priority
               />
             ) : (
               <UserCircle className="text-zinc-400" />
@@ -160,11 +162,6 @@ const NavbarUserActions: React.FunctionComponent<
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Keyboard className="mr-2 h-4 w-4" />

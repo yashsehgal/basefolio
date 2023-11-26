@@ -66,6 +66,7 @@ const FeaturedBuildersSection: React.FunctionComponent = () => {
             height={"200"}
             alt={"nominate-bg"}
             className="h-full w-auto"
+            priority
           />
           <div
             className={cn(

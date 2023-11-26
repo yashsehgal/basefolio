@@ -12,7 +12,7 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
   return (
     <div
       className={cn(
-        "profile-view-layout flex flex-row items-start max-lg:flex-col",
+        "profile-view-layout flex flex-row items-start max-lg:flex-col relative",
         className,
       )}
       {...props}
@@ -20,6 +20,7 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
       <ProfileNavigation
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
+      // className="fixed"
       />
       <ViewContainer className="py-8" forProfileView>
         {children}

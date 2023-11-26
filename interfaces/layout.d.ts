@@ -45,7 +45,8 @@ declare type ProfileViewTabsType =
   | "about"
   | "education"
   | "experience"
-  | "links";
+  | "links"
+  | "account-settings";
 
 declare interface ProfileNavigationProps
   extends React.HTMLAttributes<HTMLDivElement> {

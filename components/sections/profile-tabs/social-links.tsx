@@ -10,6 +10,9 @@ import { deleteCookie } from "@/helpers";
 const SocialLinksTab: React.FunctionComponent = () => {
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
+  // for toggling notifier state
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [socialLinks, setSocialLinks] = useState<
     Array<AuthorizedUserSocialLinksType>
   >([]);
@@ -17,7 +20,10 @@ const SocialLinksTab: React.FunctionComponent = () => {
   // adding the current social links to the client social links list
   useEffect(() => {
     if (userData.socialLinks && userData.socialLinks.length) {
-      setSocialLinks([...socialLinks, ...userData.socialLinks]);
+      setSocialLinks([...userData.socialLinks]);
+      // also updating local cookies with userData
+      deleteCookie('socialLinks');
+      document.cookie = `socialLinks=${JSON.stringify(userData.socialLinks)}; expires=${JWT_EXPIRATION_TIME} path=/`;
     }
   }, [userData]);
 
@@ -57,6 +63,14 @@ const SocialLinksTab: React.FunctionComponent = () => {
       title: "",
       link: "",
     });
+
+    // Notifying the new social link addition
+    setIsOpen(true);
+    let notifierTimeout = setTimeout(() => {
+      setIsOpen(false);
+    }, 1000);
+
+    return () => clearTimeout(notifierTimeout);
   };
 
   // checking context update globally
@@ -70,69 +84,77 @@ const SocialLinksTab: React.FunctionComponent = () => {
   }, [userData]);
 
   return (
-    <div className="social-links-tab-content-container">
-      <CardContainer
-        withSeparator
-        title="Social Links"
-        subtitle="These links will be displayed on your profile"
-      >
-        <div className="social-links-header flex flex-row gap-4">
-          <div className="social-links-title-col-wrapper w-1/3 cursor-default select-none uppercase text-zinc-400 text-sm font-semibold">
-            {"Website Name"}
+    <>
+      <div className="social-links-tab-content-container">
+        <CardContainer
+          withSeparator
+          title="Social Links"
+          subtitle="These links will be displayed on your profile"
+        >
+          <div className="social-links-header flex flex-row gap-4">
+            <div className="social-links-title-col-wrapper w-1/3 cursor-default select-none uppercase text-zinc-400 text-sm font-semibold">
+              {"Website Name"}
+            </div>
+            <div className="social-links-title-col-wrapper w-2/3 cursor-default select-none uppercase text-zinc-400 text-sm font-semibold">
+              {"URL"}
+            </div>
           </div>
-          <div className="social-links-title-col-wrapper w-2/3 cursor-default select-none uppercase text-zinc-400 text-sm font-semibold">
-            {"URL"}
-          </div>
-        </div>
-        <div className="social-links-input-content-container mt-4 grid grid-cols-1 gap-4">
-          {/* Mapping the existing social links */}
-          {socialLinks.map((socialLink, index) => {
-            return (
-              <LinkRowContainer
-                key={index}
-                allSocialLinks={socialLinks}
-                setAllSocialLinks={setSocialLinks}
-                data={socialLink}
-              />
-            );
-          })}
-          <div className="social-link-wrapper flex flex-row gap-4">
-            <Input
-              type="text"
-              placeholder="Name"
-              className="w-1/3"
-              value={newSocialLinkInput.title}
-              onChange={(e) => {
-                setNewSocialLinkInput({
-                  ...newSocialLinkInput,
-                  title: e.target.value as string,
-                });
-              }}
-            />
-            <div className="w-2/3 flex flex-row items-center gap-4">
+          <div className="social-links-input-content-container mt-4 grid grid-cols-1 gap-4">
+            {/* Mapping the existing social links */}
+            {socialLinks.map((socialLink, index) => {
+              return (
+                <LinkRowContainer
+                  key={index}
+                  allSocialLinks={socialLinks}
+                  setAllSocialLinks={setSocialLinks}
+                  data={socialLink}
+                />
+              );
+            })}
+            <div className="social-link-wrapper flex flex-row gap-4">
               <Input
                 type="text"
-                placeholder="Enter the website link"
-                value={newSocialLinkInput.link}
+                placeholder="Name"
+                className="w-1/3"
+                value={newSocialLinkInput.title}
                 onChange={(e) => {
                   setNewSocialLinkInput({
                     ...newSocialLinkInput,
-                    link: e.target.value as string,
+                    title: e.target.value as string,
                   });
                 }}
               />
-              <Button
-                className="p-3"
-                disabled={!newSocialLinkInput.title || !newSocialLinkInput.link}
-                onClick={handleNewSocialLinkUpdate}
-              >
-                <Check className="w-4 h-4" />
-              </Button>
+              <div className="w-2/3 flex flex-row items-center gap-4">
+                <Input
+                  type="text"
+                  placeholder="Enter the website link"
+                  value={newSocialLinkInput.link}
+                  onChange={(e) => {
+                    setNewSocialLinkInput({
+                      ...newSocialLinkInput,
+                      link: e.target.value as string,
+                    });
+                  }}
+                />
+                <Button
+                  className="p-3"
+                  disabled={!newSocialLinkInput.title || !newSocialLinkInput.link}
+                  onClick={handleNewSocialLinkUpdate}
+                >
+                  <Check className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      </CardContainer>
-    </div>
+        </CardContainer>
+      </div>
+      {/* All notifiers */}
+      {/* <Notifier
+        title={`Added ${newSocialLinkInput.title} to links`}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      /> */}
+    </>
   );
 };
 
@@ -155,7 +177,7 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     });
   }, []);
 
-  const handleSocialLinkDeletion = () => {};
+  const handleSocialLinkDeletion = () => { };
 
   const handleSocialLinkUpdate = async () => {
     let updatedSocialLinks = allSocialLinks;

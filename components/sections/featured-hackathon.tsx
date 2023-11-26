@@ -56,6 +56,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
                 height={"800"}
                 alt={featuredHackathonData.title}
                 className="rounded-xl shadow-xl shadow-zinc-200 max-sm:hidden"
+                priority
               />
             )}
             {featuredHackathonData.mobileBanner && (
@@ -65,6 +66,7 @@ const FeaturedHackathonSection: React.FunctionComponent = () => {
                 className="rounded-xl shadow-xl shadow-zinc-200 hidden max-sm:block"
                 width={"400"}
                 height={"600"}
+                priority
               />
             )}
             <HackathonCard
