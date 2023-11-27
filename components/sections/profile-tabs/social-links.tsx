@@ -6,12 +6,16 @@ import { Check, Trash } from "lucide-react";
 import { AuthorizedUserSocialLinksOperations } from "@/middleware";
 import { JWT_EXPIRATION_TIME } from "@/common";
 import { deleteCookie } from "@/helpers";
+import { useToast } from "@/hooks/useToast";
 
 const SocialLinksTab: React.FunctionComponent = () => {
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
   // for toggling notifier state
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // notifier instance
+  const { notifier } = useToast();
 
   const [socialLinks, setSocialLinks] = useState<
     Array<AuthorizedUserSocialLinksType>
@@ -55,6 +59,11 @@ const SocialLinksTab: React.FunctionComponent = () => {
           ...(await response).data,
           isAuthenticated: true,
         });
+        // notifying the client-side / user
+        notifier({
+          title: "New social link added",
+          description: `Added ${newSocialLinkInput.title} to social links`
+        });
       }
     }
 
@@ -63,19 +72,10 @@ const SocialLinksTab: React.FunctionComponent = () => {
       title: "",
       link: "",
     });
-
-    // Notifying the new social link addition
-    setIsOpen(true);
-    let notifierTimeout = setTimeout(() => {
-      setIsOpen(false);
-    }, 1000);
-
-    return () => clearTimeout(notifierTimeout);
   };
 
   // checking context update globally
   useEffect(() => {
-    console.log("UPDATED USER DATA GLOBALLY", userData);
     // updating cookie data for socialLinks and removing the old socialLinks cookie
     deleteCookie("socialLinks");
     document.cookie = `socialLinks=${JSON.stringify(

@@ -54,3 +54,7 @@ export {
   AlertDialogAction,
   AlertDialogCancel
 } from './alert-dialog'
+
+export {
+  Notifier
+} from './notifier'

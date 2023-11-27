@@ -4,6 +4,7 @@ import "./globals.css";
 import { Layout } from "@/components/layouts";
 import { UserAuthenticationProvider } from "@/contexts";
 import { KeyboardAccessibilityProvider } from "@/contexts/keyboard-accessibility";
+import { Notifier } from "@/components/ui";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
         <UserAuthenticationProvider>
           <KeyboardAccessibilityProvider>
             <Layout>{children}</Layout>
+            <Notifier />
           </KeyboardAccessibilityProvider>
         </UserAuthenticationProvider>
       </body>

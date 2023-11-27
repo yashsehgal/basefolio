@@ -28,7 +28,7 @@ const ProfileNavigationOptionsData: Array<{
       icon: <Link className="w-4 h-4" />,
     },
     {
-      title: "Account Settings",
+      title: "Settings",
       value: "account-settings",
       icon: <User className="w-4 h-4" />
     }

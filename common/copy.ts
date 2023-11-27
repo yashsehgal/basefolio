@@ -8,4 +8,8 @@ export const NOT_AUTHORIZED_CONTENT = {
   },
 };
 
-export const DELETE_ACCOUNT_DESCRIPTION = `This method is irriversable and will delete your account with all the details sycned. Be sure before moving ahead`;
+export const DELETE_ACCOUNT_DESCRIPTION = `This method is irriversable and will delete your account with all the details sycned. Be sure before moving ahead.`;
+
+export const EMPTY_STATE_CONTENT = {
+  EDUCATION: "There's no education or institution added to your profile as of now"
+}

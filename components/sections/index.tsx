@@ -13,8 +13,8 @@ export {
 
 export { ProfileNavigation } from "./profile-navigation";
 
-export { AboutTab, SocialLinksTab } from "./profile-tabs";
-
 export { FeaturedBuildersSection } from "./featured-builders";
 
 export { WinnerBuildersLeaderboard } from "./winner-builders-leaderboard";
+
+export { EmptyState } from './empty-state';

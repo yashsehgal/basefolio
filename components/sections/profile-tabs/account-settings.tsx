@@ -52,8 +52,8 @@ const AccountSettingsTab: React.FunctionComponent = () => {
         title="Danger Zone"
         subtitle="Here are actions that are destructive for your account"
       >
-        <div className="delete-account-layer flex flex-row items-center justify-between">
-          <div className="w-2/3">
+        <div className="delete-account-layer flex flex-row items-center justify-between max-md:grid max-md:gap-4">
+          <div className="w-2/3 max-md:w-full">
             <h2 className="text-xl font-medium">
               Delete Account
             </h2>

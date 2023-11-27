@@ -5,6 +5,8 @@ export const STRAPI_BASE_API_URL =
   process.env.NEXT_PUBLIC_STRAPI_BASE_URL + "/api";
 export const APP_BASE_HOSTNAME =
   process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "https://localhost:3000";
+export const NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY = process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY;
+export const IMAGEKIT_ENDPOINT = process.env.NEXT_PUBLIC_IMAGEKIT_ENDPOINT;
 
 export const CONTROLLED_SIZE: number = 3;
 

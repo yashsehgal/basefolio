@@ -4,8 +4,8 @@ declare type AuthorizedUserSocialLinksType = {
 };
 
 declare type AuthorizedUserEducationType = {
-  title: string;
-  institutionName: string;
+  course: string;
+  instituteName: string;
   description: string;
 };
 

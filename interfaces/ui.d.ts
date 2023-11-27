@@ -36,6 +36,7 @@ declare interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   withSeparator?: boolean;
   title?: string;
   subtitle?: string;
+  mainAction?: React.ReactNode;
 }
 
 declare interface FeaturedBuilderCardProps

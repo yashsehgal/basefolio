@@ -21,4 +21,4 @@ export {
 
 export { fetchHackathonApplicationQuestions } from "./questions";
 
-export { AuthorizedUserSocialLinksOperations, deleteUserAccount } from "./account";
+export { AuthorizedUserSocialLinksOperations, deleteUserAccount, fetchUserEducation, AuthorizedUserEducationOperations } from "./account";
