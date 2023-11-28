@@ -5,6 +5,9 @@ const ACCOUNT_DELETION_REQUEST_OPTIONS = {
   redirect: 'follow'
 };
 
+var HEADERS = new Headers();
+HEADERS.append("Content-Type", "application/json");
+
 const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
   switch (method) {
     case "update":
@@ -183,4 +186,38 @@ const AuthorizedUserEducationOperations = async (method: APIMethodType) => {
   }
 }
 
-export { AuthorizedUserSocialLinksOperations, deleteUserAccount, fetchUserEducation, AuthorizedUserEducationOperations };
+const submitFeedback = async (username: string, feedback: FeedbackInterface): Promise<{
+  status: "error" | "success";
+}> => {
+
+  if (!username) return { status: "error"};
+
+  const REQUEST_OPTIONS = {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({
+      "data": {
+        "username": username,
+        "response": [
+          feedback
+        ]
+      }
+    }),
+    redirect: 'follow'
+  };
+
+  const response = await fetch(`${STRAPI_BASE_API_URL}/feedbacks`, REQUEST_OPTIONS as any);
+  const data = await response.json();
+
+  if (data.data.attributes) {
+    return {
+      status: "success"
+    }
+  }
+
+  return {
+    status: "error"
+  }
+}
+
+export { AuthorizedUserSocialLinksOperations, deleteUserAccount, fetchUserEducation, AuthorizedUserEducationOperations, submitFeedback };

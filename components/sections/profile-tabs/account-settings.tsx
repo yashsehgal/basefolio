@@ -1,4 +1,5 @@
 'use client';
+import { JWT_EXPIRATION_TIME } from "@/common";
 import { DELETE_ACCOUNT_DESCRIPTION } from "@/common/copy"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, Button, CardContainer } from "@/components/ui"
 import { UserAuthenticationContext } from "@/contexts"
@@ -11,13 +12,13 @@ const AccountSettingsTab: React.FunctionComponent = () => {
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
   const handleLogOut = () => {
-    // removing JWT and user detail cookies
+    // removing JWT and all user details cookies, expect username
+    // username will be used in the feedback flow
     [
       "id",
       "jwt",
       "firstName",
       "lastName",
-      "username",
       "profileAvatar",
       "email",
       "password",
@@ -29,8 +30,13 @@ const AccountSettingsTab: React.FunctionComponent = () => {
       deleteCookie(key);
     });
 
+    // adding 2 hrs of access to /feedback, immediately 
+    // after logging out and deleting account
+    // TODO: IMPORTANT -> REPLACE THE JWT_EXPIRATION_TIME TO 2 HOURS
+    document.cookie = `feedback=true; expires=${JWT_EXPIRATION_TIME} path=/`;
+
     // routing to base route
-    window.location.href = "/";
+    window.location.href = "/feedback";
     // reseting the global user context after logging
     // out and clearing user cookies
   };

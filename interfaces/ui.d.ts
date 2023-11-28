@@ -17,6 +17,7 @@ declare interface ButtonProps
   iconPosition?: "start" | "end";
   size?: "small" | "medium" | "large";
   stretch?: boolean;
+  stretchOnMobile?: boolean;
 }
 
 declare interface SpeakerBadgeProps
@@ -76,4 +77,21 @@ declare interface AlertDialogContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description?: string;
+}
+
+declare type FeedbackViewType = "rating" | "review";
+
+declare interface FeedbackInterface {
+  rating: number;
+  review: Array<{
+    id: number;
+    value: string;
+  }>;
+}
+
+declare interface StarRatingStatusInterface {
+  isHovered: boolean;
+  isSelected: boolean;
+  id: number;
+  emoji: string;
 }

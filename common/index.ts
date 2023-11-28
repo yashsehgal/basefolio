@@ -65,6 +65,11 @@ export const INITIAL_USER_AUTHORIZATION: AuthorizedUserType = {
   experience: [],
 };
 
+export const INITIAL_FEEDBACK: FeedbackInterface = {
+  rating: 0,
+  review: [],
+}
+
 export const JWT_EXPIRATION_TIME: number = 2; // In days
 
 export const DUMMY_BUILDER_PROFILE_BG: string =
@@ -82,3 +87,12 @@ export const COOKIE_EXPIRATION_ON_DELETE: string =
 export const DEFAULT_PROFILE_BG_FOR_BUILDERS: string = "/workspace.jpeg";
 
 export const DEFAULT_NOMINATION_BG: string = "/nominate-bg.avif";
+
+export const STARS_EMOJI = [
+  "🤐",
+  "😕",
+  "🥹",
+  "😌",
+  "😀",
+  "😍",
+]

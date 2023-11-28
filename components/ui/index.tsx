@@ -58,3 +58,11 @@ export {
 export {
   Notifier
 } from './notifier'
+
+export {
+  StarRating
+} from './star-rating'
+
+export {
+  Checkbox
+} from './checkbox'
