@@ -42,6 +42,7 @@ const StarRating: React.FunctionComponent = () => {
               transition={{
                 type: "bounce",
               }}
+              key={index}
             >
               <Star
                 className={cn("text-transparent fill-zinc-200/80 w-10 h-10 transition-all cursor-pointer",

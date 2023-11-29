@@ -22,14 +22,11 @@ const FeedbackReviewScreen: React.FunctionComponent = () => {
     const index = updatedFeedback.review.findIndex(item => item.id === id);
 
     if (index === -1) {
-      // If not present, add it to the array
       updatedFeedback.review.push({ id, value: FeedbackReviewData[id] });
     } else {
-      // If already present, remove it from the array
       updatedFeedback.review.splice(index, 1);
     }
-
-    // Update the state with the modified feedback object
+    
     setFeedback(updatedFeedback);
   }
 
