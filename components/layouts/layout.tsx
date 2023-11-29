@@ -37,7 +37,13 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
 
   return (
     <div className={cn("layout", className)} {...props}>
-      {!hideNavigation && <Navbar className={cn(ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) && "")} />}
+      {!hideNavigation && (
+        <Navbar
+          className={cn(
+            ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) && "",
+          )}
+        />
+      )}
       {!hideSubNavigation && ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && (
         <SubNavigation />
       )}

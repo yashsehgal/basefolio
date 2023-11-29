@@ -20,7 +20,7 @@ const ProfileViewLayout: React.FunctionComponent<ProfileViewLayoutProps> = ({
       <ProfileNavigation
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
-      // className="fixed"
+        // className="fixed"
       />
       <ViewContainer className="py-8" forProfileView>
         {children}

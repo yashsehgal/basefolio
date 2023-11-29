@@ -65,9 +65,10 @@ const Navbar: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
   }, []);
 
   return (
-    <nav className={cn("navbar py-4 border-b",
-      "bg-zinc-100",
-      className)} {...props}>
+    <nav
+      className={cn("navbar py-4 border-b", "bg-zinc-100", className)}
+      {...props}
+    >
       <ViewContainer className="flex flex-row items-center justify-between max-md:flex mx-md:flex-row max-md:justify-between max-md:gap-6">
         <div className="flex flex-row items-center justify-start gap-8">
           <Link href={BASEROUTE}>
@@ -132,8 +133,7 @@ const NavbarUserActions: React.FunctionComponent<
       <DropdownMenu>
         <DropdownMenuTrigger>
           <span className="flex flex-row items-center gap-2 font-medium text-sm text-zinc-500">
-            {userData.profileAvatar &&
-              userData.profileAvatar !== "null" ? (
+            {userData.profileAvatar && userData.profileAvatar !== "null" ? (
               <Image
                 src={userData.profileAvatar}
                 width={"60"}

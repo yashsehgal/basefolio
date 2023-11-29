@@ -1,14 +1,24 @@
-'use client';
+"use client";
 import { JWT_EXPIRATION_TIME } from "@/common";
-import { DELETE_ACCOUNT_DESCRIPTION } from "@/common/copy"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, Button, CardContainer } from "@/components/ui"
-import { UserAuthenticationContext } from "@/contexts"
-import { deleteCookie } from "@/helpers"
-import { deleteUserAccount } from "@/middleware"
-import { useContext } from "react"
+import { DELETE_ACCOUNT_DESCRIPTION } from "@/common/copy";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  Button,
+  CardContainer,
+} from "@/components/ui";
+import { UserAuthenticationContext } from "@/contexts";
+import { deleteCookie } from "@/helpers";
+import { deleteUserAccount } from "@/middleware";
+import { useContext } from "react";
 
 const AccountSettingsTab: React.FunctionComponent = () => {
-
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
   const handleLogOut = () => {
@@ -30,7 +40,7 @@ const AccountSettingsTab: React.FunctionComponent = () => {
       deleteCookie(key);
     });
 
-    // adding 2 hrs of access to /feedback, immediately 
+    // adding 2 hrs of access to /feedback, immediately
     // after logging out and deleting account
     // TODO: IMPORTANT -> REPLACE THE JWT_EXPIRATION_TIME TO 2 HOURS
     document.cookie = `feedback=true; expires=${JWT_EXPIRATION_TIME} path=/`;
@@ -49,7 +59,7 @@ const AccountSettingsTab: React.FunctionComponent = () => {
     } else {
       console.log("ACCOUNT DELETION FAILED!");
     }
-  }
+  };
 
   return (
     <div className="account-settings-tab-content-container">
@@ -60,25 +70,21 @@ const AccountSettingsTab: React.FunctionComponent = () => {
       >
         <div className="delete-account-layer flex flex-row items-center justify-between max-md:grid max-md:gap-4">
           <div className="w-2/3 max-md:w-full">
-            <h2 className="text-xl font-medium">
-              Delete Account
-            </h2>
-            <p className="text-zinc-400 text-sm">{DELETE_ACCOUNT_DESCRIPTION}</p>
+            <h2 className="text-xl font-medium">Delete Account</h2>
+            <p className="text-zinc-400 text-sm">
+              {DELETE_ACCOUNT_DESCRIPTION}
+            </p>
           </div>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">
-                {"Delete Account"}
-              </Button>
+              <Button variant="destructive">{"Delete Account"}</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>
-                  Are you absolutely sure?
-                </AlertDialogTitle>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete your account
-                  and remove your data from our servers.
+                  This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <div className="alert-dialog-content-footer flex flex-row items-center justify-end gap-3 mt-2">
@@ -94,9 +100,7 @@ const AccountSettingsTab: React.FunctionComponent = () => {
         </div>
       </CardContainer>
     </div>
-  )
-}
+  );
+};
 
-export {
-  AccountSettingsTab
-}
+export { AccountSettingsTab };

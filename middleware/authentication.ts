@@ -97,43 +97,46 @@ const registerUser = async ({
   if (!username || !password || !email || !firstName) {
     return {
       status: "error",
-      data: {}
-    }
+      data: {},
+    };
   }
 
   const userAccountDetails = JSON.stringify({
-    "username": username,
-    "password": password,
-    "email": email,
-    "firstName": firstName,
-    "lastName": lastName,
-    "blocked": false,
-    "confirmed": true,
-    "provider": "local",
-    "role": 1
+    username: username,
+    password: password,
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+    blocked: false,
+    confirmed: true,
+    provider: "local",
+    role: 1,
   });
 
   const CREATE_ACCOUNT_REQUEST_OPTIONS = {
     body: userAccountDetails,
-    ...REQUEST_OPTIONS
+    ...REQUEST_OPTIONS,
   };
 
   // POST method request for creating new user to account DB
-  const response = await fetch(`${STRAPI_BASE_API_URL}/users`, CREATE_ACCOUNT_REQUEST_OPTIONS as any);
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/users`,
+    CREATE_ACCOUNT_REQUEST_OPTIONS as any,
+  );
   const data = await response.json();
 
   if (data.username) {
     // received data as response; account created
     return {
       status: "success",
-      data
-    }
+      data,
+    };
   }
 
   return {
     status: "error",
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
 export { authorizeUser, registerUser };

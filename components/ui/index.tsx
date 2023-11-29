@@ -52,17 +52,11 @@ export {
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogAction,
-  AlertDialogCancel
-} from './alert-dialog'
+  AlertDialogCancel,
+} from "./alert-dialog";
 
-export {
-  Notifier
-} from './notifier'
+export { Notifier } from "./notifier";
 
-export {
-  StarRating
-} from './star-rating'
+export { StarRating } from "./star-rating";
 
-export {
-  Checkbox
-} from './checkbox'
+export { Checkbox } from "./checkbox";

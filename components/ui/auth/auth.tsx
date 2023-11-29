@@ -35,7 +35,11 @@ const AuthView: React.FunctionComponent<{ initialView: AuthFlowViewType }> = ({
       <div
         className={cn("authview-dialog-content-body grid grid-cols-1 gap-4")}
       >
-        {view === "login" ? <LoginFlow /> : <CreateAccountFlow setView={setView} />}
+        {view === "login" ? (
+          <LoginFlow />
+        ) : (
+          <CreateAccountFlow setView={setView} />
+        )}
       </div>
     </UI.DialogContent>
   );

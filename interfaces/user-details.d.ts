@@ -1,4 +1,3 @@
-
 declare interface CollegeInterface {
   name: string;
 }

@@ -1,2 +1,1 @@
-
-export { FeedbackRatingScreen } from './feedback-rating'
+export { FeedbackRatingScreen } from "./feedback-rating";

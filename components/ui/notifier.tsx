@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Toast,
@@ -7,11 +7,11 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@/components/ui/toast"
-import { useToast } from "@/hooks/useToast"
+} from "@/components/ui/toast";
+import { useToast } from "@/hooks/useToast";
 
 const Notifier: React.FunctionComponent = () => {
-  const { toasts } = useToast()
+  const { toasts } = useToast();
 
   return (
     <ToastProvider>
@@ -27,13 +27,11 @@ const Notifier: React.FunctionComponent = () => {
             {action}
             <ToastClose />
           </Toast>
-        )
+        );
       })}
       <ToastViewport />
     </ToastProvider>
-  )
-}
+  );
+};
 
-export {
-  Notifier
-}
+export { Notifier };

@@ -56,22 +56,21 @@ declare interface LinkRowContainerProps
   data: AuthorizedUserSocialLinksType;
 }
 
-declare interface NotifierProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+declare interface NotifierProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
   setIsOpen: (toggleState: boolean) => void;
   title: string;
   description?: string;
   action?: {
     title: string;
-    method: (args: any) => any
+    method: (args: any) => any;
   };
 }
 
 declare interface AlertDialogProps
   extends React.HTMLAttributes<HTMLDivElement> {
   trigger: React.ReactNode;
-  }
+}
 
 declare interface AlertDialogContentProps
   extends React.HTMLAttributes<HTMLDivElement> {

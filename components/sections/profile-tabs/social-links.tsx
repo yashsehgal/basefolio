@@ -26,8 +26,10 @@ const SocialLinksTab: React.FunctionComponent = () => {
     if (userData.socialLinks && userData.socialLinks.length) {
       setSocialLinks([...userData.socialLinks]);
       // also updating local cookies with userData
-      deleteCookie('socialLinks');
-      document.cookie = `socialLinks=${JSON.stringify(userData.socialLinks)}; expires=${JWT_EXPIRATION_TIME} path=/`;
+      deleteCookie("socialLinks");
+      document.cookie = `socialLinks=${JSON.stringify(
+        userData.socialLinks,
+      )}; expires=${JWT_EXPIRATION_TIME} path=/`;
     }
   }, [userData]);
 
@@ -62,7 +64,7 @@ const SocialLinksTab: React.FunctionComponent = () => {
         // notifying the client-side / user
         notifier({
           title: "New social link added",
-          description: `Added ${newSocialLinkInput.title} to social links`
+          description: `Added ${newSocialLinkInput.title} to social links`,
         });
       }
     }
@@ -138,7 +140,9 @@ const SocialLinksTab: React.FunctionComponent = () => {
                 />
                 <Button
                   className="p-3"
-                  disabled={!newSocialLinkInput.title || !newSocialLinkInput.link}
+                  disabled={
+                    !newSocialLinkInput.title || !newSocialLinkInput.link
+                  }
                   onClick={handleNewSocialLinkUpdate}
                 >
                   <Check className="w-4 h-4" />
@@ -177,7 +181,7 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     });
   }, []);
 
-  const handleSocialLinkDeletion = () => { };
+  const handleSocialLinkDeletion = () => {};
 
   const handleSocialLinkUpdate = async () => {
     let updatedSocialLinks = allSocialLinks;

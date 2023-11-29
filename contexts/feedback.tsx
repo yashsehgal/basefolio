@@ -6,21 +6,19 @@ export const FeedbackContext = createContext<{
   setFeedback: (feedback: FeedbackInterface) => void;
 }>({
   feedback: INITIAL_FEEDBACK,
-  setFeedback: () => { }
+  setFeedback: () => {},
 });
 
-const FeedbackProvider: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({
-  children
-}) => {
-  const [feedback, setFeedback] = useState<FeedbackInterface>(
-    INITIAL_FEEDBACK
-  );
+const FeedbackProvider: React.FunctionComponent<
+  React.HTMLAttributes<HTMLDivElement>
+> = ({ children }) => {
+  const [feedback, setFeedback] = useState<FeedbackInterface>(INITIAL_FEEDBACK);
 
   return (
     <FeedbackContext.Provider value={{ feedback, setFeedback }}>
       {children}
     </FeedbackContext.Provider>
-  )
-}
+  );
+};
 
 export { FeedbackProvider };

@@ -4,7 +4,7 @@ import {
   AboutTab,
   SocialLinksTab,
   AccountSettingsTab,
-  EducationTab
+  EducationTab,
 } from "@/components/sections/profile-tabs";
 import { useState } from "react";
 

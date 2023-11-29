@@ -1,19 +1,18 @@
-'use client';
-import { Section } from "@/components/layouts"
-import { StarRating } from "@/components/ui"
+"use client";
+import { Section } from "@/components/layouts";
+import { StarRating } from "@/components/ui";
 import { motion } from "framer-motion";
 
 const FeedbackRatingScreen: React.FunctionComponent = () => {
-
   return (
     <motion.div
       initial={{
         x: -24,
-        opacity: 0
+        opacity: 0,
       }}
       animate={{
         x: 0,
-        opacity: 1
+        opacity: 1,
       }}
     >
       <Section className="feedback-rating-screen">
@@ -25,9 +24,7 @@ const FeedbackRatingScreen: React.FunctionComponent = () => {
         </div>
       </Section>
     </motion.div>
-  )
-}
+  );
+};
 
-export {
-  FeedbackRatingScreen
-}
+export { FeedbackRatingScreen };

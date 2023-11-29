@@ -19,16 +19,16 @@ const FeedbackView: React.FunctionComponent = () => {
 
     // move forward to "/" BASE URL
     window.location.href = "/";
-  }
+  };
 
   const handleSubmitFeedback = async () => {
-    console.log(getCookie('username').data);
+    console.log(getCookie("username").data);
 
-    const data = await submitFeedback(getCookie('username').data, feedback);
+    const data = await submitFeedback(getCookie("username").data, feedback);
     if (data.status === "success") {
       window.location.href = "/";
     }
-  }
+  };
 
   return (
     <>
@@ -41,27 +41,49 @@ const FeedbackView: React.FunctionComponent = () => {
           {flow === "rating" && <FeedbackRatingScreen />}
           {flow === "review" && <FeedbackReviewScreen />}
           <div className="feedback-flow-control-actions-wrapper mt-6 flex flex-row items-center justify-center gap-4 max-md:flex-col-reverse">
-            {flow === "rating" && <Button variant="solid" stretchOnMobile onClick={handleSkipFeedback}>
-              {"Skip"}
-            </Button>}
-            {flow === "rating" && <Button stretchOnMobile onClick={() => setFlow("review")}>
-              {"Next"}
-            </Button>}
-            {flow === "review" &&
-              <Button variant="solid" stretchOnMobile className="border-transparent" onClick={handleSkipFeedback}>
+            {flow === "rating" && (
+              <Button
+                variant="solid"
+                stretchOnMobile
+                onClick={handleSkipFeedback}
+              >
                 {"Skip"}
-              </Button>}
-            {flow === "review" && <Button variant="solid" stretchOnMobile onClick={() => setFlow("rating")}>
-              {"Go back"}
-            </Button>}
-            {flow === "review" && <Button stretchOnMobile onClick={handleSubmitFeedback}>
-              {"Submit feedback"}
-            </Button>}
+              </Button>
+            )}
+            {flow === "rating" && (
+              <Button stretchOnMobile onClick={() => setFlow("review")}>
+                {"Next"}
+              </Button>
+            )}
+            {flow === "review" && (
+              <Button
+                variant="solid"
+                stretchOnMobile
+                className="border-transparent"
+                onClick={handleSkipFeedback}
+              >
+                {"Skip"}
+              </Button>
+            )}
+            {flow === "review" && (
+              <Button
+                variant="solid"
+                stretchOnMobile
+                onClick={() => setFlow("rating")}
+              >
+                {"Go back"}
+              </Button>
+            )}
+            {flow === "review" && (
+              <Button stretchOnMobile onClick={handleSubmitFeedback}>
+                {"Submit feedback"}
+              </Button>
+            )}
           </div>
         </CardContainer>
       </FeedbackProvider>
     </>
-  )
-}
+  );
+};
 
 export default FeedbackView;

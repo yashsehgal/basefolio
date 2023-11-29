@@ -5,7 +5,8 @@ export const STRAPI_BASE_API_URL =
   process.env.NEXT_PUBLIC_STRAPI_BASE_URL + "/api";
 export const APP_BASE_HOSTNAME =
   process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "https://localhost:3000";
-export const NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY = process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY;
+export const NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY =
+  process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY;
 export const IMAGEKIT_ENDPOINT = process.env.NEXT_PUBLIC_IMAGEKIT_ENDPOINT;
 
 export const CONTROLLED_SIZE: number = 3;
@@ -68,7 +69,7 @@ export const INITIAL_USER_AUTHORIZATION: AuthorizedUserType = {
 export const INITIAL_FEEDBACK: FeedbackInterface = {
   rating: 0,
   review: [],
-}
+};
 
 export const JWT_EXPIRATION_TIME: number = 2; // In days
 
@@ -88,11 +89,4 @@ export const DEFAULT_PROFILE_BG_FOR_BUILDERS: string = "/workspace.jpeg";
 
 export const DEFAULT_NOMINATION_BG: string = "/nominate-bg.avif";
 
-export const STARS_EMOJI = [
-  "🤐",
-  "😕",
-  "🥹",
-  "😌",
-  "😀",
-  "😍",
-]
+export const STARS_EMOJI = ["🤐", "😕", "🥹", "😌", "😀", "😍"];

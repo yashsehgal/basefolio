@@ -7,9 +7,9 @@ import { cn } from "@/helpers";
 import { motion } from "framer-motion";
 import { registerUser } from "@/middleware";
 
-const CreateAccountFlow: React.FunctionComponent<{ setView: (view: AuthFlowViewType) => void; }> = ({
-  setView
-}) => {
+const CreateAccountFlow: React.FunctionComponent<{
+  setView: (view: AuthFlowViewType) => void;
+}> = ({ setView }) => {
   // to switch between flows in account creation procedure
   const [flow, setFlow] = useState<CreateAccountFlowType>("name");
 
@@ -166,8 +166,8 @@ const CreateAccountEmailInputView: React.FunctionComponent<
 const CreateAccountPasswordInputView: React.FunctionComponent<
   CreateAccountPasswordInputViewProps
 > = ({ setFlow, setCreateAccountData, data, setView }) => {
-
-  const [passwordConfirmationInput, setPasswordConfirmationInput] = useState<string>("");
+  const [passwordConfirmationInput, setPasswordConfirmationInput] =
+    useState<string>("");
   const [isPasswordMatching, setIsPasswordMatching] = useState<boolean>(false);
 
   // auto-focus to login password input
@@ -187,13 +187,13 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
       email: data.email,
       password: data.password,
       firstName: data.firstName,
-      lastName: data.lastName
+      lastName: data.lastName,
     });
 
     if (response.status === "success") {
       setView("login");
     }
-  }
+  };
 
   return (
     <>
@@ -215,22 +215,29 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
         onChange={(e) => setPasswordConfirmationInput(e.target.value as string)}
       />
       {/* show the supportive text only when there are SOME input in both data.password & passwordConfirmationInput */}
-      {(data.password && passwordConfirmationInput) && <motion.div
-        className={cn("text-sm font-medium flex flex-row items-center gap-2",
-          isPasswordMatching ? "text-green-500" : "text-red-500"
-        )}
-        initial={{
-          y: 4,
-          opacity: 0
-        }}
-        animate={{
-          y: 0,
-          opacity: 1
-        }}
-      >
-        {isPasswordMatching ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
-        {isPasswordMatching ? 'Matched' : 'Not matching'}
-      </motion.div>}
+      {data.password && passwordConfirmationInput && (
+        <motion.div
+          className={cn(
+            "text-sm font-medium flex flex-row items-center gap-2",
+            isPasswordMatching ? "text-green-500" : "text-red-500",
+          )}
+          initial={{
+            y: 4,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+        >
+          {isPasswordMatching ? (
+            <CheckCircle2 className="h-4 w-4" />
+          ) : (
+            <XCircle className="h-4 w-4" />
+          )}
+          {isPasswordMatching ? "Matched" : "Not matching"}
+        </motion.div>
+      )}
       <div className=" grid grid-cols-2 gap-3 items-center">
         <Button
           size="large"
@@ -244,7 +251,12 @@ const CreateAccountPasswordInputView: React.FunctionComponent<
         >
           {"Go back"}
         </Button>
-        <Button size="large" stretch disabled={!isPasswordMatching} onClick={handleCreateAccount}>
+        <Button
+          size="large"
+          stretch
+          disabled={!isPasswordMatching}
+          onClick={handleCreateAccount}
+        >
           {"Create account"}
         </Button>
       </div>

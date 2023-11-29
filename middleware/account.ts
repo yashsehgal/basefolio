@@ -1,8 +1,8 @@
 import { STRAPI_BASE_API_URL } from "@/common";
 
 const ACCOUNT_DELETION_REQUEST_OPTIONS = {
-  method: 'DELETE',
-  redirect: 'follow'
+  method: "DELETE",
+  redirect: "follow",
 };
 
 var HEADERS = new Headers();
@@ -70,17 +70,18 @@ const AuthorizedUserSocialLinksOperations = async (method: APIMethodType) => {
   }
 };
 
-const deleteUserAccount = async (id: number):
-  Promise<{ status: "error" | "success"; data: any }> => {
-  
-  if (id === null || id === undefined) return {
-    status: "error",
-    data: {}
-  }
-  
+const deleteUserAccount = async (
+  id: number,
+): Promise<{ status: "error" | "success"; data: any }> => {
+  if (id === null || id === undefined)
+    return {
+      status: "error",
+      data: {},
+    };
+
   const response = await fetch(
     `${STRAPI_BASE_API_URL}/users/${id}`,
-    ACCOUNT_DELETION_REQUEST_OPTIONS as any
+    ACCOUNT_DELETION_REQUEST_OPTIONS as any,
   );
 
   const data = await response.json();
@@ -88,23 +89,27 @@ const deleteUserAccount = async (id: number):
   if (data.username) {
     return {
       status: "success",
-      data: data
-    }
+      data: data,
+    };
   }
 
   return {
     status: "error",
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
-const fetchUserEducation = async (id: number): Promise<{ status: "error" | "success"; data: Array<AuthorizedUserEducationType> }> => {
-
+const fetchUserEducation = async (
+  id: number,
+): Promise<{
+  status: "error" | "success";
+  data: Array<AuthorizedUserEducationType>;
+}> => {
   if (id === null || id === undefined) {
     return {
       status: "error",
-      data: []
-    }
+      data: [],
+    };
   }
 
   const response = await fetch(`${STRAPI_BASE_API_URL}/users/${id}`);
@@ -113,22 +118,22 @@ const fetchUserEducation = async (id: number): Promise<{ status: "error" | "succ
   if (data.username) {
     return {
       status: "success",
-      data: data.education ?? []
-    }
+      data: data.education ?? [],
+    };
   }
 
   return {
     status: "error",
-    data: []
-  }
-}
+    data: [],
+  };
+};
 
 const AuthorizedUserEducationOperations = async (method: APIMethodType) => {
   switch (method) {
     case "update":
       return {
         status: "success",
-        method: async(
+        method: async (
           data: Array<AuthorizedUserEducationType>,
           id: number,
         ): Promise<{
@@ -137,13 +142,13 @@ const AuthorizedUserEducationOperations = async (method: APIMethodType) => {
         }> => {
           try {
             const response = await fetch(`${STRAPI_BASE_API_URL}/users/${id}`, {
-              method: 'PUT',
+              method: "PUT",
               headers: {
-                'Content-Type': "application/json",
+                "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                education: data
-              })
+                education: data,
+              }),
             });
 
             let updatedDataResponse = await response.json();
@@ -157,19 +162,22 @@ const AuthorizedUserEducationOperations = async (method: APIMethodType) => {
               },
             };
 
-            console.log("UPDATED RESPONSE FROM MIDDLEWARE", updatedDataResponse);
+            console.log(
+              "UPDATED RESPONSE FROM MIDDLEWARE",
+              updatedDataResponse,
+            );
             return {
               status: "success",
               data: updatedDataResponse,
             };
-          }  catch (error) {
+          } catch (error) {
             return {
               status: "error",
               data: {} as any,
             };
           }
-        }
-      }
+        },
+      };
     default:
       return {
         status: "error",
@@ -184,40 +192,49 @@ const AuthorizedUserEducationOperations = async (method: APIMethodType) => {
         },
       };
   }
-}
+};
 
-const submitFeedback = async (username: string, feedback: FeedbackInterface): Promise<{
+const submitFeedback = async (
+  username: string,
+  feedback: FeedbackInterface,
+): Promise<{
   status: "error" | "success";
 }> => {
-
-  if (!username) return { status: "error"};
+  if (!username) return { status: "error" };
 
   const REQUEST_OPTIONS = {
-    method: 'POST',
+    method: "POST",
     headers: HEADERS,
     body: JSON.stringify({
-      "data": {
-        "username": username,
-        "response": [
-          feedback
-        ]
-      }
+      data: {
+        username: username,
+        response: [feedback],
+      },
     }),
-    redirect: 'follow'
+    redirect: "follow",
   };
 
-  const response = await fetch(`${STRAPI_BASE_API_URL}/feedbacks`, REQUEST_OPTIONS as any);
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/feedbacks`,
+    REQUEST_OPTIONS as any,
+  );
   const data = await response.json();
 
   if (data.data.attributes) {
     return {
-      status: "success"
-    }
+      status: "success",
+    };
   }
 
   return {
-    status: "error"
-  }
-}
+    status: "error",
+  };
+};
 
-export { AuthorizedUserSocialLinksOperations, deleteUserAccount, fetchUserEducation, AuthorizedUserEducationOperations, submitFeedback };
+export {
+  AuthorizedUserSocialLinksOperations,
+  deleteUserAccount,
+  fetchUserEducation,
+  AuthorizedUserEducationOperations,
+  submitFeedback,
+};
