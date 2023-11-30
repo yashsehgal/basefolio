@@ -153,9 +153,27 @@ const fetchWinningBuilders = async (
   }
 };
 
+const fetchMostProjects = async (
+  order: "from-most" | "from-least" = "from-most"
+) => {
+  const data = await fetchAllBuilders();
+  const leaderboard: Array<BuilderInterface> = data.sort(
+    (a: BuilderInterface, b: BuilderInterface) =>
+      a.projects.length - b.projects.length
+  )
+
+  if (order === "from-most") {
+    return leaderboard.reverse();
+  } else {
+    return leaderboard;
+  }
+}
+
+
 export {
   fetchAllBuilders,
   fetchBuildersForHackathon,
   fetchFeaturedBuilders,
   fetchWinningBuilders,
+  fetchMostProjects
 };

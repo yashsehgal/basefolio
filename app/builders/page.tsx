@@ -1,6 +1,7 @@
 import { Section } from "@/components/layouts";
 import {
   FeaturedBuildersSection,
+  MostProjectsLeaderboard,
   WinnerBuildersLeaderboard,
 } from "@/components/sections";
 
@@ -14,8 +15,9 @@ const BuildersView: React.FunctionComponent = () => {
             {"Builders Leaderboard"}
           </h1>
         </header>
-        <div className="grid grid-cols-2 max-lg:grid-cols-1">
+        <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-12 items-start">
           <WinnerBuildersLeaderboard />
+          <MostProjectsLeaderboard />
         </div>
       </Section>
     </>
