@@ -50,6 +50,7 @@ const FeaturedBuildersSection: React.FunctionComponent = () => {
                 builder.profileImageURL || DEFAULT_PROFILE_BG_FOR_BUILDERS
               }
               isVerified={builder.isVerified}
+              bio={builder.bio}
             />
           );
         })}

@@ -47,6 +47,7 @@ declare interface FeaturedBuilderCardProps
   firstName: string;
   lastName: string;
   isVerified?: boolean;
+  bio?: string;
 }
 
 declare interface LinkRowContainerProps

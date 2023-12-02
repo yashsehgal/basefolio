@@ -172,6 +172,11 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     link: "",
   });
 
+  // notifier instance
+  const { notifier } = useToast();
+
+  const { userData, setUserData } = useContext(UserAuthenticationContext);
+
   // Storing the data prop into native state storage
   useEffect(() => {
     setLinkInput({
@@ -181,15 +186,30 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
     });
   }, []);
 
-  const handleSocialLinkDeletion = () => {};
+  const handleSocialLinkDeletion = async () => {
+    if (data.title && allSocialLinks.length) {
+      // removing the link from socialLinks array if present
+      let updatedSocialLinks = allSocialLinks.filter((link) => {
+        return link.title.toLowerCase() !== data.title.toLowerCase();
+      });
 
-  const handleSocialLinkUpdate = async () => {
-    let updatedSocialLinks = allSocialLinks;
-    /**
-     * ? Updating the social links
-     * TODO: Update the changes in title/link in global state
-     * TODO: Run the update method with the new social links data
-     */
+      const response = (
+        await AuthorizedUserSocialLinksOperations("update")
+      ).method(updatedSocialLinks, userData.id);
+
+      // updating global context for user data on updating social links
+      if ((await response).status === "success") {
+        setUserData({
+          ...(await response).data,
+          isAuthenticated: true,
+        });
+        // notifying the client-side / user
+        notifier({
+          title: "Link removed",
+          description: `Removed ${data.title} from social links`,
+        });
+      }
+    }
   };
 
   return (
@@ -218,7 +238,7 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
             });
           }}
         />
-        <Button variant="destructive" className="p-3">
+        <Button variant="destructive" className="p-3" onClick={handleSocialLinkDeletion}>
           <Trash className="w-4 h-4" />
         </Button>
       </div>
