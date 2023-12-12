@@ -7,18 +7,18 @@ import {
   Label,
 } from "@/components/ui";
 import { UserAuthenticationContext } from "@/contexts";
-import { cn } from "@/helpers";
+import { cn, deleteCookie } from "@/helpers";
 import {
   AuthorizedUserEducationOperations,
   fetchUserEducation,
 } from "@/middleware";
-import { Pencil, School, Trash } from "lucide-react";
+import { Pencil, School } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { EmptyState } from "..";
 import { EMPTY_STATE_CONTENT } from "@/common/copy";
-import { setUser } from "@sentry/nextjs";
 import { notifier } from "@/hooks/useToast";
+import { JWT_EXPIRATION_TIME } from "@/common";
 
 const EducationTab: React.FunctionComponent = () => {
   const [education, setEducation] = useState<
@@ -134,6 +134,9 @@ const NewEducationInputForm: React.FunctionComponent<
             ...(await response).data,
             isAuthenticated: true,
           });
+          // updating education in cookies
+          deleteCookie("education");
+          document.cookie = `education=${JSON.stringify((await response).data.education)}; expires=${JWT_EXPIRATION_TIME} path=/`;
           // notifying the client-side / user
           notifier({
             title: "New Education added",
@@ -220,6 +223,21 @@ const EducationRowItem: React.FunctionComponent<EducationRowItemProps> = ({
 
   const { userData, setUserData } = useContext(UserAuthenticationContext);
 
+  const [currentEducationInput, setCurrentEducationInput] = useState<AuthorizedUserEducationType>({
+    course: "",
+    instituteName: "",
+    description: ""
+  });
+
+  useEffect(() => {
+    setCurrentEducationInput(current => ({
+      ...current,
+      course: course,
+      instituteName: instituteName,
+      description: description
+    }))
+  }, []);
+
   const handleEducationRemoval = async () => {
     if (course && instituteName) {
       let updatedEducation = userData.education.filter((education) => {
@@ -231,16 +249,55 @@ const EducationRowItem: React.FunctionComponent<EducationRowItemProps> = ({
         await AuthorizedUserEducationOperations("update")
       ).method(updatedEducation, userData.id);
 
-      // updating global context for user data on updating social links
+      // updating global context for user data on updating education
       if ((await response).status === "success") {
         setUserData({
           ...(await response).data,
           isAuthenticated: true,
         });
+        // updating education in cookies
+        deleteCookie("education");
+        document.cookie = `education=${JSON.stringify((await response).data.education)}; expires=${JWT_EXPIRATION_TIME} path=/`;
         // notifying the client-side / user
         notifier({
           title: "Education removed",
           description: `Removed ${course} from education`,
+        });
+      }
+    }
+  }
+
+  const handleEducationDetailsUpdate = async () => {
+    if (course && instituteName) {
+      let updatedEducation = [...userData.education.map((education) => {
+        if (education.course === course && education.instituteName === instituteName) {
+          return {
+            course: currentEducationInput.course,
+            instituteName: currentEducationInput.instituteName,
+            description: currentEducationInput.description
+          }
+        } else {
+          return education
+        }
+      })];
+
+      const response = (await AuthorizedUserEducationOperations("update"))
+        .method(updatedEducation, userData.id);
+
+      // updating global context for user data on updating education
+      // updating global context for user data on updating education
+      if ((await response).status === "success") {
+        setUserData({
+          ...(await response).data,
+          isAuthenticated: true,
+        });
+        // updating education in cookies
+        deleteCookie("education");
+        document.cookie = `education=${JSON.stringify((await response).data.education)}; expires=${JWT_EXPIRATION_TIME} path=/`;
+        // notifying the client-side / user
+        notifier({
+          title: "Education Updated",
+          description: `Updated ${currentEducationInput.course} from education`,
         });
       }
     }
@@ -282,11 +339,29 @@ const EducationRowItem: React.FunctionComponent<EducationRowItemProps> = ({
           <div className="grid grid-cols-2 items-start gap-4">
             <FormItemWrapper className="courseName-wrapper">
               <Label>Course Name</Label>
-              <Input type="text" value={course} />
+              <Input
+                type="text"
+                value={currentEducationInput.course}
+                onChange={(e) => {
+                  setCurrentEducationInput(current => ({
+                    ...current,
+                    course: e.target.value as string
+                  }));
+                }}
+              />
             </FormItemWrapper>
             <FormItemWrapper className="instituteName-wrapper">
               <Label>Institute</Label>
-              <Input type="text" value={instituteName} />
+              <Input
+                type="text"
+                value={currentEducationInput.instituteName}
+                onChange={(e) => {
+                  setCurrentEducationInput(current => ({
+                    ...current,
+                    instituteName: e.target.value as string
+                  }));
+                }}
+              />
             </FormItemWrapper>
           </div>
           <FormItemWrapper className="description-wrapper">
@@ -295,7 +370,13 @@ const EducationRowItem: React.FunctionComponent<EducationRowItemProps> = ({
               className={cn(
                 "w-full min-h-[160px] rounded-xl border border-zinc-200 bg-white px-3 py-3 text-base ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:ring-offset-2 focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder:text-zinc-400 dark:focus-visible:ring-zinc-300 transition-all",
               )}
-              value={description}
+              value={currentEducationInput.description}
+              onChange={(e) => {
+                setCurrentEducationInput(current => ({
+                  ...current,
+                  description: e.target.value as string
+                }));
+              }}
             />
           </FormItemWrapper>
           {editView && (
@@ -305,21 +386,42 @@ const EducationRowItem: React.FunctionComponent<EducationRowItemProps> = ({
                 setEditView(false);
               }}>Remove education</Button>
               <div className="flex flex-row items-center justify-end gap-4">
-                <Button
-                  variant="solid"
+                {(
+                  (course !== currentEducationInput.course) ||
+                  (instituteName !== currentEducationInput.instituteName) ||
+                  (description !== currentEducationInput.description)
+                ) ? <>
+                  <Button
+                    variant="solid"
+                    onClick={() => {
+                      setEditView(false);
+                      // reseting the input changes, if done any
+                      setCurrentEducationInput({
+                        course,
+                        instituteName,
+                        description
+                      });
+                    }}
+                  >
+                    Discard changes
+                  </Button>
+                  <Button variant="primary" onClick={() => {
+                    handleEducationDetailsUpdate();
+                    setEditView(false);
+                  }}>Save changes</Button>
+                </> : <Button
                   onClick={() => {
                     setEditView(false);
-                  }}
-                >
-                  Discard changes
-                </Button>
-                <Button variant="primary">Save changes</Button>
+                  }}>
+                  Save
+                </Button>}
               </div>
             </div>
           )}
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

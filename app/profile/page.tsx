@@ -5,6 +5,7 @@ import {
   SocialLinksTab,
   AccountSettingsTab,
   EducationTab,
+  ExperienceTab,
 } from "@/components/sections/profile-tabs";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ const ProfileView: React.FunctionComponent = () => {
       >
         {selectedTab === "about" && <AboutTab />}
         {selectedTab === "education" && <EducationTab />}
+        {selectedTab === "experience" && <ExperienceTab />}
         {selectedTab === "links" && <SocialLinksTab />}
         {selectedTab === "account-settings" && <AccountSettingsTab />}
       </ProfileViewLayout>

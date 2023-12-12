@@ -28,4 +28,5 @@ export {
   fetchUserEducation,
   AuthorizedUserEducationOperations,
   submitFeedback,
+  fetchUserExperience
 } from "./account";

@@ -6,7 +6,7 @@ export const UserAuthenticationContext = createContext<{
   setUserData: (value: AuthorizedUserType) => void;
 }>({
   userData: INITIAL_USER_AUTHORIZATION,
-  setUserData: () => {},
+  setUserData: () => { },
 });
 
 const UserAuthenticationProvider: React.FunctionComponent<

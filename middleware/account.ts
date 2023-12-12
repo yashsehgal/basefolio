@@ -231,10 +231,45 @@ const submitFeedback = async (
   };
 };
 
+const fetchUserExperience = async (
+  id: number,
+): Promise<{
+  status: "error" | "success";
+  data: Array<AuthorizedUserExperienceType>;
+}> => {
+  if (id === null || id === undefined) {
+    return {
+      status: "error",
+      data: [],
+    };
+  }
+
+  const response = await fetch(`${STRAPI_BASE_API_URL}/users/${id}`);
+  const data = await response.json();
+
+  if (data.username) {
+    return {
+      status: "success",
+      data: data.experience ?? [],
+    };
+  }
+
+  return {
+    status: "error",
+    data: [],
+  };
+};
+
 export {
+  // social links related methods
   AuthorizedUserSocialLinksOperations,
+  // delete user account methods
   deleteUserAccount,
+  // education related methods
   fetchUserEducation,
   AuthorizedUserEducationOperations,
+  // feedback related methods
   submitFeedback,
+  // experience related methods
+  fetchUserExperience
 };

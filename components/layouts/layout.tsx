@@ -6,6 +6,7 @@ import { SubNavigation } from "../sections/sub-navigation";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useKeyboardAccessibility } from "@/contexts";
+import { CommandKSearch } from "../ui";
 
 const ROUTES_WITH_SUB_NAVIGATION = [
   "/",
@@ -47,6 +48,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
       {!hideSubNavigation && ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && (
         <SubNavigation />
       )}
+      {ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && <CommandKSearch />}
       {ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) ? (
         <>{children}</>
       ) : (
