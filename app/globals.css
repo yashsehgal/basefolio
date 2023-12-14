@@ -5,6 +5,7 @@
 html,
 body {
   @apply bg-zinc-100 text-zinc-800;
+  font-family: "Manrope", sans-serif
 }
 
 .view-container {
@@ -28,10 +29,6 @@ body {
 .markdown > p {
   @apply mb-6;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
   :root {

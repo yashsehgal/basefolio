@@ -36,6 +36,7 @@ const WinnerBuildersLeaderboard: React.FunctionComponent = () => {
               hideViewProfileButton
               className="p-4 shadow-none bg-opacity-30"
               role="button"
+              withDetails
             />
           );
         })}
