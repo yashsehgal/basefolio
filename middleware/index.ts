@@ -17,7 +17,7 @@ export {
   fetchBuildersForHackathon,
   fetchWinningBuilders,
   fetchFeaturedBuilders,
-  fetchMostProjects
+  fetchMostProjects,
 } from "./builders";
 
 export { fetchHackathonApplicationQuestions } from "./questions";
@@ -28,12 +28,11 @@ export {
   fetchUserEducation,
   AuthorizedUserEducationOperations,
   submitFeedback,
-  fetchUserExperience
+  fetchUserExperience,
 } from "./account";
-
 
 export {
   fetchHackathonCities,
   fetchAllPastHackathons,
-  fetchAllUpcomingHackathons
-} from './search-actions';
+  fetchAllUpcomingHackathons,
+} from "./search-actions";

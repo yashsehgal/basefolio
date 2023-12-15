@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { CardContainer } from '../ui';
-import { BuilderRowCard } from '../ui/builder-row-card';
-import { fetchMostProjects } from '@/middleware';
+import { useEffect, useState } from "react";
+import { CardContainer } from "../ui";
+import { BuilderRowCard } from "../ui/builder-row-card";
+import { fetchMostProjects } from "@/middleware";
 
 const MostProjectsLeaderboard: React.FunctionComponent = () => {
   const [leaderboard, setLeaderboard] = useState<Array<BuilderInterface>>([]);
@@ -17,9 +17,9 @@ const MostProjectsLeaderboard: React.FunctionComponent = () => {
 
   return (
     <CardContainer
-      className='most-projects-leaderboard'
+      className="most-projects-leaderboard"
       style={{
-        backgroundImage: `url('/exotic-workspace.jpeg')`
+        backgroundImage: `url('/exotic-workspace.jpeg')`,
       }}
     >
       <h2 className="text-white font-semibold text-2xl">
@@ -41,9 +41,7 @@ const MostProjectsLeaderboard: React.FunctionComponent = () => {
         })}
       </div>
     </CardContainer>
-  )
-}
+  );
+};
 
-export {
-  MostProjectsLeaderboard
-}
+export { MostProjectsLeaderboard };

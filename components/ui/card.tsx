@@ -20,9 +20,12 @@ const CardContainer: React.FunctionComponent<CardProps> = ({
     >
       {withSeparator && (
         <header className="card-header p-6 gap-1 border-b flex flex-row items-center justify-between max-md:grid max-md:gap-4">
-          <div className={cn("card-header-details-wrapper flex flex-col items-start max-lg:w-[70%] max-md:w-full",
-            mainAction && "max-xl:w-[50%] max-lg:w-[60%]"
-          )} >
+          <div
+            className={cn(
+              "card-header-details-wrapper flex flex-col items-start max-lg:w-[70%] max-md:w-full",
+              mainAction && "max-xl:w-[50%] max-lg:w-[60%]",
+            )}
+          >
             {title && <h3 className="font-semibold text-2xl">{title}</h3>}
             {subtitle && <p className="text-zinc-400 text-sm">{subtitle}</p>}
           </div>

@@ -1,4 +1,4 @@
-import { fetchAllHackathons } from "."
+import { fetchAllHackathons } from ".";
 
 const fetchHackathonCities = async () => {
   const data = await fetchAllHackathons();
@@ -11,7 +11,7 @@ const fetchHackathonCities = async () => {
   });
 
   return cities;
-}
+};
 
 const fetchAllPastHackathons = async () => {
   const data = await fetchAllHackathons();
@@ -27,13 +27,13 @@ const fetchAllPastHackathons = async () => {
     if (todayDateObject.getTime() > endDateObject.getTime()) {
       pastHackathons.push({
         title: hackathon.title,
-        hackathonSlug: hackathon.slug
+        hackathonSlug: hackathon.slug,
       });
     }
   });
 
   return pastHackathons;
-}
+};
 
 const fetchAllUpcomingHackathons = async () => {
   const data = await fetchAllHackathons();
@@ -49,16 +49,16 @@ const fetchAllUpcomingHackathons = async () => {
     if (todayDateObject.getTime() < startDateObject.getTime()) {
       upcomingHackathons.push({
         title: hackathon.title,
-        hackathonSlug: hackathon.slug
+        hackathonSlug: hackathon.slug,
       });
     }
   });
 
   return upcomingHackathons;
-}
+};
 
 export {
   fetchHackathonCities,
   fetchAllPastHackathons,
-  fetchAllUpcomingHackathons
-}
+  fetchAllUpcomingHackathons,
+};

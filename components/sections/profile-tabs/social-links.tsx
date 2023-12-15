@@ -240,12 +240,18 @@ const LinkRowContainer: React.FunctionComponent<LinkRowContainerProps> = ({
           }}
         />
         <div className="flex flex-row items-center justify-end gap-2">
-          <Button variant="destructive" className="p-3" onClick={handleSocialLinkDeletion}>
+          <Button
+            variant="destructive"
+            className="p-3"
+            onClick={handleSocialLinkDeletion}
+          >
             <Trash className="w-4 h-4" />
           </Button>
-          {((data.link !== linkInput.link) || (data.title !== linkInput.title)) && <Button className="p-3">
-            <Check className="w-4 h-4" />
-          </Button>}
+          {(data.link !== linkInput.link || data.title !== linkInput.title) && (
+            <Button className="p-3">
+              <Check className="w-4 h-4" />
+            </Button>
+          )}
         </div>
       </div>
     </div>

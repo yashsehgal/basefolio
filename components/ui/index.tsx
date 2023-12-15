@@ -61,8 +61,8 @@ export { StarRating } from "./star-rating";
 
 export { Checkbox } from "./checkbox";
 
-export { SocialIcon } from './social-icon';
+export { SocialIcon } from "./social-icon";
 
-export { Calendar } from './calendar'
+export { Calendar } from "./calendar";
 
-export { CommandKSearch } from './command-k-search/command-k-search';
+export { CommandKSearch } from "./command-k-search/command-k-search";

@@ -131,7 +131,7 @@ body {
 }
 
 .action-view {
-  @apply flex flex-col gap-3 items-start;;
+  @apply flex flex-col gap-3 items-start;
 }
 
 .action-view::-webkit-scrollbar-track {

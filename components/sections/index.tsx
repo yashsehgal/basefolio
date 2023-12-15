@@ -19,4 +19,4 @@ export { WinnerBuildersLeaderboard } from "./winner-builders-leaderboard";
 
 export { EmptyState } from "./empty-state";
 
-export { MostProjectsLeaderboard } from './most-projects-leaderboard';
+export { MostProjectsLeaderboard } from "./most-projects-leaderboard";

@@ -1,8 +1,20 @@
 import { cn } from "@/helpers";
-import { Dribbble, Facebook, Github, Instagram, Linkedin, Twitch, Youtube } from "lucide-react";
+import {
+  Dribbble,
+  Facebook,
+  Github,
+  Instagram,
+  Linkedin,
+  Twitch,
+  Youtube,
+} from "lucide-react";
 import Image from "next/image";
 
-const SocialIcon: React.FunctionComponent<SocialIconProps> = ({ icon, className, ...props }) => {
+const SocialIcon: React.FunctionComponent<SocialIconProps> = ({
+  icon,
+  className,
+  ...props
+}) => {
   // Common size class for all icons
   const ICONSIZECLASS = "w-full h-full";
 
@@ -15,7 +27,15 @@ const SocialIcon: React.FunctionComponent<SocialIconProps> = ({ icon, className,
         Description: X icon from public/icons/*
         Accessible from params: twitter, X
       */}
-      {icon === "X" && <Image src="/icons/x-logo.svg" width={"24"} height={"24"} alt={icon} className="w-full h-full" />}
+      {icon === "X" && (
+        <Image
+          src="/icons/x-logo.svg"
+          width={"24"}
+          height={"24"}
+          alt={icon}
+          className="w-full h-full"
+        />
+      )}
 
       {/* Conditional renders for Lucide icons */}
 
@@ -24,7 +44,9 @@ const SocialIcon: React.FunctionComponent<SocialIconProps> = ({ icon, className,
         Description: Dribbble icon from lucide-react
         Accessible from params: dribble, dribbble
       */}
-      {(icon === "dribble" || icon === "dribbble") && <Dribbble className={ICONSIZECLASS} />}
+      {(icon === "dribble" || icon === "dribbble") && (
+        <Dribbble className={ICONSIZECLASS} />
+      )}
 
       {/* 
         Conditional render for GitHub icon
@@ -71,6 +93,4 @@ const SocialIcon: React.FunctionComponent<SocialIconProps> = ({ icon, className,
   );
 };
 
-export {
-  SocialIcon
-};
+export { SocialIcon };

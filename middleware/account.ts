@@ -271,5 +271,5 @@ export {
   // feedback related methods
   submitFeedback,
   // experience related methods
-  fetchUserExperience
+  fetchUserExperience,
 };

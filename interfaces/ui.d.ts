@@ -98,14 +98,16 @@ declare interface StarRatingStatusInterface {
   emoji: string;
 }
 
-declare type SocialIconType = "twitter"
+declare type SocialIconType =
+  | "twitter"
   | "X"
   | "linkedin"
   | "github"
   | "facebook"
   | "youtube"
   | "twitch"
-  | "dribbble" | "dribble"
+  | "dribbble"
+  | "dribble"
   | "instagram";
 
 declare interface SocialIconProps extends React.HTMLAttributes<HTMLDivElement> {

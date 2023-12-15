@@ -7,6 +7,6 @@ export function getAuthorizedUsername() {
 export function getAuthorizedUserFullName() {
   return {
     firstName: getCookie("firstName"),
-    lastName: getCookie("lastName")
-  }
+    lastName: getCookie("lastName"),
+  };
 }
