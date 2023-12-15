@@ -5,7 +5,8 @@
 html,
 body {
   @apply bg-zinc-100 text-zinc-800;
-  font-family: "Manrope", sans-serif
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 
 .view-container {
@@ -127,4 +128,20 @@ body {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+}
+
+.action-view {
+  @apply flex flex-col gap-3 items-start;;
+}
+
+.action-view::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.action-view::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.action-view::-webkit-scrollbar {
+  width: 2px; /* width of the scrollbar */
 }

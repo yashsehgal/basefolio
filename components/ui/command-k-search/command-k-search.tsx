@@ -1,13 +1,14 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog"
-import { Button, Input } from "."
-import { Section, ViewContainer } from "../layouts"
+import { Button, Input } from ".."
+import { Section, ViewContainer } from "../../layouts"
 import { cn } from "@/helpers"
 import { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { UserAuthenticationContext } from "@/contexts";
+import { HackathonCityActionView, PastHackathonsActionView, UpcomingHackathonsActionView } from "./command-k-search-actions";
 
 declare type CategoryOptionType = "hackathons" | "projects" | "builders";
 
@@ -43,19 +44,31 @@ const SubCategoryOptions: {
 }
 
 const CommandKSearch: React.FunctionComponent = () => {
-  const [commandSearch, setCommandSearch] = useState<{
-    category: CategoryOptionType;
-    subCategory: Array<any>;
-  }>({
-    category: "hackathons",
-    subCategory: SubCategoryOptions["hackathons"]
-  });
-
+  /** 
+   * storing state of main category option 
+   * > options: 
+   *  - hackathons
+   *  - projects
+   *  - builders
+  */
   const [selectedOption, setSelectedOption] = useState<CategoryOptionType>("hackathons");
-
+  /**
+   * storing state of sub-option of the selected category
+   * > hackathons:
+   *  - city
+   *  - past
+   *  - upcoming
+   *  - domain
+   * > builders:
+   *  - location
+   *  - company
+   *  - college
+   * > projects
+   *  - hackathons
+   *  - builder name
+   *  - tech
+   */
   const [selectedSubOption, setSelectedSubOption] = useState<string>("");
-
-  useEffect(() => { console.log(selectedSubOption) }, [selectedSubOption]);
 
   return (
     <Section className="command-k-search-container pb-0">
@@ -100,7 +113,10 @@ const CommandKSearch: React.FunctionComponent = () => {
                     />
                   </div>
                   <div className="search-subCategory-action-wrapper">
-                    {/* <SearchSubCategoryActionContent /> */}
+                    <SearchSubCategoryActionContent
+                      selectedSubCategory={selectedSubOption}
+                      selectedMainCategory={selectedOption}
+                    />
                   </div>
                 </div>
               </div>
@@ -124,14 +140,21 @@ const CommandKSearchButtonContent: React.FunctionComponent = () => {
   )
 }
 
-const SearchSubCategoryActionContent: React.FunctionComponent<{ selectedSubCategory: string }> = ({ selectedSubCategory }) => {
-  const { userData } = useContext(UserAuthenticationContext);
+const SearchSubCategoryActionContent: React.FunctionComponent<{
+  selectedSubCategory: string;
+  selectedMainCategory: CategoryOptionType;
+}> = ({ selectedSubCategory, selectedMainCategory }) => {
   return (
     <div className="search-category-content-container h-full border border-neutral-200 rounded-xl p-3 grid grid-cols-1 gap-3 bg-neutral-100">
-      {selectedSubCategory && <div className="h-full w-full overflow-hidden text-white font-medium rounded-lg bg-gradient-to-tr from-neutral-900 to-neutral-700 text-3xl p-6 flex flex-col justify-end">
-        Let&apos;s start <br />
-        searching, {userData.fullName.firstName}
-      </div>}
+      {/* renders for hackathon sub-options */}
+      {(selectedMainCategory === "hackathons"
+        && selectedSubCategory === "city") && <HackathonCityActionView />}
+      {(selectedMainCategory === "hackathons"
+        && selectedSubCategory === "past") && <PastHackathonsActionView />}
+      {(selectedMainCategory === "hackathons"
+        && selectedSubCategory === "upcoming") && <UpcomingHackathonsActionView />}
+      {/* renders for projects sub-options */}
+      {/* renders for builders sub-options */}
     </div >
   )
 }
@@ -139,7 +162,7 @@ const SearchSubCategoryActionContent: React.FunctionComponent<{ selectedSubCateg
 const SearchSubCategoriesContent: React.FunctionComponent<{
   selectedParent: CategoryOptionType;
   setSelectedSubOption: (option: string) => void;
-  selectedSubOption: string
+  selectedSubOption: string;
 }> =
   ({ selectedParent, setSelectedSubOption, selectedSubOption }) => {
     return (
@@ -172,7 +195,7 @@ const SearchSubCategoriesContent: React.FunctionComponent<{
                 className={cn("justify-between p-6 bg-white focus:shadow-2xl focus:scale-105 focus:outline-none",
                   (selectedSubOption === subOption.category
                     ? "bg-blue-600 text-white hover:bg-blue-600 hover:text-white"
-                    : "focus:bg-neutral-800 focus:text-white hover:bg-neutral-800 hover:text-white"
+                    : "focus:bg-neutral-800 focus:text-white hover:white"
                   )
                 )}
                 stretch
@@ -223,7 +246,7 @@ const SearchCatogoriesContent: React.FunctionComponent<{
               className={cn("justify-between p-6 bg-white focus:shadow-2xl focus:scale-105 focus:outline-none",
                 (selectedOption === option.category
                   ? "bg-blue-600 text-white hover:bg-blue-600 hover:text-white"
-                  : "focus:bg-neutral-800 focus:text-white hover:bg-neutral-800 hover:text-white"
+                  : "focus:bg-neutral-800 focus:text-white hover:bg-white"
                 )
               )}
               stretch

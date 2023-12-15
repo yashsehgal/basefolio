@@ -9,7 +9,7 @@ const EmptyState: React.FunctionComponent<
   return (
     <div
       className={cn(
-        "empty-state cursor-default select-none flex flex-col items-center gap-4 text-zinc-300 my-12",
+        "empty-state cursor-default select-none flex flex-col items-center justify-center gap-4 text-zinc-300 my-12 w-full",
         className,
       )}
       {...props}

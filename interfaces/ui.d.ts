@@ -18,6 +18,8 @@ declare interface ButtonProps
   size?: "small" | "medium" | "large";
   stretch?: boolean;
   stretchOnMobile?: boolean;
+  asLink?: boolean;
+  href?: string;
 }
 
 declare interface SpeakerBadgeProps
