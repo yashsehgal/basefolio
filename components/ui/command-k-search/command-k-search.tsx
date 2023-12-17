@@ -12,6 +12,7 @@ import {
   HackathonCityActionView,
   PastHackathonsActionView,
   UpcomingHackathonsActionView,
+  UserSearchByCompanyActionView,
   UserSearchByLocationActionView,
   UserSearchByUsernameActionView,
 } from "./command-k-search-actions";
@@ -182,6 +183,8 @@ const SearchSubCategoryActionContent: React.FunctionComponent<{
         selectedSubCategory === "name" && <UserSearchByUsernameActionView />}
       {selectedMainCategory === "builders" &&
         selectedSubCategory === "location" && <UserSearchByLocationActionView />}
+      {selectedMainCategory === "builders" &&
+        selectedSubCategory === "company" && <UserSearchByCompanyActionView />}
     </div>
   );
 };

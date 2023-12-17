@@ -1,5 +1,5 @@
 import { STRAPI_BASE_API_URL, STRAPI_REQUEST_OPTIONS } from "@/common";
-import { fetchAllHackathons } from ".";
+import { fetchAllBuilders, fetchAllHackathons } from ".";
 
 const fetchHackathonCities = async () => {
   const data = await fetchAllHackathons();
@@ -138,6 +138,29 @@ const fetchBuildersByLocation = async (locationInput: string) => {
   }
 };
 
+const fetchBuildersCompanies = async () => {
+  const response = await fetch(
+    `${STRAPI_BASE_API_URL}/users`,
+    STRAPI_REQUEST_OPTIONS,
+  );
+  const data = await response.json();
+  const companies: Array<string> = [];
+
+  if (data.length) {
+    data.map((builder: any) => {
+      if (builder.experience !== null && builder.experience.length > 0) {
+        builder.experience.map((experience: AuthorizedUserExperienceType) => {
+          if (experience.company.name) {
+            companies.push(experience.company.name);
+          }
+        })
+      }
+    })
+  }
+
+  return companies;
+}
+
 
 export {
   // hackathons fetching methods
@@ -146,5 +169,6 @@ export {
   fetchAllUpcomingHackathons,
   // user fetching methods
   fetchBuildersByNames,
-  fetchBuildersByLocation
+  fetchBuildersByLocation,
+  fetchBuildersCompanies
 };

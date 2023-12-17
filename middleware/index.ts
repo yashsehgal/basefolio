@@ -35,5 +35,6 @@ export {
   fetchHackathonCities,
   fetchAllPastHackathons,
   fetchAllUpcomingHackathons,
-  fetchBuildersByNames
+  fetchBuildersByNames,
+  fetchBuildersCompanies
 } from "./search-actions";

@@ -17,6 +17,8 @@ const ROUTES_WITH_SUB_NAVIGATION = [
 
 const ROUTES_WITH_NO_VIEW_CONTAINER_CONROL = ["/profile"];
 
+const ROUTES_WITH_WEBSITE_COMPONENTS = ["/home", "/masterpiece", "/website"];
+
 const Layout: React.FunctionComponent<LayoutProps> = ({
   className,
   hideFooter = false,
@@ -38,18 +40,27 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
 
   return (
     <div className={cn("layout", className)} {...props}>
-      {!hideNavigation && (
-        <Navbar
-          className={cn(
-            ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) && "",
-          )}
-        />
-      )}
-      {!hideSubNavigation && ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && (
-        <SubNavigation />
-      )}
-      {ROUTES_WITH_SUB_NAVIGATION.includes(pathname) && <CommandKSearch />}
-      {ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) ? (
+      {(!hideNavigation
+        && !ROUTES_WITH_WEBSITE_COMPONENTS.includes(pathname)
+      )
+        && (
+          <Navbar
+            className={cn(
+              ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname) && "",
+            )}
+          />
+        )}
+      {!hideSubNavigation
+        && ROUTES_WITH_SUB_NAVIGATION.includes(pathname)
+        && !ROUTES_WITH_WEBSITE_COMPONENTS.includes(pathname)
+        && (
+          <SubNavigation />
+        )}
+      {ROUTES_WITH_SUB_NAVIGATION.includes(pathname)
+        && !ROUTES_WITH_WEBSITE_COMPONENTS.includes(pathname)
+        && <CommandKSearch />}
+      {(ROUTES_WITH_NO_VIEW_CONTAINER_CONROL.includes(pathname)
+        && ROUTES_WITH_WEBSITE_COMPONENTS.includes(pathname)) ? (
         <>{children}</>
       ) : (
         <Section>

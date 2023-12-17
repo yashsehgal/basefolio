@@ -12,7 +12,7 @@ import { EmptyState } from "@/components/sections";
 import { Laptop, MapPin, User, UserCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchBuildersByLocation } from "@/middleware/search-actions";
+import { fetchBuildersByLocation, fetchBuildersCompanies } from "@/middleware/search-actions";
 
 // Hackathons > City action view
 const HackathonCityActionView: React.FunctionComponent = () => {
@@ -548,10 +548,96 @@ const UserSearchByLocationActionView: React.FunctionComponent = () => {
   )
 }
 
+const UserSearchByCompanyActionView: React.FunctionComponent = () => {
+  const [companies, setCompanies] = useState<Array<string>>([]);
+  const [filteredCompanies, setFilteredCompanies] = useState<Array<string>>([]);
+
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchBuildersCompanies();
+      setCompanies(data);
+      setFilteredCompanies(data);
+    }
+    fetchData();
+  }, []);
+
+  const handleSearchInput = () => {
+    const filteredPastHackathons = companies.filter((company) =>
+      company.toLowerCase().includes(searchInput.toLowerCase()),
+    );
+
+    setFilteredCompanies(filteredPastHackathons);
+    setSearchInput(searchInput);
+  };
+
+  useEffect(() => {
+    handleSearchInput();
+  }, [searchInput]);
+
+  return (
+    <div className="builders-searchByCompanies-action-view action-view h-full">
+      <div className="sub-category-headline cursor-default select-none text-base font-medium ml-1">
+        {`Found ${companies.length} companies`}
+      </div>
+      <Input
+        className="p-6"
+        type="text"
+        placeholder="Search for builders by companies..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value as string)}
+      />
+      {filteredCompanies.length ? (
+        <div className="users-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
+          {filteredCompanies.map((company, index) => {
+            return (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  top: 24 * index * 2,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  top: 0,
+                  scale: 1,
+                }}
+                transition={{
+                  type: "spring",
+                }}
+                className="w-full"
+                key={index}
+              >
+                <Button
+                  variant={"solid"}
+                  size="large"
+                  className={cn(
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
+                  )}
+                  stretch
+                  asLink
+                >
+                  {company}
+                </Button>
+              </motion.div>
+            );
+          })}
+        </div>
+      ) : (
+        !searchInput
+          ? <EmptyState icon={User}>Start searching for builders via company names</EmptyState>
+          : <EmptyState icon={User}>No builders found working at {`\'${searchInput}\'`}</EmptyState>
+      )}
+    </div>
+  )
+}
+
 export {
   HackathonCityActionView,
   PastHackathonsActionView,
   UpcomingHackathonsActionView,
   UserSearchByUsernameActionView,
-  UserSearchByLocationActionView
+  UserSearchByLocationActionView,
+  UserSearchByCompanyActionView
 };
