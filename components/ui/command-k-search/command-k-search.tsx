@@ -12,6 +12,8 @@ import {
   HackathonCityActionView,
   PastHackathonsActionView,
   UpcomingHackathonsActionView,
+  UserSearchByLocationActionView,
+  UserSearchByUsernameActionView,
 } from "./command-k-search-actions";
 
 declare type CategoryOptionType = "hackathons" | "projects" | "builders";
@@ -19,10 +21,10 @@ declare type CategoryOptionType = "hackathons" | "projects" | "builders";
 const SearchCategoryOptions: Array<{
   category: string;
 }> = [
-  { category: "hackathons" },
-  { category: "builders" },
-  { category: "projects" },
-];
+    { category: "hackathons" },
+    { category: "builders" },
+    { category: "projects" },
+  ];
 
 const SubCategoryOptions: {
   hackathons: Array<{ category: string }>;
@@ -36,6 +38,7 @@ const SubCategoryOptions: {
     { category: "domain" },
   ],
   builders: [
+    { category: "name" },
     { category: "location" },
     { category: "company" },
     { category: "college" },
@@ -65,6 +68,7 @@ const CommandKSearch: React.FunctionComponent = () => {
    *  - upcoming
    *  - domain
    * > builders:
+   *  - name
    *  - location
    *  - company
    *  - college
@@ -174,6 +178,10 @@ const SearchSubCategoryActionContent: React.FunctionComponent<{
         selectedSubCategory === "upcoming" && <UpcomingHackathonsActionView />}
       {/* renders for projects sub-options */}
       {/* renders for builders sub-options */}
+      {selectedMainCategory === "builders" &&
+        selectedSubCategory === "name" && <UserSearchByUsernameActionView />}
+      {selectedMainCategory === "builders" &&
+        selectedSubCategory === "location" && <UserSearchByLocationActionView />}
     </div>
   );
 };

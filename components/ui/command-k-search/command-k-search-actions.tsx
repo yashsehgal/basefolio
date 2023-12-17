@@ -3,13 +3,16 @@ import { Button, Input } from "..";
 import {
   fetchAllPastHackathons,
   fetchAllUpcomingHackathons,
+  fetchBuildersByNames,
   fetchHackathonCities,
 } from "@/middleware";
 import { motion } from "framer-motion";
 import { cn } from "@/helpers";
 import { EmptyState } from "@/components/sections";
-import { Laptop, MapPin } from "lucide-react";
+import { Laptop, MapPin, User, UserCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { fetchBuildersByLocation } from "@/middleware/search-actions";
 
 // Hackathons > City action view
 const HackathonCityActionView: React.FunctionComponent = () => {
@@ -80,7 +83,7 @@ const HackathonCityActionView: React.FunctionComponent = () => {
                   variant={"solid"}
                   size="large"
                   className={cn(
-                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none",
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
                   )}
                   stretch
                 >
@@ -148,7 +151,7 @@ const PastHackathonsActionView: React.FunctionComponent = () => {
         onChange={(e) => setSearchInput(e.target.value as string)}
       />
       {filteredPastHackathons.length ? (
-        <div className="locations-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
+        <div className="hackathons-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
           {filteredPastHackathons.map((hackathon, index) => {
             return (
               <motion.div
@@ -172,7 +175,7 @@ const PastHackathonsActionView: React.FunctionComponent = () => {
                   variant={"solid"}
                   size="large"
                   className={cn(
-                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none",
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
                   )}
                   stretch
                   asLink
@@ -242,7 +245,7 @@ const UpcomingHackathonsActionView: React.FunctionComponent = () => {
         onChange={(e) => setSearchInput(e.target.value as string)}
       />
       {filteredUpcomingHackathons.length ? (
-        <div className="locations-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
+        <div className="hackathons-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
           {filteredUpcomingHackathons.map((hackathon, index) => {
             return (
               <motion.div
@@ -266,7 +269,7 @@ const UpcomingHackathonsActionView: React.FunctionComponent = () => {
                   variant={"solid"}
                   size="large"
                   className={cn(
-                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none",
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
                   )}
                   stretch
                   asLink
@@ -285,8 +288,270 @@ const UpcomingHackathonsActionView: React.FunctionComponent = () => {
   );
 };
 
+// User filtering and searching based actions
+const UserSearchByUsernameActionView: React.FunctionComponent = () => {
+  const [users, setUsers] = useState<Array<{
+    username: string;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+    profileAvatar: string;
+  }>>([]);
+  const [filteredUsers, setFilteredUsers] = useState<Array<{
+    username: string;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+    profileAvatar: string;
+  }>>([]);
+
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  useEffect(() => {
+    const delay = 200;
+    let timeoutId: NodeJS.Timeout;
+
+    async function fetchBuilders() {
+      const data = await fetchBuildersByNames(searchInput);
+      setUsers(data);
+      setFilteredUsers(data);
+    }
+
+    // Use debounce to delay the API call
+    const debounceApiCall = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fetchBuilders(), delay);
+    };
+
+    // Call debounceApiCall when searchInput changes
+    debounceApiCall();
+
+    // Cleanup function to clear the timeout on component unmount or when searchInput changes
+    return () => clearTimeout(timeoutId);
+  }, [searchInput]);
+
+
+  return (
+    <div className="builders-search-action-view action-view h-full">
+      <div className="sub-category-headline cursor-default select-none text-base font-medium ml-1">
+        {`Found ${users.length} builders`}
+      </div>
+      <Input
+        className="p-6"
+        type="text"
+        placeholder="Search for builders by username..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value as string)}
+      />
+      {filteredUsers.length ? (
+        <div className="users-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
+          {filteredUsers.map((user, index) => {
+            return (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  top: 24 * index * 2,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  top: 0,
+                  scale: 1,
+                }}
+                transition={{
+                  type: "spring",
+                }}
+                className="w-full"
+                key={index}
+              >
+                <Button
+                  variant={"solid"}
+                  size="large"
+                  className={cn(
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
+                  )}
+                  stretch
+                  asLink
+                >
+                  <div className="flex flex-row items-center gap-4">
+                    <div
+                      className={cn(
+                        "builder-avatar-wrapper flex flex-row items-center justify-center",
+                        "overflow-hidden w-16 h-16 rounded-xl",
+                        !user.profileAvatar &&
+                        "border border-dashed border-zinc-400 text-zinc-400",
+                      )}
+                    >
+                      {user.profileAvatar && (
+                        <Image
+                          src={user.profileAvatar}
+                          width={"240"}
+                          height={"240"}
+                          alt="profile-avatar"
+                          className="w-full h-auto"
+                          loading="lazy"
+                        />
+                      )}
+                      {!user.profileAvatar && <UserCircle />}
+                    </div>
+                    <div className="flex flex-col items-start gap-1">
+                      <span>{user.username}</span>
+                      <span className="font-normal text-sm text-neutral-400">
+                        {`${user.fullName.firstName} ${user.fullName.lastName || ""}`}
+                      </span>
+                    </div>
+                  </div>
+                </Button>
+              </motion.div>
+            );
+          })}
+        </div>
+      ) : (
+        !searchInput
+          ? <EmptyState icon={User}>Start searching for builders</EmptyState>
+          : <EmptyState icon={User}>No builders found with {`\'${searchInput}\'`}</EmptyState>
+      )}
+    </div>
+  )
+}
+
+const UserSearchByLocationActionView: React.FunctionComponent = () => {
+  const [users, setUsers] = useState<Array<{
+    username: string;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+    profileAvatar: string;
+    city: string;
+    country: string;
+  }>>([]);
+  const [filteredUsers, setFilteredUsers] = useState<Array<{
+    username: string;
+    fullName: {
+      firstName: string;
+      lastName: string;
+    };
+    profileAvatar: string;
+    city: string;
+    country: string;
+  }>>([]);
+
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  useEffect(() => {
+    const delay = 200;
+    let timeoutId: NodeJS.Timeout;
+
+    async function fetchBuilders() {
+      const data = await fetchBuildersByLocation(searchInput);
+      setUsers(data);
+      setFilteredUsers(data);
+    }
+
+    // Use debounce to delay the API call
+    const debounceApiCall = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fetchBuilders(), delay);
+    };
+
+    // Call debounceApiCall when searchInput changes
+    debounceApiCall();
+
+    // Cleanup function to clear the timeout on component unmount or when searchInput changes
+    return () => clearTimeout(timeoutId);
+  }, [searchInput]);
+
+  return (
+    <div className="builders-search-action-view action-view h-full">
+      <div className="sub-category-headline cursor-default select-none text-base font-medium ml-1">
+        {`Found ${users.length} builders`}
+      </div>
+      <Input
+        className="p-6"
+        type="text"
+        placeholder="Search for builders by location..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value as string)}
+      />
+      {filteredUsers.length ? (
+        <div className="users-list-wrapper grid grid-cols-1 gap-3 w-full overflow-y-scroll overflow-x-auto max-h-[300px] p-3">
+          {filteredUsers.map((user, index) => {
+            return (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  top: 24 * index * 2,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  top: 0,
+                  scale: 1,
+                }}
+                transition={{
+                  type: "spring",
+                }}
+                className="w-full"
+                key={index}
+              >
+                <Button
+                  variant={"solid"}
+                  size="large"
+                  className={cn(
+                    "justify-between p-6 bg-white focus:shadow-sm focus:scale-105 focus:outline-none focus:bg-neutral-800 focus:text-white hover:white",
+                  )}
+                  stretch
+                  asLink
+                >
+                  <div className="flex flex-row items-center gap-4">
+                    <div
+                      className={cn(
+                        "builder-avatar-wrapper flex flex-row items-center justify-center",
+                        "overflow-hidden w-16 h-16 rounded-xl",
+                        !user.profileAvatar &&
+                        "border border-dashed border-zinc-400 text-zinc-400",
+                      )}
+                    >
+                      {user.profileAvatar && (
+                        <Image
+                          src={user.profileAvatar}
+                          width={"240"}
+                          height={"240"}
+                          alt="profile-avatar"
+                          className="w-full h-auto"
+                          loading="lazy"
+                        />
+                      )}
+                      {!user.profileAvatar && <UserCircle />}
+                    </div>
+                    <div className="flex flex-col items-start gap-1">
+                      <span>{user.username}</span>
+                      <span className="font-normal text-sm text-neutral-400">
+                        {`from, ${user.city}, ${user.country}`}
+                      </span>
+                    </div>
+                  </div>
+                </Button>
+              </motion.div>
+            );
+          })}
+        </div>
+      ) : (
+        !searchInput
+          ? <EmptyState icon={User}>Start searching for builders</EmptyState>
+          : <EmptyState icon={User}>No builders found with {`\'${searchInput}\'`}</EmptyState>
+      )}
+    </div>
+  )
+}
+
 export {
   HackathonCityActionView,
   PastHackathonsActionView,
   UpcomingHackathonsActionView,
+  UserSearchByUsernameActionView,
+  UserSearchByLocationActionView
 };
